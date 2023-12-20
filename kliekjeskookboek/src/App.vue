@@ -4,14 +4,31 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { firestore } from '@/firebase.js';
+
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      users: []  // To store the fetched users
+    };
+  },
+  created() {
+    // Reference to the 'users' collection
+    const usersCollection = firestore.collection('users');
+
+    // Fetch all documents from the 'users' collection
+    usersCollection.get().then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        // Push each document's data into the users array
+        this.users.push(doc.data());
+      });
+    }).catch(error => {
+      console.error("Error fetching data: ", error);
+    });
   }
-}
+};
+
 </script>
 
 <style>
