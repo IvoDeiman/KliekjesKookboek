@@ -1,34 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <Header title="Title"></Header>
+    <button @click="created()">Add user</button>
+  </div>
 </template>
 
 <script>
-import { firestore } from '@/firebase.js';
-
+import Header from './components/Header.vue';
+import { collection, addDoc } from "firebase/firestore"
+import db from './firebase/init.js'
 
 export default {
-  data() {
-    return {
-      users: []  // To store the fetched users
-    };
+  name: 'App',
+  components: {
+    Header
   },
-  created() {
-    // Reference to the 'users' collection
-    const usersCollection = firestore.collection('users');
+  methods: {
+    async createUser() {
+      // 'users' collection reference
+      const colRef = collection(db, 'users')
+      // data to send
+      const dataObj = {
+        firstName: 'John',
+        lastName: 'Doe',
+        dob: '1990'
+      }
 
-    // Fetch all documents from the 'users' collection
-    usersCollection.get().then(querySnapshot => {
-      querySnapshot.forEach(doc => {
-        // Push each document's data into the users array
-        this.users.push(doc.data());
-      });
-    }).catch(error => {
-      console.error("Error fetching data: ", error);
-    });
+      // create document and return reference to it
+      const docRef = await addDoc(colRef, dataObj)
+
+      // access auto-generated ID with '.id'
+      console.log('Document was created with ID:', docRef.id)
+    },
+    created() {
+      this.createUser();
+    },
   }
-};
-
+}
 </script>
 
 <style>
@@ -38,6 +46,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
 }
 </style>
