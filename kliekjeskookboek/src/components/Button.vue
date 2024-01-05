@@ -1,5 +1,5 @@
 <template>
-    <button @click="onClick()" :style="{ background:color }" class="btn">{{ text }}</button>
+    <button :style="{background:color}" class="btn">{{ text }}</button>
 </template>
 
 <script>
@@ -15,10 +15,12 @@
                 default: '#000'
             }
         },
-        methods: {
-            onClick() {
-                console.log("Clicked");
-            }
-        }
     }
 </script>
+
+<style>
+    .btn {
+        background: #fff;
+        padding: 10px;
+    }
+</style>
