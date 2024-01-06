@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import DefaultLayout from "@/components/DefaultLayout.vue";
 import Home from "@/views/Home.vue";
+import Recipes from "@/views/Recipes.vue";
+import About from "@/views/About.vue";
+import MyAccount from "@/views/MyAccount.vue";
 
 const routes = [
     {
@@ -11,6 +14,21 @@ const routes = [
                 name: "Home",
                 component: Home,
                 path: "/",
+            },
+            {
+                name: "Recipes",
+                component: Recipes,
+                path: "/recipes",
+            },
+            {
+                name: "About us",
+                component: About,
+                path: "/about",
+            },
+            {
+                name: "My account",
+                component: MyAccount,
+                path: "/my_account",
             },
         ]
     },
@@ -35,11 +53,6 @@ const routes = [
     //     path: "/recipes/{recipeId}",
     // },
     // {
-    //     name: "My account",
-    //     component: Home,
-    //     path: "/my_account",
-    // },
-    // {
     //     name: "User",
     //     component: Home,
     //     path: "/user/{userId}",
@@ -49,6 +62,7 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+    linkExactActiveClass: "exact-active",
 });
 
 export default router

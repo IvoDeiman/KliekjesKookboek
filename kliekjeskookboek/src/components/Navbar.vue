@@ -1,6 +1,13 @@
 <script>
+import router from "@/routers";
+
 export default {
   name: "HomePage",
+  methods: {
+    router() {
+      return router
+    }
+  },
   props: {
     msg: String
   }
@@ -8,36 +15,40 @@ export default {
 </script>
 <template>
   <header id="navbar" class="shadow h-16 flex justify-between items-stretch">
-    <div class="inline-flex items-center ms-36 text-black font-bold">
+    <router-link
+        to="/"
+        class="inline-flex items-center ms-36">
       <img src="../assets/kliekjes-logo.png" alt="ewa" height="63">
-    </div>
+    </router-link>
     <div class="flex items-center gap-1">
       <router-link
-          :to="{ name: 'Home' }"
-          class="inline-flex items-center px-2 h-full font-semibold transition-colors text-white hover:text-black">
+          to="/"
+          class="inline-flex items-center px-3 h-full font-semibold text-white hover:text-black">
         Home
       </router-link>
-      <router-link
-          :to="{ name: 'Home' }"
-          class="inline-flex items-center px-2 h-full font-semibold transition-colors text-white hover:text-black">
+      <router-link to="/recipes"
+          class="inline-flex items-center px-3 h-full font-semibold text-white hover:text-black">
         Recepten
       </router-link>
       <router-link
-          :to="{ name: 'Home' }"
-          class="inline-flex items-center me-36 px-2 h-full font-semibold transition-colors text-white hover:text-black">
+          to="/about"
+          class="inline-flex items-center px-3 h-full font-semibold text-white hover:text-black">
         Over ons
       </router-link>
       <router-link
-          :to="{ name: 'Home' }"
-          class="inline-flex items-center me-36 px-2 h-full font-semibold transition-colors text-white hover:text-black">
-        Over ons
+          to="/my_account"
+          class="inline-flex items-center me-36 px-3 h-full font-semibold text-white hover:text-black">
+        <font-awesome-icon :icon="['far', 'user']" />
       </router-link>
     </div>
   </header>
 </template>
 
-<style>
+<style lang="css">
 #navbar {
+  .exact-active {
+    color: black;
+  }
   background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
 }
 </style>
