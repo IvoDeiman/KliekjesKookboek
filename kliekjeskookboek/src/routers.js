@@ -4,6 +4,7 @@ import Home from "@/views/Home.vue";
 import Recipes from "@/views/Recipes.vue";
 import About from "@/views/About.vue";
 import MyAccount from "@/views/MyAccount.vue";
+import Test from "@/views/test.vue";
 
 const routes = [
     {
@@ -29,6 +30,11 @@ const routes = [
                 name: "My account",
                 component: MyAccount,
                 path: "/my_account",
+            },
+            {
+                name: "Test",
+                component: Test,
+                path: "/test",
             },
         ]
     },

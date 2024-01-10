@@ -1,6 +1,7 @@
 <script>
 import router from "@/routers";
 
+
 export default {
   name: "HomePage",
   methods: {
@@ -14,7 +15,7 @@ export default {
 }
 </script>
 <template>
-  <header id="navbar" class="h-16 flex justify-between items-stretch">
+  <header id="navbar" class="h-16 flex justify-between items-stretch width-container">
     <router-link
         to="/"
         class="inline-flex items-center ms-36">
@@ -46,9 +47,12 @@ export default {
 
 <style lang="css">
 #navbar {
+  margin-top: 10px;
+  position: absolute;
+  width: 100%;
+
   .exact-active {
     color: black;
   }
-  background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
 }
 </style>
