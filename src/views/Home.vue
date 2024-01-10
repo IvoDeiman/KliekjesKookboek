@@ -23,6 +23,9 @@
           <h3 class="dotw--title"><highlight>Gerecht</highlight> van de week</h3>
           <h1 class="dotw--name">Overheerlijke gekruide kikkererwten
             en gegrilde courgette-taco's</h1>
+          <div>
+            
+          </div>
         </div>
       </div>
     </div>
