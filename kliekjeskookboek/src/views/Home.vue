@@ -10,7 +10,7 @@
         </div>
         <search-component id="search-bar" placeholder="Vul hier je kliekjes in!" value="" label=""></search-component>
       </div>
-      <img class="pt-48 luminous" src="../assets/big-mascotte.png" alt="">
+      <img class="mt-48 luminous" src="../assets/big-mascotte.png" alt="">
     </div>
   </div>
 
