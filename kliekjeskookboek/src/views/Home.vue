@@ -31,7 +31,7 @@ export default {
 <style>
 #first-segment {
   background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
-  height: 990px;
+  height: 100vh;
   top:0;
 }
 
@@ -60,6 +60,7 @@ export default {
 .hero {
   justify-content: center;
   align-items: center;
+  max-height: 100vh;
 }
 
 .text_section{
