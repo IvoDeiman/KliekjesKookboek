@@ -1,7 +1,7 @@
 <template>
-  <div class="first-segment">
+  <div id="first-segment" class="h-[925px]">
     <div class="hero grid grid-flow-col auto-cols-max ms-[0%]">
-      <div class="text_section me-10">
+      <div class="text_section pt-48 me-10">
         <div class="company-name">
           Het Kliekjes Kookboek
         </div>
@@ -10,28 +10,10 @@
         </div>
         <search-component id="search-bar" placeholder="Vul hier je kliekjes in!" value="" label=""></search-component>
       </div>
-      <img class="luminous non-interactable sizing--auto" src="../assets/big-mascotte.png" alt="">
+      <img class="mt-48 luminous" src="../assets/big-mascotte.png" alt="">
     </div>
   </div>
-  <section class="dotw">
-    <div class="dotw--background">
-      <div class="dotw--grid">
-        <div>
-          <img class="dotw--image" src="../assets/dotw_preview.png" alt="dotw-image">
-        </div>
-        <div class="dotw--description--cont">
-          <h3 class="dotw--title"><highlight>Gerecht</highlight> van de week</h3>
-          <h1 class="dotw--name">Overheerlijke gekruide kikkererwten
-            en gegrilde courgette-taco's</h1>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="categories">
-    <div class="categories--background">
-      <img src="../assets/categoriesBackground.png">
-    </div>
-  </section>
+
 </template>
 
 <script>
@@ -47,17 +29,10 @@ export default {
 </script>
 
 <style>
-highlight{
-  color: #E4A428;
-}
-
-.first-segment {
+#first-segment {
   background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
   height: 100vh;
   top:0;
-  justify-content: center;
-  align-items: center;
-  vertical-align: center;
 }
 
 .company-name {
@@ -85,7 +60,7 @@ highlight{
 .hero {
   justify-content: center;
   align-items: center;
-  height: inherit;
+  max-height: 100vh;
 }
 
 .text_section{
@@ -98,76 +73,6 @@ highlight{
 
 .luminous{
   mix-blend-mode: luminosity;
-}
-
-.sizing--auto{
-  width: auto;
-  height: 75vh;
-}
-
-.non-interactable{
-  pointer-events: none;
-}
-
-section{
-  max-height: 100vh;
-  width: 100vw;
-  height: 100vh;
-}
-
-.dotw {
-
-}
-
-.dotw--background {
-  height: 100%;
-  background-image: url(../assets/topEllipse.svg);
-  background-repeat: no-repeat;
-}
-
-.dotw--grid {
-  justify-content: center;
-  align-items: center;
-  display: inline-grid;
-  grid-template-columns: 1fr 2fr;
-  max-width: 1084px;
-  height: inherit;
-}
-
-.dotw--image {
-  height: 55vh;
-  width: 80%;
-}
-
-.dotw--image img {
-  background: center no-repeat;
-}
-
-.dotw--description--cont {
-  max-width: 540px;
-  margin-left: 50px;
-}
-
-.dotw--title{
-  font-family: Bitter,sans-serif;
-  font-size: 45px;
-  font-weight: 200;
-}
-
-.dotw--name{
-  margin-top: 10px;
-  font-family: Bitter,sans-serif;
-  font-size: 45px;
-  font-weight: bold;
-  line-height: 2.3rem;
-}
-
-.categories--background img{
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  height: inherit;
-  width: 100vw;
 }
 
 </style>
