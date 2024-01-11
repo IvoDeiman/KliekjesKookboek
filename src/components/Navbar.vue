@@ -47,12 +47,17 @@ export default {
 
 <style lang="css">
 #navbar {
-  margin-top: 10px;
-  position: absolute;
+  position: fixed;
+  top: 0;
   width: 100%;
+  height: 80px;
+  z-index: 2;
+  background: rgba(228,164,40,80%);
+  backdrop-filter: blur(5px);
+  border-radius: 0 0 25px 25px;
+}
 
-  .exact-active {
-    color: black;
-  }
+#navbar .exact-active {
+  color: black;
 }
 </style>
