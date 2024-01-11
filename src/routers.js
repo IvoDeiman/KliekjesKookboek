@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import DefaultLayout from "@/components/DefaultLayout.vue";
 import Home from "@/views/Home.vue";
 import Recipes from "@/views/Recipes.vue";
+import RecipeDetail from "@/views/RecipeDetail.vue"
 import About from "@/views/About.vue";
 import MyAccount from "@/views/MyAccount.vue";
 import Test from "@/views/test.vue";
@@ -20,6 +21,11 @@ const routes = [
                 name: "Recipes",
                 component: Recipes,
                 path: "/recipes",
+            },
+            {
+                name: "Recipes details",
+                component: RecipeDetail,
+                path: "/recipes/:recipeId",
             },
             {
                 name: "About us",

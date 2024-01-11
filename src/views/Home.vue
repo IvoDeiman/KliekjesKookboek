@@ -13,7 +13,6 @@
       <img class="mt-48 luminous" src="../assets/big-mascotte.png" alt="">
     </div>
   </div>
-
 </template>
 
 <script>
