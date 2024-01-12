@@ -49,7 +49,8 @@
         <div class="carousel__item">
           <img class="carousel__item-thumbnail" :src="getCategoryImage(category)" :alt="getCategoryTitle(category)">
           <h3 class="carousel__item-title">{{getCategoryTitle(category)}}</h3>
-          <button class="button-secondary carousel__button">ontdek</button>
+          <router-link :to="getCategoryLink(category)" class="button-secondary carousel__button">
+            ontdek</router-link>
         </div>
       </slide>
       <template #addons>
@@ -104,17 +105,20 @@ export default {
     },
     getCategoryTitle(category) {
       return category.title;
+    },
+    getCategoryLink(category) {
+      return category.link;
     }
   },
   data() {
     return {
       categories: [
-        {id: 1, image:categoryBrazilImage, title:"Braziliaans"},
-        {id: 2, image:categoryItalyImage, title:"Italiaans"},
-        {id: 3, image:categoryKoreaImage, title:"Koreaans"},
-        {id: 4, image:categoryDutchImage, title:"Nederlands"},
-        {id: 5, image:categorySpainImage, title:"Spaans"},
-        {id: 6, image:categoryVietnamImage, title:"Vietnamees"}
+        {id: 1, image:categoryBrazilImage, title:"Braziliaans", link:"/recipes"},
+        {id: 2, image:categoryItalyImage, title:"Italiaans", link:"/recipes"},
+        {id: 3, image:categoryKoreaImage, title:"Koreaans", link:"/recipes"},
+        {id: 4, image:categoryDutchImage, title:"Nederlands", link:"/recipes"},
+        {id: 5, image:categorySpainImage, title:"Spaans", link:"/recipes"},
+        {id: 6, image:categoryVietnamImage, title:"Vietnamees", link:"/recipes"}
       ]
     }
   }
@@ -189,6 +193,7 @@ highlight{
 .sector{
   max-height: 90vh;
   height: 90vh;
+  overflow: hidden;
 }
 
 /* Dish Of The Week Section */
@@ -218,10 +223,15 @@ highlight{
 }
 
 .dotw--image {
+  display: flex;
+  float: right;
   border-radius: 15px;
   box-shadow: 0 4px 10px 5px rgba(0,0,0,20%);
-  height: 40vh;
-  width: 400px;
+  height: 480px;
+  max-height: 100%;
+  width: auto;
+  min-width: 100px;
+  max-width: 450px;
   object-fit: cover;
 }
 
@@ -242,7 +252,6 @@ highlight{
   font-size: 45px;
   font-weight: bold;
   line-height: 3.5rem;
-
 }
 
 .dotw--labelholder{
@@ -442,6 +451,7 @@ highlight{
 }
 
 .buyBook__grid {
+  max-width: 1084px;
   width: 1084px;
   display: inline-grid;
   grid-template-columns: 3fr 3fr;
@@ -467,7 +477,10 @@ highlight{
   background: url("../assets/cookbook.jpg") no-repeat center;
   background-size: cover;
   border-radius: 45px;
-  height: 30vh;
+  height: 100%;
+  max-height: 500px;
   width: 100%;
+  max-width: 30vw;
+  align-self: center;
 }
 </style>
