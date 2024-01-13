@@ -1,8 +1,10 @@
 <template>
-  <h1>Test</h1>
+  <h1 class="mt-20">Test</h1>
   <button @click="printRecipeById">print 1</button>
   <br>
   <button @click="printRecipes">print all</button>
+  <br>
+  <button @click="printRecipesContainingIngredient">print recipes containing ingredient</button>
 </template>
 
 <script>
@@ -28,7 +30,19 @@ export default {
           console.log(response[i]);
         }
       })
-      }
+      },
+    printRecipesContainingIngredient() {
+      let recipes = fb.getRecipes();
+      recipes.then((response) => {
+        for (let i = 0; i<response.length; i++) {
+          for (let j = 0; j<response.length; j++) {
+            if(response[i].ingredients[j].name == "pindakaas") {
+              console.log(response[i].name)
+            }
+          }
+        }
+      })
+    }
     }
 }
 
