@@ -1,19 +1,23 @@
 <template>
+<<<<<<< HEAD
   <h1 class="mt-20">Test</h1>
   <button @click="printRecipeById">print 1</button>
   <br>
   <button @click="printRecipes">print all</button>
   <br>
   <button @click="printRecipesContainingIngredient">print recipes containing ingredient</button>
+=======
   <div id="app" style="padding: 100px">
     <RecipeComponent></RecipeComponent>
   </div>
 
+>>>>>>> origin/feature-get-recipe-Data-From-Database
 </template>
 
 <script>
 import FirebaseService from "@/services/FirebaseService"
 import RecipeComponent from "@/components/Recipe.vue";
+
 
 const fb = new FirebaseService();
 export default {
@@ -71,10 +75,7 @@ export default {
             // Handle the error
           });
     },
-
-    removeTag(index) {
-      this.localRecipe.tags.splice(index, 1);
-    },
+<<<<<<< HEAD
     printRecipes() {
       let recipes = fb.getRecipes();
       recipes.then((response) => {
@@ -97,7 +98,12 @@ export default {
     }
     }
 }
+=======
+>>>>>>> origin/feature-get-recipe-Data-From-Database
 
+    removeTag(index) {
+      this.localRecipe.tags.splice(index, 1);
+    },
 
     test() {
 

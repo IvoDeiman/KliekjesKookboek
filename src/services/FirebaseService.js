@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app";
-import {doc, getDoc, getFirestore, collection, getDocs} from 'firebase/firestore/lite';
-//collection,
+import {collection, doc, getDoc, getDocs, getFirestore, setDoc} from 'firebase/firestore/lite';
+
 export default class FirebaseService {
     // Your web app's Firebase configuration
 
@@ -33,11 +33,66 @@ export default class FirebaseService {
             return "Recipe does not exist";
         }
     }
-    async getRecipes() {
-        const recipesCol = collection(this.db, 'recipes');
-        const recipesSnapshot = await getDocs(recipesCol);
 
-        return recipesSnapshot.docs.map(doc => doc.data());
+    async getAllRecipes() {
+        const recipes = [];
+        const recipesCol = collection(this.db, 'recipes');
+        await getDocs(recipesCol).then((data) => {
+            data.forEach((recipe) => {
+                recipes.push({id:recipe.id, ...recipe.data()})
+            })
+        })
+        return recipes;
+    }
+
+    async getTags() {
+        try {
+            const recipesCol = collection(this.db, 'tags');
+            const docSnap = await getDocs(recipesCol);
+
+            // Extract tags from the documents
+            return [].concat(...docSnap.docs.map(doc => doc.id));
+        } catch (error) {
+            console.error("Error fetching tags:", error);
+            throw error;
+        }
+    }
+
+    async addRecipe(data) {
+        await setDoc(doc(this.db, "recipes", data.title), {
+            description: data.description,
+            ingredient: data.ingredients,
+            tags: data.tags,
+            preparation: data.preparation,
+            rating: data.rating,
+            owner: data.owner,
+            image: data.image,
+            preparationtime: data.preparationtime
+        })
+    }
+    async getRecipes() {
+        try {
+            const recipesCol = collection(this.db, 'recipes');
+            const docSnap = await getDocs(recipesCol);
+            return [].concat(...docSnap.docs.map(doc => doc.data));
+        }
+        catch (error) {
+            console.error("Error fetching document Recipes:", error);
+            throw error; // Optional: Rethrow the error if you want to handle it elsewhere
+        }
+
+    }
+    async getMeasurements() {
+        try {
+            const collectionRef = collection(this.db, 'measurements');
+            const docSnap = await getDocs(collectionRef);
+
+            // Extract document IDs from the query snapshot
+            return [].concat(...docSnap.docs.map(doc => doc.id));
+        } catch (error) {
+            console.error("Error fetching document Measurements:", error);
+            throw error;
+        }
     }
 
 }
