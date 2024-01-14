@@ -1,7 +1,7 @@
 <template>
   <div id="first-segment" class="h-[925px]">
     <div class="hero grid grid-flow-col auto-cols-max ms-[0%]">
-      <div class="filter-column absolute top-1/2 transform -translate-y-1/2">
+      <div class="filter-column absolute top-1/3">
         
         <div class="filter-box" :class="{ 'expanded': aanbevolenExpanded }" @click="toggleFilterBox('aanbevolen')">
           <div class="filter-title">Aanbevolen ingrediënt</div>
@@ -165,6 +165,8 @@ export default {
 .filter-column {
   width: 200px; 
   padding: 20px;
+  top: 70px; 
+
 }
 
 .filter-box {
