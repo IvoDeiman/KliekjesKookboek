@@ -1,18 +1,18 @@
 <template>
   <div id="first-segment" class="h-[925px]">
     <div class="hero grid grid-flow-col auto-cols-max ms-[0%]">
-      <div class="filter-column">
+      <div class="filter-column absolute top-1/2 transform -translate-y-1/2">
         <div class="filter-box">
           <div class="filter-title">Filter 1</div>
           <div class="filter-subtext">Subtext for Filter 1</div>
         </div>
         <div class="filter-box">
-          <div class="filter-title">Filter 1</div>
-          <div class="filter-subtext">Subtext for Filter 1</div>
+          <div class="filter-title">Filter 2</div>
+          <div class="filter-subtext">Subtext for Filter 2</div>
         </div>
         <div class="filter-box">
-          <div class="filter-title">Filter 1</div>
-          <div class="filter-subtext">Subtext for Filter 1</div>
+          <div class="filter-title">Filter 3</div>
+          <div class="filter-subtext">Subtext for Filter 3</div>
         </div>
       </div>
       <div class="text_section pt-48 me-10 flex items-center">
@@ -21,9 +21,7 @@
       </div>
     </div>
   </div>
-
 </template>
-
 <script>
 import SearchComponent from "@/components/inputs/Search.vue";
 
@@ -38,19 +36,21 @@ export default {
 
 <style>
 #search-screen {
-  height: 100vh; /* Set the height of the screen to 100% of the viewport height */
+  height: 100vh; 
 }
 
 .filter-column {
-  width: 200px; /* Set the width of the filter column */
-  background-color: white;
+  width: 200px; 
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for separation */
 }
 
 .filter-box {
   margin-bottom: 20px;
   margin-top: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .filter-title {
