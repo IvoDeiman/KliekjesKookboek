@@ -5,6 +5,7 @@ import Recipes from "@/views/Recipes.vue";
 import About from "@/views/About.vue";
 import MyAccount from "@/views/MyAccount.vue";
 import Test from "@/views/test.vue";
+import RecipeInfo from "@/views/RecipeInfo.vue";
 
 const routes = [
     {
@@ -15,6 +16,11 @@ const routes = [
                 name: "Home",
                 component: Home,
                 path: "/",
+            },
+            {
+              name: "RecipeInfo",
+              component: RecipeInfo,
+              path: "/recipe-info/:id"
             },
             {
                 name: "Recipes",
