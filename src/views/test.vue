@@ -94,13 +94,6 @@ export default {
           }
         }
       })
-    }
-    }
-}
-
-
-    test() {
-
     },
 
     submitRecipe() {
