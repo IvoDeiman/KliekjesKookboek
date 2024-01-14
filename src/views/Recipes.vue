@@ -211,7 +211,7 @@ export default {
 
 #first-segment {
   background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
-  height: 990px;
+  height: 400px;
   top:0;
 }
 
