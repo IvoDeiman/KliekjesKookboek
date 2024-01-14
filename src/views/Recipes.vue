@@ -2,18 +2,95 @@
   <div id="first-segment" class="h-[925px]">
     <div class="hero grid grid-flow-col auto-cols-max ms-[0%]">
       <div class="filter-column absolute top-1/2 transform -translate-y-1/2">
-        <div class="filter-box">
-          <div class="filter-title">Filter 1</div>
-          <div class="filter-subtext">Subtext for Filter 1</div>
+        
+        <div class="filter-box" :class="{ 'expanded': aanbevolenExpanded }" @click="toggleFilterBox('aanbevolen')">
+          <div class="filter-title">Aanbevolen ingrediënt</div>
+          <div class="filter-subtext">0/120 geselecteerd</div>
+          <div v-show="aanbevolenExpanded" class="checkbox-section">
+            <div class="checkbox-item" v-for="(checkbox, index) in aanbevolen" :key="index">
+              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
+              <span class="checkbox-label">{{ checkbox.label }}</span>
+            </div>
+          </div>
         </div>
-        <div class="filter-box">
-          <div class="filter-title">Filter 2</div>
-          <div class="filter-subtext">Subtext for Filter 2</div>
+
+        <div class="filter-box" :class="{ 'expanded': groentenExpanded }" @click="toggleFilterBox('groenten')">
+          <div class="filter-title">Groenten</div>
+          <div class="filter-subtext">0/120 geselecteerd</div>
+          <div v-show="groentenExpanded" class="checkbox-section">
+            <div class="checkbox-item" v-for="(checkbox, index) in groenten" :key="index">
+              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
+              <span class="checkbox-label">{{ checkbox.label }}</span>
+            </div>
+          </div>
         </div>
-        <div class="filter-box">
-          <div class="filter-title">Filter 3</div>
-          <div class="filter-subtext">Subtext for Filter 3</div>
+
+        <div class="filter-box" :class="{ 'expanded': vleesExpanded }" @click="toggleFilterBox('vlees')">
+          <div class="filter-title">vlees</div>
+          <div class="filter-subtext">0/120 geselecteerd</div>
+          <div v-show="vleesExpanded" class="checkbox-section">
+            <div class="checkbox-item" v-for="(checkbox, index) in vlees" :key="index">
+              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
+              <span class="checkbox-label">{{ checkbox.label }}</span>
+            </div>
+          </div>
         </div>
+
+        <div class="filter-box" :class="{ 'expanded': zuivelExpanded }" @click="toggleFilterBox('zuivel')">
+          <div class="filter-title">Zuivel</div>
+          <div class="filter-subtext">0/120 geselecteerd</div>
+          <div v-show="zuivelExpanded" class="checkbox-section">
+            <div class="checkbox-item" v-for="(checkbox, index) in zuivel" :key="index">
+              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
+              <span class="checkbox-label">{{ checkbox.label }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-box" :class="{ 'expanded': visExpanded }" @click="toggleFilterBox('vis')">
+          <div class="filter-title">Vis en zeevruchten</div>
+          <div class="filter-subtext">0/120 geselecteerd</div>
+          <div v-show="visExpanded" class="checkbox-section">
+            <div class="checkbox-item" v-for="(checkbox, index) in vis" :key="index">
+              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
+              <span class="checkbox-label">{{ checkbox.label }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-box" :class="{ 'expanded': olieExpanded }" @click="toggleFilterBox('olie')">
+          <div class="filter-title">Oliën, dressing en frituurvet</div>
+          <div class="filter-subtext">0/120 geselecteerd</div>
+          <div v-show="olieExpanded" class="checkbox-section">
+            <div class="checkbox-item" v-for="(checkbox, index) in olie" :key="index">
+              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
+              <span class="checkbox-label">{{ checkbox.label }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-box" :class="{ 'expanded': kruidenExpanded }" @click="toggleFilterBox('kruiden')">
+          <div class="filter-title">Kruiden</div>
+          <div class="filter-subtext">0/120 geselecteerd</div>
+          <div v-show="kruidenExpanded" class="checkbox-section">
+            <div class="checkbox-item" v-for="(checkbox, index) in kruiden" :key="index">
+              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
+              <span class="checkbox-label">{{ checkbox.label }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-box" :class="{ 'expanded': bakkenExpanded }" @click="toggleFilterBox('bakken')">
+          <div class="filter-title">Bakken</div>
+          <div class="filter-subtext">0/120 geselecteerd</div>
+          <div v-show="bakkenExpanded" class="checkbox-section">
+            <div class="checkbox-item" v-for="(checkbox, index) in bakken" :key="index">
+              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
+              <span class="checkbox-label">{{ checkbox.label }}</span>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="text_section pt-48 me-10 flex items-center">
         <search-component id="search-bar" placeholder="Kliekjes toevoegen" value="" label=""></search-component>
@@ -27,11 +104,57 @@ import SearchComponent from "@/components/inputs/Search.vue";
 
 export default {
   name: "RecipeList",
-  components: {SearchComponent},
-  props: {
-    msg: String
-  }
-}
+  components: { SearchComponent },
+  data() {
+    return {
+      aanbevolenExpanded: false,
+      groentenExpanded: false,
+      vleesExpanded: false,
+      zuivelExpanded: false,
+      visExpanded: false,
+      olieExpanded: false,
+      kruidenExpanded: false,
+      bakkenExpanded: false,
+      aanbevolen: [
+        { label: "knoflook", checked: false },
+        { label: "kaas", checked: false },
+      ],
+      groenten: [
+        { label: "paprika", checked: false },
+        { label: "ui", checked: false },
+      ],
+      vlees: [
+        { label: "kip", checked: false },
+        { label: "rund", checked: false },
+      ],
+      zuivel: [
+        { label: "melk", checked: false },
+        { label: "kaas", checked: false },
+      ],
+      vis: [
+        { label: "zalm", checked: false },
+        { label: "mossel", checked: false },
+      ],
+      olie: [
+        { label: "olijfolie", checked: false },
+        { label: "knoflook saus", checked: false },
+      ],
+      kruiden: [
+        { label: "zout", checked: false },
+        { label: "peper", checked: false },
+      ],
+      bakken: [
+        { label: "meel", checked: false },
+        { label: "eieren", checked: false },
+      ],
+    };
+  },
+  methods: {
+    toggleFilterBox(filter) {
+      this[`${filter}Expanded`] = !this[`${filter}Expanded`];
+    },
+  },
+};
 </script>
 
 <style>
@@ -51,6 +174,14 @@ export default {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   border-radius: 10px;
   padding: 10px;
+  left: 10px; 
+  transition: height 0.5s ease; 
+  overflow: hidden; 
+  cursor: pointer;
+}
+
+.expanded {
+  height: 160px; 
 }
 
 .filter-title {
@@ -60,6 +191,20 @@ export default {
 
 .filter-subtext {
   font-size: 14px;
+}
+
+.checkbox-section {
+  margin-top: 10px;
+}
+
+.checkbox-item {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-input {
+  margin-right: 5px;
 }
 
 #first-segment {
