@@ -54,7 +54,6 @@ export default {
   z-index: 2;
   background: rgba(228,164,40,80%);
   backdrop-filter: blur(5px);
-  border-radius: 0 0 25px 25px;
 }
 
 #navbar .exact-active {
