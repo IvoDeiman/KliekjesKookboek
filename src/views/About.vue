@@ -70,7 +70,7 @@
   max-width: 800px;
   margin: 100px auto 20px; 
   padding: 20px;
-  font-family: 'Bitter', sans-serif;
+  font-family: 'Work Sans, sans-serif', sans-serif;
 }
 
 .section-bg {
@@ -84,6 +84,8 @@
 .section-title {
   font-size: 2em;
   margin-bottom: 10px;
+  font-weight: 700;
+  font-family: Bitter, sans-serif;
 }
 
 .section-introduction p,
