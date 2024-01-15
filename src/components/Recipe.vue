@@ -48,7 +48,7 @@ export default {
       this.image = this.recipeData.image;
     },
     goToInfo() {
-      this.$router.push({name:'RecipeInfo', params: {id:this.title}})
+      this.$router.push({name:'RecipesDetails', params: {id:this.title}})
     },
     unpackTags() {
       return this.tags.toString().replace(/,/g, ', ');
