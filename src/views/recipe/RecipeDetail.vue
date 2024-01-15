@@ -4,7 +4,7 @@
       <div class="container-details sm:px-3 xl:px-[144px]">
         <div class="recipe-info lg:grid lg:grid-cols-3 lg:gap-4">
           <div class="recipe mb-8 lg:col-span-2 rounded-md box-shadow">
-            <img src="../../assets/oosterse-maaltijd.jpg" alt="maaltijd" class="w-full rounded-t-md h-[304px]" style="object-fit: cover;">
+            <img src="../assets/oosterse-maaltijd.jpg" alt="maaltijd" class="w-full rounded-t-md h-[304px]" style="object-fit: cover;">
             <h1 class="recipe-title">{{ title }}</h1>
             <h2 class="quote"><i>{{ description }}</i></h2>
             <div class="grid info grid-rows-4">
@@ -29,7 +29,7 @@
           </div>
 
           <div class="owner  mb-8 rounded-md box-shadow">
-            <img src="../../assets/Chef1.jpg" alt="chef" class="rounded-full owner-image md w-[304px] h-[304px]">
+            <img src="../assets/Chef1.jpg" alt="chef" class="rounded-full owner-image md w-[304px] h-[304px]">
             <label class="owner-name">{{ owner }}</label>
             <hr class="owner-seperator">
             <p class="chef-info">Werkt al 10 jaar bij restaurant de Harmonie in Sexbierum, waarvan 4 als kok. Hiervoor werkte hij als vakkenvuller bij de locale Albert Heijn</p>
