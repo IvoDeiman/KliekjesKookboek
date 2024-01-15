@@ -69,6 +69,33 @@ export default class FirebaseService {
             image: data.image,
             preparationtime: data.preparationtime
         })
+<<<<<<< HEAD
+    }
+    async getRecipes() {
+        try {
+            const recipesCol = collection(this.db, 'recipes');
+            const docSnap = await getDocs(recipesCol);
+            return [].concat(...docSnap.docs.map(doc => doc.data));
+        }
+        catch (error) {
+            console.error("Error fetching document Recipes:", error);
+            throw error; // Optional: Rethrow the error if you want to handle it elsewhere
+        }
+
+    }
+    async getMeasurements() {
+        try {
+            const collectionRef = collection(this.db, 'measurements');
+            const docSnap = await getDocs(collectionRef);
+
+            // Extract document IDs from the query snapshot
+            return [].concat(...docSnap.docs.map(doc => doc.id));
+        } catch (error) {
+            console.error("Error fetching document Measurements:", error);
+            throw error;
+        }
+=======
+>>>>>>> origin/Feature--Recipe-detail-page
     }
     async getRecipes() {
         try {
@@ -95,4 +122,3 @@ export default class FirebaseService {
         }
     }
 }
-
