@@ -1,120 +1,105 @@
 <template>
-  <div id="first-segment" class="h-[925px]">
-    <div class="hero grid grid-flow-col auto-cols-max ms-[0%]">
-      <div class="filter-column absolute top-1/3">
-        
-        <div class="filter-box" :class="{ 'expanded': aanbevolenExpanded }" @click="toggleFilterBox('aanbevolen')">
-          <div class="filter-title">Aanbevolen ingrediënt</div>
-          <div class="filter-subtext">0/120 geselecteerd</div>
-          <div v-show="aanbevolenExpanded" class="checkbox-section">
-            <div class="checkbox-item" v-for="(checkbox, index) in aanbevolen" :key="index">
-              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
-              <span class="checkbox-label">{{ checkbox.label }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="filter-box" :class="{ 'expanded': groentenExpanded }" @click="toggleFilterBox('groenten')">
-          <div class="filter-title">Groenten</div>
-          <div class="filter-subtext">0/120 geselecteerd</div>
-          <div v-show="groentenExpanded" class="checkbox-section">
-            <div class="checkbox-item" v-for="(checkbox, index) in groenten" :key="index">
-              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
-              <span class="checkbox-label">{{ checkbox.label }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="filter-box" :class="{ 'expanded': vleesExpanded }" @click="toggleFilterBox('vlees')">
-          <div class="filter-title">vlees</div>
-          <div class="filter-subtext">0/120 geselecteerd</div>
-          <div v-show="vleesExpanded" class="checkbox-section">
-            <div class="checkbox-item" v-for="(checkbox, index) in vlees" :key="index">
-              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
-              <span class="checkbox-label">{{ checkbox.label }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="filter-box" :class="{ 'expanded': zuivelExpanded }" @click="toggleFilterBox('zuivel')">
-          <div class="filter-title">Zuivel</div>
-          <div class="filter-subtext">0/120 geselecteerd</div>
-          <div v-show="zuivelExpanded" class="checkbox-section">
-            <div class="checkbox-item" v-for="(checkbox, index) in zuivel" :key="index">
-              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
-              <span class="checkbox-label">{{ checkbox.label }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="filter-box" :class="{ 'expanded': visExpanded }" @click="toggleFilterBox('vis')">
-          <div class="filter-title">Vis en zeevruchten</div>
-          <div class="filter-subtext">0/120 geselecteerd</div>
-          <div v-show="visExpanded" class="checkbox-section">
-            <div class="checkbox-item" v-for="(checkbox, index) in vis" :key="index">
-              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
-              <span class="checkbox-label">{{ checkbox.label }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="filter-box" :class="{ 'expanded': olieExpanded }" @click="toggleFilterBox('olie')">
-          <div class="filter-title">Oliën, dressing en frituurvet</div>
-          <div class="filter-subtext">0/120 geselecteerd</div>
-          <div v-show="olieExpanded" class="checkbox-section">
-            <div class="checkbox-item" v-for="(checkbox, index) in olie" :key="index">
-              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
-              <span class="checkbox-label">{{ checkbox.label }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="filter-box" :class="{ 'expanded': kruidenExpanded }" @click="toggleFilterBox('kruiden')">
-          <div class="filter-title">Kruiden</div>
-          <div class="filter-subtext">0/120 geselecteerd</div>
-          <div v-show="kruidenExpanded" class="checkbox-section">
-            <div class="checkbox-item" v-for="(checkbox, index) in kruiden" :key="index">
-              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
-              <span class="checkbox-label">{{ checkbox.label }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="filter-box" :class="{ 'expanded': bakkenExpanded }" @click="toggleFilterBox('bakken')">
-          <div class="filter-title">Bakken</div>
-          <div class="filter-subtext">0/120 geselecteerd</div>
-          <div v-show="bakkenExpanded" class="checkbox-section">
-            <div class="checkbox-item" v-for="(checkbox, index) in bakken" :key="index">
-              <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
-              <span class="checkbox-label">{{ checkbox.label }}</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="text_section pt-48 me-10 flex items-center">
-        <search-component id="search-bar" placeholder="Kliekjes toevoegen" value="" label=""></search-component>
-        <button class="verras-me">Verras me</button>
-      </div>
+  <div class="searchbar--background">
+    <div class="searchbar--holder">
+      <search-component id="search-bar" placeholder="Vul hier je kliekjes in!" value="" label=""></search-component>
+      <secondary-button class="button--squared" id="surprise-button" value="Verras Mij"/>
+    </div>
+  </div >
+  <div class="content">
+    <div class="filter-column">
+      <filter-box-component :filterData="aanbevolenTest"></filter-box-component>
+      <filter-box-component :filterData="groentenTest"></filter-box-component>
+      <filter-box-component :filterData="vleesTest"></filter-box-component>
+      <filter-box-component :filterData="zuivelTest"></filter-box-component>
+      <filter-box-component :filterData="visEnZeeTest"></filter-box-component>
+      <filter-box-component :filterData="olieDressingVetTest"></filter-box-component>
+      <filter-box-component :filterData="KruidenTest"></filter-box-component>
+      <filter-box-component :filterData="BakkenTest"></filter-box-component>
+    </div>
+    <div class="recipes--grid">
+      <RecipeComponent v-for="recipe in recipes" :key="recipe.id" :recipeData="recipe" />
     </div>
   </div>
 </template>
+
 <script>
 import SearchComponent from "@/components/inputs/Search.vue";
+import FilterBoxComponent from "@/components/inputs/FilterBox.vue";
+import RecipeComponent from "@/components/Recipe.vue";
+import SecondaryButton from "@/components/SecondaryButton.vue";
+import FirebaseService from "@/services/FirebaseService";
+
+const fb = new FirebaseService();
 
 export default {
-  name: "RecipeList",
-  components: { SearchComponent },
+  name: "RecipePage",
+  components: {
+    SearchComponent,
+    RecipeComponent,
+    SecondaryButton,
+    FilterBoxComponent
+  },
   data() {
     return {
-      aanbevolenExpanded: false,
-      groentenExpanded: false,
-      vleesExpanded: false,
-      zuivelExpanded: false,
-      visExpanded: false,
-      olieExpanded: false,
-      kruidenExpanded: false,
-      bakkenExpanded: false,
+
+      recipes: [],
+      groentenTest: {
+        title: "Groenten",
+        content: [
+          {label: "Paprica", checkbox: false},
+          {label: "ui", checkbox: false}
+        ]
+      },
+      aanbevolenTest: {
+        title: "aanbevolen",
+        content: [
+          { label: "knoflook", checked: false },
+          { label: "kaas", checked: false },
+        ]
+      },
+      vleesTest: {
+        title: "aanbevolen",
+        content: [
+          { label: "knoflook", checked: false },
+          { label: "kaas", checked: false },
+        ]
+      },
+      zuivelTest: {
+        title: "aanbevolen",
+        content: [
+          { label: "knoflook", checked: false },
+          { label: "kaas", checked: false },
+        ]
+      },
+      visEnZeeTest: {
+        title: "aanbevolen",
+        content: [
+          { label: "knoflook", checked: false },
+          { label: "kaas", checked: false },
+        ]
+      },
+      olieDressingVetTest: {
+        title: "aanbevolen",
+        content: [
+          { label: "knoflook", checked: false },
+          { label: "kaas", checked: false },
+        ]
+      },
+      KruidenTest: {
+        title: "aanbevolen",
+        content: [
+          { label: "knoflook", checked: false },
+          { label: "kaas", checked: false },
+        ]
+      },
+      BakkenTest: {
+        title: "aanbevolen",
+        content: [
+          { label: "knoflook", checked: false },
+          { label: "kaas", checked: false },
+        ]
+      },
+
       aanbevolen: [
         { label: "knoflook", checked: false },
         { label: "kaas", checked: false },
@@ -154,19 +139,46 @@ export default {
       this[`${filter}Expanded`] = !this[`${filter}Expanded`];
     },
   },
+  created() {
+    console.log(this.recipes)
+    fb.getAllRecipes()
+        .then(data => {
+          this.recipes = [...this.recipes, ...data]
+        })
+        .catch(error => {
+          console.error("Error in getDocumentIds:", error);
+        });
+  },
 };
 </script>
 
 <style>
-#search-screen {
-  height: 100vh; 
+
+body {
+  background: #fafafa;
 }
 
 .filter-column {
-  width: 200px; 
-  padding: 20px;
-  top: 70px; 
+  width: 225px;
+}
 
+.content{
+  position: relative;
+  top: -30px;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 20px;
+  max-width: 1084px;
+  margin: auto;
+}
+
+.recipes--grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  height: fit-content;
 }
 
 .filter-box {
@@ -180,6 +192,10 @@ export default {
   transition: height 0.5s ease; 
   overflow: hidden; 
   cursor: pointer;
+}
+
+.filter-box:first-child{
+  margin-top: 0;
 }
 
 .expanded {
@@ -209,71 +225,36 @@ export default {
   margin-right: 5px;
 }
 
-#first-segment {
+.searchbar--background {
   background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
-  height: 400px;
-  top:0;
-}
-
-#search-bar{
-  width: 540px;
-}
-
-.verras-me {
-  height: 60px;
-  width: 200px;
-  margin-left: 10px;
-  background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
-  color: white; /* Text color */
-  border: 2px solid white; /* White border */
-  border-radius: 10px; /* Rounded corners */
-  padding: 10px 20px; /* Adjust padding as needed */
-  font-size: 16px; /* Adjust font size as needed */
-  cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-.verras-me:hover {
-  background-color: rgba(255, 255, 255, 0.5); /* Lighter background on hover */
-  border-color: rgba(255, 255, 255, 0.8); /* Lighter border on hover */
-}
-.company-name {
-  color: #000;
-  width: 402px;
-  font-family: Bitter,sans-serif;
-  font-size: 72px;
-  font-style: normal;
-  font-weight: bolder;
-  line-height: 77px; /* 106.944% */
-  letter-spacing: -1.44px;
-}
-
-.company-slogan {
-  color: #FFF;
-  max-width: inherit;
-  font-family: Work Sans,sans-serif;
-  font-size: 25px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 35px; /* 140% */
-  letter-spacing: -1.25px;
-}
-
-.hero {
+  height: 25vh;
+  display: flex;
   justify-content: center;
-  align-items: center;
+  justify-items: center;
 }
 
-.text_section{
-  max-width: 540px;
+.searchbar--holder {
+  display: inline-flex;
+  max-width: 1084px;
+  padding-top: 10vh;
+  justify-content: center;
+  justify-items: center;
 }
 
 #search-bar{
   width: 540px;
 }
 
-.luminous{
-  mix-blend-mode: luminosity;
+.button--squared {
+  min-height: 65px;
+  border-radius: 10px !important;
+  margin-left: 15px;
+}
+
+.button--squared:hover {
+  background: #ffffff;
+  border: solid 2px #ffffff !important;
+  transform: scale(1.0) !important;
 }
 
 </style>

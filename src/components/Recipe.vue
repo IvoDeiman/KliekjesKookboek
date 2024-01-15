@@ -35,6 +35,7 @@ export default {
       tags: [],
       preparationtime:Number,
       rating: Number,
+      image: Blob,
       unpackedTags:''
     }
   }, methods: {
@@ -44,6 +45,7 @@ export default {
       this.tags = this.recipeData.tags;
       this.preparationtime = this.recipeData.preparationtime;
       this.rating = this.recipeData.rating;
+      this.image = this.recipeData.image;
     },
     goToInfo() {
       this.$router.push({name:'RecipeInfo', params: {id:this.title}})
@@ -69,6 +71,14 @@ export default {
   max-width: 440px;
   display: inline-grid;
   grid-template-columns: 1.125fr 2fr;
+  background: white;
+  cursor: pointer;
+  transition: transform .1s;
+  transform: scale(1.0);
+}
+
+.recipe-preview--container:hover{
+  transform: scale(103%);
 }
 
 .image--container {
