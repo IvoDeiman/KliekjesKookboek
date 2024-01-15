@@ -2,7 +2,7 @@
   <div class="searchbar--background">
     <div class="searchbar--holder">
       <search-component id="search-bar" placeholder="Vul hier je kliekjes in!" value="" label=""></search-component>
-      <secondary-button class="button--squared" id="surprise-button" value="Verras Mij"/>
+      <secondary-button class="button--squared" id="surprise-button" value="Verras me"/>
     </div>
   </div >
   <div class="content">

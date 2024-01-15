@@ -18,7 +18,7 @@ export default {
 </script>
 <template>
  <footer id="footer" class="flex justify-between">
-   <div class="clipped inline-flex items-center ms-36">
+   <div class="inline-flex items-center ms-36">
      <div class="flex">
        <div class="socials">
          <div class="company-name-footer">
@@ -69,7 +69,7 @@ export default {
      </div>
    </div>
    <div class="inline-flex items-center">
-     <img class="items-center me-36 mb-44 footer-mascot" src="../assets/mascot-general.png" alt="Footer mascot">
+     <img class="me-36 mb-36" src="../assets/mascot-general.png" alt="Footer mascot">
      <div class="privacy-and-tos">
        <a class="me-[15px]" target="_blank">
          Privacy Policy
@@ -227,9 +227,5 @@ export default {
 .button-frame button {
   position: absolute;
   right: 0;
-}
-
-.footer-mascot {
-  z-index: 3;
 }
 </style>

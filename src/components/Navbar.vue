@@ -52,7 +52,7 @@ export default {
   width: 100%;
   height: 80px;
   z-index: 2;
-  background: rgba(228,164,40,80%);
+  background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
   backdrop-filter: blur(5px);
 }
 
