@@ -110,7 +110,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .header {
     background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
   }

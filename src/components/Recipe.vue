@@ -61,7 +61,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .recipe-preview--container{
   border-radius: 10px;
   box-shadow: 0 4px 7px 0 rgba(0,0,0,20%);
