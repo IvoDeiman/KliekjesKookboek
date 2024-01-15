@@ -5,8 +5,8 @@
     <div v-show="expanded" class="checkbox-section">
       <div class="checkbox-item" v-for="(checkbox, index) in content" :key="index">
         <label class="checkbox-container">
-          <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
-          <span class="checkbox-label">{{ checkbox.label }}</span>
+          <input type="checkbox" v-model="checkbox.checkbox" @change="handleCheckboxChange" class="checkbox-input" @click.stop />
+          {{ checkbox.label }}
         </label>
 
       </div>
@@ -31,6 +31,18 @@ export default {
   methods: {
     toggleFilterBox() {
       this[`expanded`] = !this[`expanded`];
+    },
+    handleCheckboxChange() {
+      let count=0;
+      for (let i=0; i < this.content.length; i++){
+        if(this.content[i].checkbox){
+          count++;
+        }
+      }
+      console.log(count)
+      this.currentlySelected = count;
+
+      //TODO: Add Filter application
     },
   },
   created(){
@@ -75,11 +87,10 @@ export default {
 }
 
 .checkbox-item {
-  margin-bottom: 5px;
-  margin-right: 10px;
-  padding: 5px;
+  height: 2rem;
+  width: auto;
+  margin-right: 5px;
   align-items: center;
-  background: #F0F0F0;
   white-space: nowrap;
   max-width: fit-content;
   color: black;
@@ -89,10 +100,42 @@ export default {
 }
 
 .checkbox-container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+  min-width: fit-content;
+  min-height: fit-content;
+}
+
+.checkbox-container input{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 2rem;
+  width: 100%;
+}
+
+.checkbox-container {
+  top: 0;
+  left: 0;
+  height: max-content;
+  width: max-content;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
   pointer-events: all;
 }
 
-.checkbox-input {
-  margin-right: 5px;
+.checkbox-container:hover{
+  background-color: #ccc;
 }
+
+.checkbox-container:has(input:checked){
+  background-color: #E4A428;
+  color: white;
+}
+
 </style>
