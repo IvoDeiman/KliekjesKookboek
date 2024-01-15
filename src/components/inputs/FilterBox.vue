@@ -1,11 +1,14 @@
 <template>
-  <div class="filter-box" :class="{ 'expanded': expanded }" @click="toggleFilterBox()">
+  <div class="filter-box" :class="{ 'expanded': expanded }"  @click="toggleFilterBox()">
     <div class="filter-title">{{title}}</div>
     <div class="filter-subtext">{{currentlySelected}}/{{selectionEntries}} geselecteerd</div>
     <div v-show="expanded" class="checkbox-section">
       <div class="checkbox-item" v-for="(checkbox, index) in content" :key="index">
-        <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
-        <span class="checkbox-label">{{ checkbox.label }}</span>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="checkbox.checked" class="checkbox-input" @click.stop />
+          <span class="checkbox-label">{{ checkbox.label }}</span>
+        </label>
+
       </div>
     </div>
   </div>
@@ -39,13 +42,25 @@ export default {
 </script>
 
 <style scoped>
+.filter-box {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  left: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
 .expanded {
-  height: 160px;
 }
 
 .filter-title {
   font-weight: bold;
   font-size: 18px;
+  text-transform: capitalize;
 }
 
 .filter-subtext {
@@ -54,12 +69,27 @@ export default {
 
 .checkbox-section {
   margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .checkbox-item {
   margin-bottom: 5px;
-  display: flex;
+  margin-right: 10px;
+  padding: 5px;
   align-items: center;
+  background: #F0F0F0;
+  white-space: nowrap;
+  max-width: fit-content;
+  color: black;
+  border-radius: 6px;
+  font-family: Work Sans, sans-serif;
+  text-transform: capitalize;
+}
+
+.checkbox-container {
+  pointer-events: all;
 }
 
 .checkbox-input {

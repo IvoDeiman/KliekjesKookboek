@@ -7,14 +7,7 @@
   </div >
   <div class="content">
     <div class="filter-column">
-      <filter-box-component :filterData="aanbevolenTest"></filter-box-component>
-      <filter-box-component :filterData="groentenTest"></filter-box-component>
-      <filter-box-component :filterData="vleesTest"></filter-box-component>
-      <filter-box-component :filterData="zuivelTest"></filter-box-component>
-      <filter-box-component :filterData="visEnZeeTest"></filter-box-component>
-      <filter-box-component :filterData="olieDressingVetTest"></filter-box-component>
-      <filter-box-component :filterData="KruidenTest"></filter-box-component>
-      <filter-box-component :filterData="BakkenTest"></filter-box-component>
+      <filter-box-component v-for="filter in filterCategories" :key="filter.id" :filterData="filter"></filter-box-component>
     </div>
     <div class="recipes--grid">
       <RecipeComponent v-for="recipe in recipes" :key="recipe.id" :recipeData="recipe" />
@@ -43,97 +36,73 @@ export default {
     return {
 
       recipes: [],
-      groentenTest: {
-        title: "Groenten",
-        content: [
-          {label: "Paprica", checkbox: false},
-          {label: "ui", checkbox: false}
-        ]
-      },
-      aanbevolenTest: {
-        title: "aanbevolen",
-        content: [
-          { label: "knoflook", checked: false },
-          { label: "kaas", checked: false },
-        ]
-      },
-      vleesTest: {
-        title: "aanbevolen",
-        content: [
-          { label: "knoflook", checked: false },
-          { label: "kaas", checked: false },
-        ]
-      },
-      zuivelTest: {
-        title: "aanbevolen",
-        content: [
-          { label: "knoflook", checked: false },
-          { label: "kaas", checked: false },
-        ]
-      },
-      visEnZeeTest: {
-        title: "aanbevolen",
-        content: [
-          { label: "knoflook", checked: false },
-          { label: "kaas", checked: false },
-        ]
-      },
-      olieDressingVetTest: {
-        title: "aanbevolen",
-        content: [
-          { label: "knoflook", checked: false },
-          { label: "kaas", checked: false },
-        ]
-      },
-      KruidenTest: {
-        title: "aanbevolen",
-        content: [
-          { label: "knoflook", checked: false },
-          { label: "kaas", checked: false },
-        ]
-      },
-      BakkenTest: {
-        title: "aanbevolen",
-        content: [
-          { label: "knoflook", checked: false },
-          { label: "kaas", checked: false },
-        ]
-      },
-
-      aanbevolen: [
-        { label: "knoflook", checked: false },
-        { label: "kaas", checked: false },
+      filterCategories:[
+        {
+          title: "aanbevolen",
+          content: [
+            { label: "knoflook", checked: false },
+            { label: "kaas", checked: false },
+          ]
+        },
+        {
+          title: "Groenten",
+          content: [
+            { label: "paprika", checked: false },
+            { label: "ui", checked: false },
+          ]
+        },
+        {
+          title: "Vlees",
+          content: [
+            { label: "kip", checked: false },
+            { label: "rund", checked: false },
+          ]
+        },
+        {
+          title: "Zuivel",
+          content: [
+            { label: "melk", checked: false },
+            { label: "kaas", checked: false },
+          ]
+        },
+        {
+          title: "Vis en Zeevruchten",
+          content: [
+            { label: "zalm", checked: false },
+            { label: "mossel", checked: false },
+          ]
+        },
+        {
+          title: "Oliën, dressing en frituurvet",
+          content: [
+            { label: "olijfolie", checked: false },
+          ]
+        },
+        {
+          title: "Kruiden, sausen specerijen",
+          content: [
+            { label: "zout", checked: false },
+            { label: "peper", checked: false },
+            { label: "knoflook saus", checked: false },
+          ]
+        },
+        {
+          title: "Suiker en zoetmakers",
+          content: [
+            { label: "wit kristalsuiker", checked: false },
+            { label: "bastardsuiker", checked: false },
+          ]
+        },
+        {
+          title: "Bakproducten",
+          content: [
+            {label: "meel", checked: false},
+            {label: "eieren", checked: false},
+          ]
+        }
       ],
-      groenten: [
-        { label: "paprika", checked: false },
-        { label: "ui", checked: false },
-      ],
-      vlees: [
-        { label: "kip", checked: false },
-        { label: "rund", checked: false },
-      ],
-      zuivel: [
-        { label: "melk", checked: false },
-        { label: "kaas", checked: false },
-      ],
-      vis: [
-        { label: "zalm", checked: false },
-        { label: "mossel", checked: false },
-      ],
-      olie: [
-        { label: "olijfolie", checked: false },
-        { label: "knoflook saus", checked: false },
-      ],
-      kruiden: [
-        { label: "zout", checked: false },
-        { label: "peper", checked: false },
-      ],
-      bakken: [
-        { label: "meel", checked: false },
-        { label: "eieren", checked: false },
-      ],
-    };
-  },
+      }
+    },
   methods: {
     toggleFilterBox(filter) {
       this[`${filter}Expanded`] = !this[`${filter}Expanded`];
@@ -181,48 +150,8 @@ body {
   height: fit-content;
 }
 
-.filter-box {
-  margin-bottom: 20px;
-  margin-top: 20px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-  border-radius: 10px;
-  padding: 10px;
-  left: 10px; 
-  transition: height 0.5s ease; 
-  overflow: hidden; 
-  cursor: pointer;
-}
-
 .filter-box:first-child{
   margin-top: 0;
-}
-
-.expanded {
-  height: 160px; 
-}
-
-.filter-title {
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.filter-subtext {
-  font-size: 14px;
-}
-
-.checkbox-section {
-  margin-top: 10px;
-}
-
-.checkbox-item {
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-}
-
-.checkbox-input {
-  margin-right: 5px;
 }
 
 .searchbar--background {
