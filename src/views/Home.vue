@@ -21,7 +21,7 @@
             <img class="dotw--image" src="../assets/dotw-preview.jpg" alt="dotw-image">
           </div>
           <div class="dotw--description--cont">
-            <h3 class="dotw--title"><highlight>Gerecht</highlight> van de week</h3>
+            <h3 class="dotw--title"><span class="text-primary">Gerecht</span> van de week</h3>
             <h1 class="dotw--name">Overheerlijke gekruide kikkererwten en gegrilde courgette-taco's</h1>
             <div class="dotw--labelholder">
               <div class="dotw-label preptime"><img src="../assets/clock-regular.svg" alt=""> 40 minuten</div>
@@ -62,11 +62,10 @@
   <section class="buyBook sector">
     <div class="buyBook__grid">
       <div>
-        <h1 class="buyBook__title">Liever iets <highlight>fysieks</highlight>?</h1>
+        <h1 class="buyBook__title">Liever iets <span class="text-primary">fysieks</span>?</h1>
         <p class="buyBook__paragraph">Je kan nu ons kookboek kopen, gevuld met de
           beste recepten zoals beoordeeld door de
-          gebruikers van het <highlight>Kliekjes Kookboek</highlight>! Dit
-          prachtige boek zal ook zeker een leuk cadeau
+          gebruikers van het <span class="text-primary">Kliekjes Kookboek</span>! Dit prachtige boek zal ook zeker een leuk cadeau
           zijn voor mensen die niet zo van het internet
           zijn (of gewoon boeken nog leuk vinden). </p>
         <button class="button-primary">bestel nu</button>
@@ -126,10 +125,6 @@ export default {
 </script>
 
 <style>
-highlight{
-  color: #E4A428;
-}
-
 .first-segment {
   background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
   height: 100vh;
