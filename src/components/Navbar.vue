@@ -15,7 +15,7 @@ export default {
 }
 </script>
 <template>
-  <header id="navbar" class="h-16 flex justify-between items-stretch width-container">
+  <header id="navbar" class="flex justify-between items-stretch width-container">
     <router-link
         to="/"
         class="inline-flex items-center ms-36">
