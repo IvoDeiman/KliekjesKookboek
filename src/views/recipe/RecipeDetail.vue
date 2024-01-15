@@ -1,79 +1,74 @@
 <template>
-    <!--<h1 style="padding-top: 100px;">Recipe detail {{ id }}</h1>-->
-    <div class="header h-[368px]">
-      <div class="container-details sm:px-3 xl:px-[144px]">
-        <div class="recipe-info lg:grid lg:grid-cols-3 lg:gap-4">
-          <div class="recipe mb-8 lg:col-span-2 rounded-md box-shadow">
-            <img src="../../assets/oosterse-maaltijd.jpg" alt="maaltijd" class="w-full rounded-t-md h-[304px]" style="object-fit: cover;">
-            <h1 class="recipe-title">{{ title }}</h1>
-            <h2 class="quote"><i>{{ description }}</i></h2>
-            <div class="grid info grid-rows-4">
-              <div class="row">
-                <label class="font-bold">Bereidingstijd: </label>
-                <label>{{ preparationtime }}</label>
-              </div>
-              <div class="row">
-                <label class="font-bold">Score: </label>
-                <label>{{ rating }}</label>
-              </div>
-              <div class="row">
-                <label class="font-bold">Tags: </label>
-                <label></label>
-              </div>
-              <div class="row">
-                <label v-for="tag in tags" :key="tag">
-                  {{ tag }}, 
-                </label>
-              </div>
-            </div>
+  <div class="upper-page-background"></div>
+  <div class="container-details sm:px-3 xl:px-[144px]">
+    <div class="lg:grid lg:grid-cols-3 lg:gap-4">
+      <div class="mb-8 lg:col-span-2 rounded-md box-shadow">
+        <img src="../../assets/oosterse-maaltijd.jpg" alt="maaltijd" class="w-full rounded-t-md h-[304px]" style="object-fit: cover;">
+        <h1 class="recipe-title">{{ title }}</h1>
+        <h2 class="quote"><i>{{ description }}</i></h2>
+        <div class="info grid grid-rows-3 grid-cols-1 md:grid-rows-1 md:grid-cols-3">
+          <div class="row">
+            <img src="../../assets/clock-regular.svg" alt="" class="prep-time-icon"> 
+            <label v-if="preparationtime == 1"> {{ preparationtime }} minuut</label>
+            <label v-else> {{ preparationtime }} minuten</label>
           </div>
+          <div class="row">
+            <star-rating :ratingVal="rating"/>
+          </div>
+          <div class="row">
+            <img src="../../assets/tag-solid.svg" alt="" class="recipe-tag-icon">
+            <label>
+              {{ unpackTags() }}
+            </label>
+          </div>
+        </div>
+      </div>
 
-          <div class="owner  mb-8 rounded-md box-shadow">
-            <img src="../../assets/Chef1.jpg" alt="chef" class="rounded-full owner-image md w-[304px] h-[304px]">
-            <label class="owner-name">{{ owner }}</label>
-            <hr class="owner-seperator">
-            <p class="chef-info">Werkt al 10 jaar bij restaurant de Harmonie in Sexbierum, waarvan 4 als kok. Hiervoor werkte hij als vakkenvuller bij de locale Albert Heijn</p>
-          </div>
-        </div>
-        
-        <div class="ingredients box-shadow rounded-md mb-8">
-          <div style="padding-bottom: 25px;">
-            <label class="font-bold" style="font-size: 25px;">Ingredienten:</label>
-          </div>
-          <div class="">
-            <ol>
-              <li v-for="ingredient in ingredients" :key="ingredient" class="" style="">
-                <input type="checkbox" class="ingredient-checkbox"> {{ ingredient.name }} {{ ingredient.amount }} {{ ingredient.measurement }}
-              </li>
-            </ol>
-          </div>
-        </div>
-
-        <div class="instructions box-shadow rounded-md mb-8">
-          <div style="padding-bottom: 25px;">
-            <label class="font-bold" style="font-size: 25px;">Instructies:</label>
-          </div>
-          <div class="">
-            <ol>
-              <!-- <li v-for="instruction in preparation" :key="instruction" class="instruction-step" style="">
-                {{ instruction }}
-              </li> -->
-              <li class="instruction-step" style="">{{ preparation }}</li>
-            </ol>
-          </div>
-        </div>
-        
+      <div class="owner  mb-8 rounded-md box-shadow">
+        <img src="../../assets/default-profile.jpg" alt="chef" class="rounded-full owner-image md w-[304px] h-[304px]">
+        <label class="owner-name">{{ owner }}</label>
+        <hr class="owner-seperator">
+        <p class="chef-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </div>
     </div>
     
+    <div class="ingredients box-shadow rounded-md mb-8">
+      <div style="padding-bottom: 25px;">
+        <label class="font-bold" style="font-size: 25px;">Ingredienten:</label>
+      </div>
+      <div class="">
+        <ol>
+          <li v-for="ingredient in ingredients" :key="ingredient" class="" style="">
+            <input type="checkbox" class="ingredient-checkbox"> {{ ingredient.name }} {{ ingredient.amount }} {{ ingredient.measurement }}
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="instructions box-shadow rounded-md mb-8">
+      <div style="padding-bottom: 25px;">
+        <label class="font-bold" style="font-size: 25px;">Instructies:</label>
+      </div>
+      <div class="">
+        <ol>
+          <!-- <li v-for="instruction in preparation" :key="instruction" class="instruction-step" style="">
+            {{ instruction }}
+          </li> -->
+          <li class="instruction-step">{{ preparation }}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
 </template>
   
 <script>
+  import StarRating from "@/components/StarRatingViewOnly";
   import FirebaseService from "@/services/FirebaseService";
 
   const fb = new FirebaseService();
   export default {
     name: "RecipeDetailPage",
+    components: { StarRating },
     data(){
       return {
         title: String,
@@ -89,9 +84,9 @@
     },
     methods: {
       setData() {
-        fb.getRecipeById('Koek').then((data) =>
+        fb.getRecipeById(this.$route.params.id).then((data) =>
         {
-          this.title = "Koek";
+          this.title = this.$route.params.id;
           this.comments = data.comments;
           this.description = data.description;
           this.ingredients = data.ingredients;
@@ -101,7 +96,9 @@
           this.tags = data.tags;
           this.preparation = data.preparation;
         })
-
+      },
+      unpackTags() {
+        return this.tags.toString().replace(/,/g, ', ');
       }
     },
     created() {
@@ -111,17 +108,15 @@
 </script>
 
 <style scoped>
-  .header {
+  .upper-page-background {
     background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
+    height: 368px;
   }
 
   .container-details {
-    margin-top: 184px;
-    position: absolute;
+    top: -184px;
+    position: relative;
     width: 100%;
-  }
-
-  .recipe {
   }
 
   .recipe-title {
@@ -141,7 +136,13 @@
 
   .info {
     padding: 0px 25px 25px 25px;
-    text-align: center;
+    justify-items: center;
+  }
+
+  .prep-time-icon, .recipe-tag-icon {
+    margin-bottom: 3px;
+    margin-right: 3px;
+    display: inline;
   }
 
   .owner {
@@ -196,13 +197,8 @@
     color: #444444;
   }
 
-  @media (min-width: 1024px) {
-    .custom-grid {
-      display: grid;
-    }
-  }
-
   .box-shadow {
-    box-shadow: 0px 3px 10px 0px #000;
+    border-radius: 10px;
+    box-shadow: 0 4px 7px 0 rgba(0,0,0,20%);
   }
 </style>
