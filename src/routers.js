@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import DefaultLayout from "@/components/DefaultLayout.vue";
 import Home from "@/views/Home.vue";
-import Recipes from "@/views/Recipes.vue";
-import RecipeDetail from "@/views/RecipeDetail.vue"
+import Recipes from "@/views/recipe/Recipes.vue";
+import RecipeDetail from "@/views/recipe/RecipeDetail.vue"
 import About from "@/views/About.vue";
 import MyAccount from "@/views/MyAccount.vue";
 import Test from "@/views/test.vue";
-import RecipeInfo from "@/views/RecipeInfo.vue";
+import RecipeInfo from "@/views/recipe/RecipeInfo.vue";
+import PageNotFound from "@/views/PageNotFound.vue";
 
 const routes = [
     {
@@ -48,6 +49,11 @@ const routes = [
                 component: Test,
                 path: "/test",
             },
+            {
+                path: "/:notFound",
+                name: "Page not found",
+                component: PageNotFound
+            }
         ]
     },
     // {
