@@ -61,7 +61,7 @@ export default {
 
 <style>
 .recipe-preview--container{
-  border-radius: 6px;
+  border-radius: 10px;
   box-shadow: 0 4px 7px 0 rgba(0,0,0,20%);
   height: 200px;
   max-height: 200px;
@@ -80,7 +80,7 @@ export default {
   width: 150px;
   object-fit: cover;
   clip-path: polygon(0 0, 100% 0%, 90% 100%, 0% 100%);
-  border-radius: 6px 0 0 6px;
+  border-radius: 10px 0 0 10px;
 }
 
 .info--container {
