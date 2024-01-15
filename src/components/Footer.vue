@@ -17,149 +17,131 @@ export default {
 }
 </script>
 <template>
- <footer id="footer" class="flex">
-   <img class="background" src="../assets/background-footer.png" alt="footer background">
-   <div class="inner-footer">
-     <div class="group">
-       <p class="text-wrapper">© 2023 Kliekjes Kookboek Co., Ltd. All rights reserved</p>
-       <div class="privacy-policy">Privacy Policy</div>
-       <div class="text-wrapper-2">Terms of Service</div>
+ <footer id="footer" class="flex justify-between">
+   <div class="clipped inline-flex items-center ms-36">
+     <div class="flex">
+       <div class="socials">
+         <div class="company-name-footer">
+           Het <br> Kliekjes Kookboek
+         </div>
+         <a target="_blank" href="https://www.facebook.com/" class="link-group">
+           <img class="socials-logo" alt="Facebook Logo" src="../assets/facebook.png"/> Facebook
+         </a>
+         <a target="_blank" href="https://twitter.com/home" class="link-group">
+           <img class="socials-logo" alt="Twitter Logo" src="../assets/twitter.png"/> Twitter
+         </a>
+         <a target="_blank" href="https://www.instagram.com/" class="link-group">
+           <img class="socials-logo" alt="Instagram Logo" src="../assets/instagram.png"/> Instagram
+         </a>
+         <a target="_blank" href="https://www.youtube.com/" class="link-group">
+           <img class="socials-logo" alt="YouTube Logo" src="../assets/youtube.png"/> YouTube
+         </a>
+         <div class="company-rights">
+           © 2023 Kliekjes Kookboek Co., Ltd. All rights reserved
+         </div>
+       </div>
+       <div class="company-info">
+         <div class="our-company">
+           Het bedrijf
+         </div>
+         <router-link to="/partners" class="link-group">
+           Partners
+         </router-link>
+         <router-link to="/about" class="link-group">
+           Over ons
+         </router-link>
+         <router-link to="/contact" class="link-group">
+           Neem contact op
+         </router-link>
+       </div>
      </div>
      <div class="newsletter">
-       <p class="newsletter-text">Schrijf je in op onze nieuwsbrief</p>
-       <div class="button-frame frame">
+       <div class="newsletter-header">
+         Schrijf je in op onze nieuwsbrief
+       </div>
+       <div class="newsletter-subtext my-[17px]">
+         Zo ontvang je de lekkerste recepten <br> eens per week in je e-mail!
+       </div>
+       <div class="button-frame">
          <input placeholder="E-mailadres" type="email" />
          <primary-button value="Submit"></primary-button>
        </div>
-       <p class="newsletter-subtext">
-         Zo ontvang je de lekkerste recepten <br>
-         eens per week in je e-mailadres
-       </p>
      </div>
-     <div class="company-info">
-       <router-link to="/company" class="text-wrapper-3">Het bedrijf</router-link>
-       <router-link to="/about" class="text-wrapper-4">Over ons</router-link>
-       <router-link to="/contact" class="text-wrapper-5">Neem contact op</router-link>
-       <router-link to="/partners" class="text-wrapper-6">Partners</router-link>
+   </div>
+   <div class="inline-flex items-center">
+     <img class="items-center me-36 mb-44 footer-mascot" src="../assets/mascot-general.png" alt="Footer mascot">
+     <div class="privacy-and-tos">
+       <a class="me-[15px]" target="_blank">
+         Privacy Policy
+       </a>
+       <a target="_blank">
+        Terms of Service
+       </a>
      </div>
-     <div class="socials">
-       <a href="https://www.instagram.com/" target="_blank" class="group-2">
-         <div class="text-wrapper-11">Instagram</div>
-         <img class="instagram" alt="Instagram" src="../assets/instagram.png"/>
-       </a>
-       <a href="https://www.instagram.com/" class="group-3">
-         <div class="text-wrapper-11">YouTube</div>
-         <img class="youtube" alt="YouTube" src="../assets/youtube.png"/>
-       </a>
-       <a href="https://www.instagram.com/" class="group-4">
-         <div class="text-wrapper-11">Twitter</div>
-         <img class="twitter" alt="Twitter" src="../assets/twitter.png"/>
-       </a>
-       <a href="https://www.instagram.com/" class="group-5">
-         <div class="text-wrapper-11">Facebook</div>
-         <img class="facebook" alt="Facebook" src="../assets/facebook.png"/>
-       </a>
-       <div class="company-name-footer">
-         <div>Het</div><div>Kliekjes Kookboek</div>
-       </div>
-     </div>
-     <img class="footer-mascot" src="../assets/mascotte-general.png" alt="Footer achtergrond">
    </div>
  </footer>
 </template>
 
 <style lang="css">
-
 #footer {
-  position: relative;
-  bottom: 0;
-}
-
-.inner-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-}
-
-.background {
-  height: 436px;
-  position: relative;
   width: 100%;
-  top: 34px;
+  background: #1E1E1E;
+  clip-path: polygon(0 20%, 100% 0%, 100% 100%, 0% 100%);
 }
 
-.group {
-  left: 0;
-  position: absolute;
-  bottom: 0;
-  color: #636363;
-  font-size: 12px;
+.socials {
+  color: #B4B4B4;
+  font-family: Work Sans, sans-serif;
+  font-size: 16px;
+  font-style: normal;
   font-weight: 500;
-  letter-spacing: 0;
-  white-space: nowrap;
-  margin-left: 185px;
-}
-
-.text-wrapper {
-  color: #636363;
-  font-size: 12px;
-  font-weight: 500;
-  height: 14px;
-  left: 0;
-  letter-spacing: normal;
-  position: absolute;
-  top: 0;
-  white-space: nowrap;
-}
-
-.privacy-policy {
-  color: #636363;
-  font-size: 12px;
-  font-weight: 500;
-  height: 14px;
-  left: 871px;
-  letter-spacing: 0;
   line-height: normal;
-  position: absolute;
-  top: 0;
-  white-space: nowrap;
+  margin-right: 25px;
 }
 
-.text-wrapper-2 {
-  color: #636363;
-  font-size: 12px;
-  font-weight: 500;
-  height: 14px;
-  left: 966px;
-  letter-spacing: 0;
-  line-height: normal;
+.company-rights {
+  margin-top: 100px;
+  color: #646464;
+  display: inline-flex;
   position: absolute;
-  top: 0;
-  white-space: nowrap;
+  font-family: Work Sans, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.privacy-and-tos {
+  margin-left: 80px;
+  margin-top: 420px;
+  color: #646464;
+  display: inline-flex;
+  position: absolute;
+  font-family: Work Sans, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.company-info {
+  color: #B4B4B4;
+  font-family: Work Sans, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-right: 122px;
+  margin-top: 20px;
 }
 
 .newsletter {
-  left: 561px;
-  position: absolute;
-  top: 179px;
-  width: 439px;
-}
-
-.newsletter-text {
-  color: #e9e9e9;
-  font-size: 18px;
-  font-weight: 400;
-  height: 20px;
-  left: 0;
-  letter-spacing: -.36px;
-  line-height: 20px;
-  position: absolute;
-  top: 0;
-  white-space: nowrap;
+  font-family: Work Sans, sans-serif;
+  font-style: normal;
+  margin-bottom: 30px;
 }
 
 .button-frame {
-  top: 92px;
   width: 435px;
   position: relative;
 }
@@ -181,161 +163,73 @@ export default {
   right: 0;
 }
 
-.newsletter-subtext {
-  color: #b3b3b3;
-  font-size: 16px;
-  font-weight: 500;
-  height: 38px;
-  left: 0;
-  letter-spacing: -.32px;
-  line-height: normal;
-  position: absolute;
-  top: 37px;
-}
-
-.company-info {
-  height: 122px;
-  left: 368px;
-  position: absolute;
-  top: 179px;
-  width: 140px;
-}
-
-.text-wrapper-3 {
-  color: #e9e9e9;
-  font-size: 16px;
+.newsletter-header {
+  color: #EAEAEA;
+  font-size: 18px;
   font-weight: 400;
-  height: 20px;
-  left: 0;
-  letter-spacing: -.32px;
-  line-height: 20px;
-  position: absolute;
-  top: 0;
-  white-space: nowrap;
+  line-height: 20px; /* 111.111% */
+  letter-spacing: -0.36px;
 }
 
-.text-wrapper-4 {
-  color: #b3b3b3;
+.our-company {
+  margin-bottom: 21px;
+  color: #EAEAEA;
   font-size: 16px;
-  font-weight: 500;
-  left: 0;
+  font-family: Work Sans, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
   letter-spacing: -.32px;
-  position: absolute;
-  height: 23px;
-  line-height: normal;
-  top: 69px;
-  width: 75px;
 }
 
-.text-wrapper-5 {
-  color: #b3b3b3;
+.newsletter-subtext {
+  color: #B4B4B4;
+  font-family: Work Sans, sans-serif;
   font-size: 16px;
+  font-style: normal;
   font-weight: 500;
-  height: 19px;
-  left: 0;
-  letter-spacing: -.32px;
   line-height: normal;
-  position: absolute;
-  top: 103px;
-  white-space: nowrap;
+  letter-spacing: -0.32px;
 }
 
-.text-wrapper-6 {
-  color: #b3b3b3;
-  font-size: 16px;
-  font-weight: 500;
-  left: 0;
-  height: 19px;
-  letter-spacing: -.32px;
-  line-height: normal;
-  position: absolute;
-  top: 39px;
-  white-space: nowrap;
+.socials-logo {
+  margin-right: 8px;
 }
 
-.socials {
-  height: 169px;
-  left: 188px;
-  position: absolute;
-  top: 158px;
-  width: 157px;
+.link-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
 }
 
-.group-2 {
-  height: 19px;
-  position: absolute;
-  top: 120px;
-  width: 104px;
-}
-
-.instagram {
-  height: 16px;
-  position: absolute;
-  width: 17px;
-}
-
-.group-3 {
-  height: 19px;
-  position: absolute;
-  top: 150px;
-  width: 92px;
-}
-
-.youtube {
-  height: 16px;
-  position: absolute;
-  width: 17px;
-}
-
-.group-4 {
-  height: 19px;
-  position: absolute;
-  top: 91px;
-  width: 82px;
-}
-
-.text-wrapper-11 {
-  color: #b3b3b3;
-  font-size: 16px;
-  font-weight: 500;
-  height: 19px;
-  left: 25px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 0;
-  white-space: nowrap;
-}
-
-.twitter {
-  height: 16px;
-  position: absolute;
-  width: 17px;
-}
-
-.group-5 {
-  position: absolute;
-  top: 62px;
-  width: 100px;
-}
-
-.facebook {
-  height: 16px;
-  position: absolute;
-  width: 17px;
+.button-frame input {
+  background: #ffffffcc;
+  width: 100%;
+  height: 45px;
+  border-radius: 45px;
 }
 
 .company-name-footer {
-  color: #e9e9e9;
-  font-size: 20px;
+  margin-bottom: 21px;
+  color: #EAEAEA;
+  font-size: 18px;
+  font-family: Bitter, sans-serif;
+  font-style: normal;
   font-weight: 500;
-  line-height: 20px;
-  width: 200px;
+  line-height: 20px; /* 142.857% */
+}
+
+.button-frame input::placeholder {
+  color: #444444;
+  font-weight: 600;
+}
+
+.button-frame button {
+  position: absolute;
+  right: 0;
 }
 
 .footer-mascot {
-  left: 1004px;
-  position: absolute;
-  top: 0;
+  z-index: 3;
 }
 </style>
