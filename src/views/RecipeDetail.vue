@@ -2,8 +2,9 @@
     <!--<h1 style="padding-top: 100px;">Recipe detail {{ id }}</h1>-->
     <div class="header h-[368px]">
       <div class="container-details sm:px-3 xl:px-[144px]">
-        <div class="recipe-info custom-grid xl:h-[608px] xl:mb-8 lg:grid-cols-3 lg:gap-4 ">
-          <div class="recipe xl:h-full mb-8 xl:mb-0 md:col-span-2 rounded-md box-shadow">
+        <!--<div class="recipe-info custom-grid xl:h-[608px] xl:mb-8 lg:grid-cols-3 lg:gap-4 ">-->
+        <div class="recipe-info lg:grid lg:grid-cols-3 lg:gap-4">
+          <div class="recipe mb-8 lg:col-span-2 rounded-md box-shadow">
             <img src="../assets/oosterse-maaltijd.jpg" alt="maaltijd" class="w-full rounded-t-md h-[304px]" style="object-fit: cover;">
             <h1 class="recipe-title">Gekruide kikkererwten en gegrilde courgette-taco's</h1>
             <h2 class="quote"><i>“Vandaag op het menu: eet het op of sterf aan honger”</i></h2>
@@ -27,8 +28,12 @@
               </div>
             </div>
           </div>
-          <div class="owner h-[608px] xl:h-full mb-8 xl:mb-0 md:col-1 rounded-md box-shadow">
-            Owner
+
+          <div class="owner  mb-8 rounded-md box-shadow">
+            <img src="../assets/Chef1.jpg" alt="chef" class="rounded-full owner-image md w-[304px] h-[304px]">
+            <label class="owner-name">Lettuce B. Frank</label>
+            <hr class="owner-seperator">
+            <p class="chef-info">Werkt al 10 jaar bij restaurant de Harmonie in Sexbierum, waarvan 4 als kok. Hiervoor werkte hij als vakkenvuller bij de locale Albert Heijn</p>
           </div>
         </div>
         
@@ -138,12 +143,34 @@
   }
 
   .info {
-    padding: 0px 25px 10px 25px;
+    padding: 0px 25px 25px 25px;
     text-align: center;
   }
 
   .owner {
-    background: blue;
+    padding: 15px 0px 0px 0px;
+    background: white;
+  }
+
+  .owner-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .owner-name {
+    text-align: center;
+    display: block;
+    font-size: 22px;
+    padding: 20px 15px;
+  }
+
+  .owner-seperator {
+    margin: 0px 15px;
+  }
+
+  .chef-info {
+    padding: 20px 35px;
   }
 
   .ingredients {
