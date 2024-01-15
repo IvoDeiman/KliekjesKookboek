@@ -50,7 +50,7 @@ const routes = [
                 path: "/test",
             },
             {
-                path: "/:notFound",
+                path: ":notFound",
                 name: "Page not found",
                 component: PageNotFound
             }
