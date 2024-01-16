@@ -2,9 +2,9 @@
   <div class="upper-page-background"></div>
   <div class="container-details sm:px-3 xl:px-[144px]">
     <div class="lg:grid lg:grid-cols-3 lg:gap-4">
-      <div class="mb-8 lg:col-span-2 rounded-md box-shadow">
+      <div class="dish-container mb-8 lg:col-span-2 rounded-md box-shadow">
         <img src="../../assets/oosterse-maaltijd.jpg" alt="maaltijd" class="w-full rounded-t-md h-[304px]" style="object-fit: cover;">
-        <h1 class="recipe-title">{{ title }}</h1>
+        <h1 class="title-font recipe-title">{{ title }}</h1>
         <h2 class="quote info-color"><i>"{{ description }}"</i></h2>
         <div class="info grid grid-rows-3 grid-cols-1 md:grid-rows-1 md:grid-cols-3">
           <div class="row">
@@ -23,7 +23,6 @@
           </div>
         </div>
       </div>
-
       <div class="owner  mb-8 rounded-md box-shadow">
         <img src="../../assets/default-profile.jpg" alt="chef" class="rounded-full owner-image md w-[304px] h-[304px]">
         <label class="owner-name">{{ owner }}</label>
@@ -31,10 +30,9 @@
         <p class="chef-info info-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </div>
     </div>
-    
     <div class="ingredients box-shadow rounded-md mb-8">
       <div style="padding-bottom: 25px;">
-        <label class="font-bold" style="font-size: 25px;">Ingrediënten</label>
+        <label class="title-font container-title" style="font-size: 25px;">Ingrediënten</label>
       </div>
       <div class="">
         <ol>
@@ -44,10 +42,9 @@
         </ol>
       </div>
     </div>
-
     <div class="instructions box-shadow rounded-md mb-8">
       <div style="padding-bottom: 25px;">
-        <label class="font-bold" style="font-size: 25px;">Instructies</label>
+        <label class="title-font container-title" style="font-size: 25px;">Instructies</label>
       </div>
       <div class="">
         <ol>
@@ -108,6 +105,21 @@
 </script>
 
 <style scoped>
+
+  .title-font{
+    font-family: Bitter, sans-serif;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .recipe-title{
+    font-size: 35px;
+  }
+
+  .container-title{
+    font-size: 22px;
+  }
+
   .upper-page-background {
     background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
     height: 368px;
@@ -119,8 +131,13 @@
     width: 100%;
   }
 
+  .dish-container {
+    background: white;
+  }
+
   .recipe-title {
-    padding: 0px 50px;
+    font-family: Bitter, sans-serif;
+    padding: 0 50px;
     margin-top: 10px;
     font-size: 35px;
     text-align: center;
@@ -130,12 +147,12 @@
   .quote {
     font-size: 18px;
     text-align: center;
-    font-weight: italic;
-    margin: 50px 0px;
+    font-style: italic;
+    margin: 50px 0;
   }
 
   .info {
-    padding: 0px 25px 25px 25px;
+    padding: 0 25px 25px 25px;
     justify-items: center;
   }
 
@@ -150,7 +167,7 @@
   }
 
   .owner {
-    padding: 15px 0px 0px 0px;
+    padding: 15px 0 0 0;
     background: white;
   }
 
@@ -180,6 +197,7 @@
   .ingredients {
     width: 100%;
     padding: 25px;
+    background-color: white;
   }
 
   .ingredient-checkbox {
@@ -190,6 +208,7 @@
 
   .instructions {
     padding: 25px;
+    background: white;
   }
 
   .instruction-step {
