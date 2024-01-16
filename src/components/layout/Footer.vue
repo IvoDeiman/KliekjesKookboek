@@ -1,6 +1,6 @@
 <script>
 import router from "@/routers";
-import PrimaryButton from "@/components/PrimaryButton.vue";
+import PrimaryButton from "@/components/buttons/PrimaryButton.vue";
 
 
 export default {
@@ -25,16 +25,16 @@ export default {
            Het <br> Kliekjes Kookboek
          </div>
          <a target="_blank" href="https://www.facebook.com/" class="link-group">
-           <img class="socials-logo" alt="Facebook Logo" src="../assets/facebook.png"/> Facebook
+           <img class="socials-logo" alt="Facebook Logo" src="../../assets/facebook.png"/> Facebook
          </a>
          <a target="_blank" href="https://twitter.com/home" class="link-group">
-           <img class="socials-logo" alt="Twitter Logo" src="../assets/twitter.png"/> Twitter
+           <img class="socials-logo" alt="Twitter Logo" src="../../assets/twitter.png"/> Twitter
          </a>
          <a target="_blank" href="https://www.instagram.com/" class="link-group">
-           <img class="socials-logo" alt="Instagram Logo" src="../assets/instagram.png"/> Instagram
+           <img class="socials-logo" alt="Instagram Logo" src="../../assets/instagram.png"/> Instagram
          </a>
          <a target="_blank" href="https://www.youtube.com/" class="link-group">
-           <img class="socials-logo" alt="YouTube Logo" src="../assets/youtube.png"/> YouTube
+           <img class="socials-logo" alt="YouTube Logo" src="../../assets/youtube.png"/> YouTube
          </a>
          <div class="company-rights">
            © 2023 Kliekjes Kookboek Co., Ltd. All rights reserved
@@ -69,7 +69,7 @@ export default {
      </div>
    </div>
    <div class="inline-flex items-center">
-     <img class="me-36 mb-36" src="../assets/mascot-general.png" alt="Footer mascot">
+     <img class="me-36 mb-36" src="../../assets/mascot-general.png" alt="Footer mascot">
      <div class="privacy-and-tos">
        <a class="me-[15px]" target="_blank">
          Privacy Policy

@@ -19,7 +19,7 @@ export default {
     <router-link
         to="/"
         class="inline-flex items-center ms-36">
-      <img src="../assets/kliekjes-logo.png" alt="ewa" height="63">
+      <img src="../../assets/kliekjes-logo.png" alt="ewa" height="63">
     </router-link>
     <div class="flex items-center gap-1">
       <router-link

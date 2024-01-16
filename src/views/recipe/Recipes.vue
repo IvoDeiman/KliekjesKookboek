@@ -19,7 +19,7 @@
 import SearchComponent from "@/components/inputs/Search.vue";
 import FilterBoxComponent from "@/components/inputs/FilterBox.vue";
 import RecipeComponent from "@/components/Recipe.vue";
-import SecondaryButton from "@/components/SecondaryButton.vue";
+import SecondaryButton from "@/components/buttons/SecondaryButton.vue";
 import FirebaseService from "@/services/FirebaseService";
 
 const fb = new FirebaseService();
