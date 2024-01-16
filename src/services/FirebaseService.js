@@ -21,6 +21,16 @@ export default class FirebaseService {
         this.app = initializeApp(this.firebaseConfig);
         this.db = getFirestore(this.app);
     }
+    containsEveryIngredient(arr1, arr2) {
+        // Check if both arrays are defined and are arrays
+        if (Array.isArray(arr1) && Array.isArray(arr2)) {
+            return arr2.every(item => arr1.includes(item));
+        } else {
+            // Handle the case where one or both arrays are undefined or not arrays
+            console.log("no array");
+            return false;
+        }
+    }
 
     async getRecipeById(id) {
         const docRef = doc(this.db, "recipes", id);
@@ -45,6 +55,36 @@ export default class FirebaseService {
         return recipes;
     }
 
+    async filterIngredients(ingredients) {
+        const validRecipes = [];
+        await this.getAllRecipes().then(recipe => {
+            recipe.forEach((data) => {
+                const ingredientNames = [];
+                data.ingredientnames.forEach((ingredient => {
+                    ingredientNames.push(ingredient);
+                }));
+                if (this.containsEveryIngredient(ingredientNames, ingredients)) {
+                    validRecipes.push(data.id);
+                }
+            });
+        });
+        return validRecipes
+    }
+
+    async getRandomRecipe() {
+        const recipeIds = [];
+        //get all recipe id's and store in array
+        const recipesCol = collection(this.db, 'recipes');
+        await getDocs(recipesCol).then((data) => {
+            data.forEach((recipe) => {
+                recipeIds.push(recipe.id)
+            })
+        })
+        //pick random id from array and return it
+        const randomIndex = Math.floor(Math.random() * (recipeIds.length));
+        return recipeIds[randomIndex];
+    }
+
     async getTags() {
         try {
             const recipesCol = collection(this.db, 'tags');
@@ -57,6 +97,8 @@ export default class FirebaseService {
             throw error;
         }
     }
+
+
 
     async addRecipe(data) {
         await setDoc(doc(this.db, "recipes", data.title), {
