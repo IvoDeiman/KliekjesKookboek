@@ -4,7 +4,7 @@
   <br>
   <button @click="printRecipes">print all</button>
   <br>
-  <button @click="printRecipesContainingIngredient">print recipes containing ingredient</button>
+  <button @click="filter">print recipes containing ingredient</button>
   <div id="app" style="padding: 100px">
     <RecipeComponent></RecipeComponent>
   </div>

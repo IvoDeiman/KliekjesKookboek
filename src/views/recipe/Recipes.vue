@@ -2,7 +2,7 @@
   <div class="searchbar--background">
     <div class="searchbar--holder">
       <search-component id="search-bar" placeholder="Vul hier je kliekjes in!" value="" label=""></search-component>
-      <secondary-button class="button--squared" id="surprise-button" value="Verras me"/>
+      <secondary-button class="button--squared" @click="goToRandomRecipe" id="surprise-button" value="Verras me"/>
     </div>
   </div >
   <div class="content">
@@ -112,6 +112,19 @@ export default {
     toggleFilterBox(filter) {
       this[`${filter}Expanded`] = !this[`${filter}Expanded`];
     },
+
+    goToRandomRecipe() {
+      fb.getRandomRecipe().then((id) => {
+        this.$router.push({name:'RecipesDetails', params: {id:id}});
+      })
+    },
+
+    filter() {
+      fb.filterIngredients(["flower","butter"]).then(data => {
+        console.log(fb.getRecipeById(data[0]))
+      });
+    },
+
   },
   created() {
     console.log(this.recipes)
