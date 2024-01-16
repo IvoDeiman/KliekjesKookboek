@@ -34,7 +34,7 @@
     
     <div class="ingredients box-shadow rounded-md mb-8">
       <div style="padding-bottom: 25px;">
-        <label class="font-bold" style="font-size: 25px;">Ingredienten:</label>
+        <label class="font-bold" style="font-size: 25px;">Ingrediënten</label>
       </div>
       <div class="">
         <ol>
@@ -47,7 +47,7 @@
 
     <div class="instructions box-shadow rounded-md mb-8">
       <div style="padding-bottom: 25px;">
-        <label class="font-bold" style="font-size: 25px;">Instructies:</label>
+        <label class="font-bold" style="font-size: 25px;">Instructies</label>
       </div>
       <div class="">
         <ol>
