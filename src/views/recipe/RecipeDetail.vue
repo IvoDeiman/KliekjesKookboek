@@ -13,13 +13,13 @@
             <label v-else> {{ preparationtime }} minuten</label>
           </div>
           <div class="row">
-            <star-rating :ratingVal="rating"/>
-          </div>
-          <div class="row">
             <img src="../../assets/tag-solid.svg" alt="" class="recipe-tag-icon">
             <label>
               {{ unpackTags() }}
             </label>
+          </div>
+          <div class="row">
+            <star-rating :ratingVal="rating"/>
           </div>
         </div>
       </div>
@@ -154,21 +154,23 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border: 5px solid #E4A428;
   }
 
   .owner-name {
     text-align: center;
     display: block;
     font-size: 22px;
-    padding: 20px 15px;
+    padding: 20px 15px 5px 15px;
   }
 
   .owner-seperator {
-    margin: 0px 15px;
+    margin: 0px 30px;
+    opacity: 20%;
   }
 
   .chef-info {
-    padding: 20px 35px;
+    padding: 20px 50px;
   }
 
   .ingredients {
