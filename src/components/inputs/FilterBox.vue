@@ -127,10 +127,13 @@ export default {
   padding-left: 5px;
   padding-right: 5px;
   pointer-events: all;
+  transition: background-color 0.1s, color 0.1s, scale 0.1s;
+  transform: scale(1.0);
 }
 
 .checkbox-container:hover{
   background-color: #ccc;
+  transform: scale(1.05);
 }
 
 .checkbox-container:has(input:checked){

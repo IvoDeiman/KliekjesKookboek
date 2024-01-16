@@ -38,10 +38,15 @@ export default {
       recipes: [],
       filterCategories:[
         {
-          title: "aanbevolen",
+          title: "categorieën",
           content: [
-            { label: "knoflook", checked: false },
-            { label: "kaas", checked: false },
+            { label: "Braziliaans", checked: false },
+            { label: "Italiaans", checked: false },
+            { label: "Koreaans", checked: false },
+            { label: "Mexicaans", checked: false },
+            { label: "Nederlands", checked: false },
+            { label: "Spaans", checked: false },
+            { label: "Vietnamees", checked: false },
           ]
         },
         {
@@ -156,7 +161,7 @@ body {
 
 .searchbar--background {
   background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
-  height: 25vh;
+  height: 300px;
   display: flex;
   justify-content: center;
   justify-items: center;
@@ -165,7 +170,7 @@ body {
 .searchbar--holder {
   display: inline-flex;
   max-width: 1084px;
-  padding-top: 10vh;
+  padding-top: 150px;
   justify-content: center;
   justify-items: center;
 }
