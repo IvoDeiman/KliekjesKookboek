@@ -1,6 +1,9 @@
 <template>
   <div class="filter-box" :class="{ 'expanded': expanded }"  @click="toggleFilterBox()">
-    <div class="filter-title">{{title}}</div>
+    <div class="flex">
+      <div class="filter-title">{{title}}</div>
+      <font-awesome-icon class="mt-1 ms-auto" :icon="['fas', expanded ? 'chevron-up' : 'chevron-down']" />
+    </div>
     <div class="filter-subtext">{{currentlySelected}}/{{selectionEntries}} geselecteerd</div>
     <div v-show="expanded" class="checkbox-section">
       <div class="checkbox-item" v-for="(checkbox, index) in content" :key="index">
