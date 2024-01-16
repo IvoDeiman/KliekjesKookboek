@@ -5,16 +5,16 @@
       <div class="mb-8 lg:col-span-2 rounded-md box-shadow">
         <img src="../../assets/oosterse-maaltijd.jpg" alt="maaltijd" class="w-full rounded-t-md h-[304px]" style="object-fit: cover;">
         <h1 class="recipe-title">{{ title }}</h1>
-        <h2 class="quote"><i>{{ description }}</i></h2>
+        <h2 class="quote info-color"><i>"{{ description }}"</i></h2>
         <div class="info grid grid-rows-3 grid-cols-1 md:grid-rows-1 md:grid-cols-3">
           <div class="row">
             <img src="../../assets/clock-regular.svg" alt="" class="prep-time-icon"> 
-            <label v-if="preparationtime == 1"> {{ preparationtime }} minuut</label>
-            <label v-else> {{ preparationtime }} minuten</label>
+            <label class="info-color" v-if="preparationtime == 1"> {{ preparationtime }} minuut</label>
+            <label class="info-color" v-else> {{ preparationtime }} minuten</label>
           </div>
           <div class="row">
             <img src="../../assets/tag-solid.svg" alt="" class="recipe-tag-icon">
-            <label>
+            <label class="info-color">
               {{ unpackTags() }}
             </label>
           </div>
@@ -28,7 +28,7 @@
         <img src="../../assets/default-profile.jpg" alt="chef" class="rounded-full owner-image md w-[304px] h-[304px]">
         <label class="owner-name">{{ owner }}</label>
         <hr class="owner-seperator">
-        <p class="chef-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="chef-info info-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </div>
     </div>
     
@@ -39,7 +39,7 @@
       <div class="">
         <ol>
           <li v-for="ingredient in ingredients" :key="ingredient" class="" style="">
-            <input type="checkbox" class="ingredient-checkbox"> {{ ingredient.name }} {{ ingredient.amount }} {{ ingredient.measurement }}
+            <input type="checkbox" class="ingredient-checkbox"> <span class="info-color ">{{ ingredient.amount }} {{ ingredient.measurement }} {{ ingredient.name }} </span>
           </li>
         </ol>
       </div>
@@ -137,6 +137,10 @@
   .info {
     padding: 0px 25px 25px 25px;
     justify-items: center;
+  }
+
+  .info-color {
+    color: #444444;
   }
 
   .prep-time-icon, .recipe-tag-icon {
