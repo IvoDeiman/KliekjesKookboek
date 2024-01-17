@@ -1,6 +1,7 @@
 import {initializeApp} from "firebase/app";
 import {collection, doc, getDoc, getDocs, getFirestore, setDoc} from 'firebase/firestore/lite';
 
+
 export default class FirebaseService {
     // Your web app's Firebase configuration
 
@@ -21,8 +22,36 @@ export default class FirebaseService {
         this.app = initializeApp(this.firebaseConfig);
         this.db = getFirestore(this.app);
     }
+    containsEveryIngredient(arr1, arr2) {
+        // Check if both arrays are defined and are arrays
+        if (Array.isArray(arr1) && Array.isArray(arr2)) {
+            return arr2.every(item => arr1.includes(item));
+        } else {
+            // Handle the case where one or both arrays are undefined or not arrays
+            return false;
+        }
+    }
+
+    async filterIngredients(ingredients) {
+        const validRecipes = [];
+       try {
+           const allRecipes = await this.getAllRecipes();
+           allRecipes.forEach((data) => {
+               const ingredientNames = data.ingredientnames.map(ingredient => ingredient.toLowerCase());
+               const inputIngredients = ingredients.map(ingredient => ingredient.toLowerCase());
+
+               if (this.containsEveryIngredient(ingredientNames, inputIngredients)) {
+                   validRecipes.push(data.id);
+               }
+           })
+       } catch (error) {
+           console.log("Error filtering recipes: " , error)
+       }
+        return validRecipes
+    }
 
     async getRecipeById(id) {
+
         const docRef = doc(this.db, "recipes", id);
         const docSnap = await getDoc(docRef);
 
@@ -45,6 +74,20 @@ export default class FirebaseService {
         return recipes;
     }
 
+    async getRandomRecipe() {
+        const recipeIds = [];
+        //get all recipe id's and store in array
+        const recipesCol = collection(this.db, 'recipes');
+        await getDocs(recipesCol).then((data) => {
+            data.forEach((recipe) => {
+                recipeIds.push(recipe.id)
+            })
+        })
+        //pick random id from array and return it
+        const randomIndex = Math.floor(Math.random() * (recipeIds.length));
+        return recipeIds[randomIndex];
+    }
+
     async getTags() {
         try {
             const recipesCol = collection(this.db, 'tags');
@@ -58,44 +101,27 @@ export default class FirebaseService {
         }
     }
 
+
+
     async addRecipe(data) {
         await setDoc(doc(this.db, "recipes", data.title), {
             description: data.description,
-            ingredient: data.ingredients,
+            ingredients: data.ingredients,
+            ingredientnames: data.ingredientnames,
             tags: data.tags,
             preparation: data.preparation,
             rating: data.rating,
             owner: data.owner,
-            image: data.image,
-            preparationtime: data.preparationtime
-        })
 <<<<<<< HEAD
-    }
-    async getRecipes() {
-        try {
-            const recipesCol = collection(this.db, 'recipes');
-            const docSnap = await getDocs(recipesCol);
-            return [].concat(...docSnap.docs.map(doc => doc.data));
-        }
-        catch (error) {
-            console.error("Error fetching document Recipes:", error);
-            throw error; // Optional: Rethrow the error if you want to handle it elsewhere
-        }
-
-    }
-    async getMeasurements() {
-        try {
-            const collectionRef = collection(this.db, 'measurements');
-            const docSnap = await getDocs(collectionRef);
-
-            // Extract document IDs from the query snapshot
-            return [].concat(...docSnap.docs.map(doc => doc.id));
-        } catch (error) {
-            console.error("Error fetching document Measurements:", error);
-            throw error;
-        }
+            imageurl: data.imageurl,
+            preparationtime: data.preparationtime,
+            comments: data.comments
 =======
->>>>>>> origin/Feature--Recipe-detail-page
+            image: data.image,
+            preparationtime: data.preparationtime,
+            imageurl: data.imageurl
+>>>>>>> new-file-structure
+        })
     }
     async getRecipes() {
         try {
@@ -122,3 +148,4 @@ export default class FirebaseService {
         }
     }
 }
+

@@ -1,7 +1,7 @@
 <template>
-  <label>
+  <label class="label">
     {{ label }}
-    <input type="text" :name="name" :value="value" @input="$emit('input', $event.target.value)" />
+    <input class="input-field" type="text" :name="name" :value="value" @input="$emit('input', $event.target.value)" />
   </label>
 </template>
 
@@ -25,3 +25,23 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.input-field {
+  border-radius: 8px;
+  background-color: #D6D6D64D;
+  border: none;
+  height: 60px;
+  width: 480px;
+  margin-left: 28px;
+}
+
+.label {
+  color: #444;
+  font-family: Work Sans, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+</style>

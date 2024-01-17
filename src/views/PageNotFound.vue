@@ -18,8 +18,12 @@ export default {
 
 .notFound {
   display: flex;
-  margin: auto;
+  height: 100vh;
   justify-content: center;
   align-items: center;
+}
+
+.notFound img {
+  margin-top: 90px;
 }
 </style>

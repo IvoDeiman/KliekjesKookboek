@@ -10,7 +10,7 @@
         </div>
         <search-component id="search-bar" placeholder="Vul hier je kliekjes in!" value="" label=""></search-component>
       </div>
-      <img class="luminous non-interactable sizing--auto" src="../assets/big-mascotte.png" alt="">
+      <img class="hero--ralf non-interactable sizing--auto" src="../assets/big-mascotte.png" alt="">
     </div>
   </div>
   <section class="dotw sector">
@@ -125,6 +125,11 @@ export default {
 </script>
 
 <style>
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .first-segment {
   background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
   height: 100vh;
@@ -132,6 +137,12 @@ export default {
   justify-content: center;
   align-items: center;
   vertical-align: center;
+}
+
+.hero {
+  justify-content: center;
+  align-items: center;
+  height: inherit;
 }
 
 .company-name {
@@ -156,12 +167,6 @@ export default {
   letter-spacing: -1.25px;
 }
 
-.hero {
-  justify-content: center;
-  align-items: center;
-  height: inherit;
-}
-
 .text_section{
   max-width: 540px;
 }
@@ -172,7 +177,7 @@ export default {
   font-weight: 400;
 }
 
-.luminous{
+.hero--ralf{
   mix-blend-mode: luminosity;
 }
 
@@ -184,6 +189,25 @@ export default {
 .non-interactable{
   pointer-events: none;
 }
+
+
+@media only screen and (max-width: 1000px){
+  .hero--ralf{
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .hero{
+    width: 80vw;
+  }
+
+  .company-name{
+    width: 80vw;
+    font-size: 50px;
+  }
+}
+
 
 .sector{
   max-height: 90vh;

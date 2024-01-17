@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import DefaultLayout from "@/components/DefaultLayout.vue";
+import DefaultLayout from "@/components/layout/DefaultLayout.vue";
 import Home from "@/views/Home.vue";
 import Recipes from "@/views/recipe/Recipes.vue";
 import RecipeDetail from "@/views/recipe/RecipeDetail.vue"
@@ -8,6 +8,7 @@ import About from "@/views/About.vue";
 import MyAccount from "@/views/MyAccount.vue";
 import Test from "@/views/test.vue";
 import PageNotFound from "@/views/PageNotFound.vue";
+import LoginPage from "@/views/auth/Login.vue";
 
 const routes = [
     {
@@ -43,6 +44,11 @@ const routes = [
                 name: "My account",
                 component: MyAccount,
                 path: "/my_account",
+            },
+            {
+                name: "Login",
+                component: LoginPage,
+                path: "/login",
             },
             {
                 name: "Test",
