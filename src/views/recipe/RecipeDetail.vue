@@ -9,7 +9,7 @@
         <div class="info grid grid-rows-3 grid-cols-1 md:grid-rows-1 md:grid-cols-3">
           <div class="row">
             <img src="../../assets/clock-regular.svg" alt="" class="prep-time-icon">
-            <label class="info-color" v-if="preparationtime == 1"> {{ preparationtime }} minuut</label>
+            <label class="info-color" v-if="preparationtime === 1"> {{ preparationtime }} minuut</label>
             <label class="info-color" v-else> {{ preparationtime }} minuten</label>
           </div>
           <div class="row">
@@ -57,7 +57,7 @@
     </div>
   </div>
 </template>
-  
+
 <script>
   import StarRating from "@/components/StarRatingViewOnly";
   import FirebaseService from "@/services/FirebaseService";
@@ -214,8 +214,8 @@
   }
 
   .instruction-step {
-    margin-left: 35px; 
-    padding-bottom: 10px; 
+    margin-left: 35px;
+    padding-bottom: 10px;
     list-style: o;
   }
 

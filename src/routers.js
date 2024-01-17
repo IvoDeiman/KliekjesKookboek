@@ -8,6 +8,7 @@ import About from "@/views/About.vue";
 import MyAccount from "@/views/MyAccount.vue";
 import Test from "@/views/test.vue";
 import PageNotFound from "@/views/PageNotFound.vue";
+import LoginPage from "@/views/auth/Login.vue";
 
 const routes = [
     {
@@ -45,6 +46,11 @@ const routes = [
                 path: "/my_account",
             },
             {
+                name: "Login",
+                component: LoginPage,
+                path: "/login",
+            },
+            {
                 name: "Test",
                 component: Test,
                 path: "/test",
@@ -56,17 +62,37 @@ const routes = [
             }
         ]
     },
+    // {
+    //     name: "Sign up",
+    //     component: Home,
+    //     path: "/sign_up",
+    // },
+    // {
+    //     name: "Sign in",
+    //     component: Home,
+    //     path: "/sign_in",
+    // },
+    // {
+    //     name: "Recipes",
+    //     component: Home,
+    //     path: "/recipes",
+    // },
+    // {
+    //     name: "Recipe",
+    //     component: Home,
+    //     path: "/recipes/{recipeId}",
+    // },
+    // {
+    //     name: "User",
+    //     component: Home,
+    //     path: "/user/{userId}",
+    // },
 ]
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
     linkExactActiveClass: "exact-active",
-    scrollBehavior() {
-        return new Promise((resolve) => {
-            resolve({ left: 0, top: 0 })
-        })
-    }
 });
 
 export default router

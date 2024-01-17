@@ -32,7 +32,7 @@
 
     <section class="section-why">
       <div class ="section-bg">
-        <h1 class="section-title">Waarom</h1>
+        <h1 class="login-title">Waarom</h1>
         <p>
           "Gemiddeld verspilden Nederlanders in 2022 thuis 33,4 kg eten per
           persoon. Binnen de hele voedselketen zijn van boer tot bord weliswaar

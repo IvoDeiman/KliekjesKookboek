@@ -82,11 +82,14 @@ export default {
  </footer>
 </template>
 
-<style lang="css">
+<style scoped lang="css">
 #footer {
   width: 100%;
-  background: #1E1E1E;
-  clip-path: polygon(0 20%, 100% 0%, 100% 100%, 0% 100%);
+  position: relative;
+  height: auto;
+  bottom: 0;
+  background-color: #1E1E1E;
+  clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 .socials {
@@ -210,6 +213,7 @@ export default {
 }
 
 .company-name-footer {
+  width: 155px;
   margin-bottom: 21px;
   color: #EAEAEA;
   font-size: 18px;
