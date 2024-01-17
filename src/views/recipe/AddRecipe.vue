@@ -130,7 +130,9 @@ export default {
   .add-recipe-container {
     max-width: 1084px;
     margin: auto;
+    margin-top: -184px;
     padding: 25px;
+    background-color: white;
   }
 
   .instructions-container {
