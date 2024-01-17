@@ -18,7 +18,7 @@ export default {
 
 .notFound {
   display: flex;
-  margin: auto;
+  margin: 90px auto;
   justify-content: center;
   align-items: center;
 }

@@ -11,11 +11,15 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons"
+import { faEye } from "@fortawesome/free-solid-svg-icons"
 
 /* add icons to the library */
 library.add(faUser)
 library.add(faChevronDown)
 library.add(faChevronUp)
+library.add(faEyeSlash)
+library.add(faEye)
 
 const app = createApp(App);
 app.component('font-awesome-icon', FontAwesomeIcon).use(router).mount("#app");
