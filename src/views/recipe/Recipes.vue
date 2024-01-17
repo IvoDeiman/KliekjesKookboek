@@ -1,4 +1,7 @@
 <template>
+  <router-link to="/add-recipes" class="add-recipe-button rounded-full">
+    Voeg recept toe
+  </router-link>
   <div class="searchbar--background">
     <div class="searchbar--holder">
       <search-component id="search-bar" placeholder="Vul hier je kliekjes in!" value="" label=""></search-component>
@@ -146,6 +149,18 @@ export default {
 
 body {
   background: #fafafa;
+}
+
+.add-recipe-button {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 5;
+  margin: 0px 100px 50px 0px;
+  padding: 40px 10px 40px 10px;
+  border: 5px #E4A428 solid;
+  font-size: 12px;
 }
 
 .filter-column {
