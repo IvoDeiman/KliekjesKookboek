@@ -1,7 +1,7 @@
 <template>
   <div class="recipe-preview--container" @click="goToInfo">
     <div class="image--container">
-      <img :src="image" alt="">
+      <img :src="setImage()" alt="">
     </div>
     <div class="info--container">
       <div class="recipe-title">{{title}}</div>
@@ -23,6 +23,7 @@
 
 <script>
 import StarRating from "@/components/StarRatingViewOnly";
+import imgPlaceholder from "@/assets/recipe-placeholder.png"
 export default {
 
   name: "RecipeComponent",
@@ -52,6 +53,13 @@ export default {
     },
     unpackTags() {
       return this.tags.toString().replace(/,/g, ', ');
+    },
+    setImage(){
+      //Blame danny voor de pindakaas clause
+      if(this.image == null || this.image === '' || this.image === 'pindakaas'){
+        return imgPlaceholder;
+      }
+      return this.image;
     }
   },
   created() {
@@ -129,6 +137,9 @@ export default {
 
 .recipe-tags {
   text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .recipe-tags img {
