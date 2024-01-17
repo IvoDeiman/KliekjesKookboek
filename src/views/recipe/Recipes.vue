@@ -2,7 +2,7 @@
   <div class="searchbar--background">
     <div class="searchbar--holder">
       <search-component id="search-bar" placeholder="Vul hier je kliekjes in!" value="" label=""></search-component>
-      <secondary-button class="button--squared" @click="goToRandomRecipe" id="surprise-button" value="Verras me"/>
+      <secondary-button class="button--squared" @click="filter" id="surprise-button" value="Verras me"/>
     </div>
   </div >
   <div class="content">
@@ -115,8 +115,12 @@ export default {
     },
 
     filter() {
-      fb.filterIngredients(["flower","butter"]).then(data => {
-        console.log(fb.getRecipeById(data[0]))
+      this.recipes = []
+      fb.filterIngredients(["zout","peper"]).then(data => {
+        for (let i=0; i<data.length ; i++)
+        fb.getRecipeById(data[i]).then((data2) =>
+        this.recipes.push({id:data[i],...data2}));
+        console.log(this.recipes);
       });
     },
 
