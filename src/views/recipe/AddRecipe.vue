@@ -60,7 +60,7 @@
             <div class="instructions-container" >
                 <div v-for="(instruction, k) in instructions" :key="k">
                     {{ k+1 }}
-                    <textarea rows="5" cols="33" class="instruction-step"></textarea>
+                    <textarea rows="5" cols="33" class="instruction-step" v-model="instructions[k]"></textarea>
                 </div>
             </div>
 
@@ -110,15 +110,7 @@ export default {
 
             ],
             instructions: [
-                {
-                    instruction: ''
-                },
-                {
-                    instruction: ''
-                },
-                {
-                    instruction: ''
-                }
+                "",
             ]
         }
     },
@@ -150,7 +142,7 @@ export default {
         },
         addInstruction() {
             if (this.instructions.length >= 20 ) return false; 
-            this.instructions.push({instruction: ''});
+            this.instructions.push('');
         },
         removeLatestInstruction() {
             if (this.instructions.length <= 1 ) return false; 
@@ -185,7 +177,7 @@ export default {
             this.localRecipe.tags = tags;
             this.localRecipe.ingredientnames = this.ingredients;
             this.localRecipe.preparationtime = parseInt(this.prepTime);
-            this.localRecipe.preparation = this.instructions.at(0).instruction;
+            this.localRecipe.preparation = this.instructions.at(0);
             this.localRecipe.comments = [];
 
             console.log(this.localRecipe);
