@@ -28,7 +28,8 @@ export default {
       title: false,
       currentlySelected: 0,
       selectionEntries: 0,
-      content: [{label: '', checkbox: false}]
+      content: [{label: '', checkbox: false}],
+      activeFilters: []
     }
   },
   methods: {
@@ -37,12 +38,16 @@ export default {
     },
     handleCheckboxChange() {
       let count=0;
+      let activated = []
       for (let i=0; i < this.content.length; i++){
         if(this.content[i].checkbox){
+          activated.push(this.content[i].label);
           count++;
+        } else {
+          activated.filter((e) => e !== this.content[i].label);
         }
       }
-      console.log(count)
+      this.activeFilters = activated;
       this.currentlySelected = count;
 
       //TODO: Add Filter application
