@@ -29,7 +29,8 @@ export default {
       currentlySelected: 0,
       selectionEntries: 0,
       content: [{label: '', checkbox: false}],
-      activeFilters: []
+      activeFilters: [],
+      removeFilter: '',
     }
   },
   methods: {
@@ -39,24 +40,28 @@ export default {
     handleCheckboxChange() {
       let count=0;
       let activated = []
+      this.removeFilter = ''
       for (let i=0; i < this.content.length; i++){
-        if(this.content[i].checkbox){
-          activated.push(this.content[i].label);
+        let label = this.content[i].label
+        let checkbox = this.content[i].checkbox
+        if(checkbox){
+          activated.push(label);
           count++;
-        } else {
-          activated.filter((e) => e !== this.content[i].label);
-          this.removeFilter(this.content[i].label);
+        } else if(!checkbox && this.activeFilters.includes(label)){
+          this.removeFilter = label;
+          this.emitFilterToRemove();
+          activated.filter((e) => e !== label);
         }
       }
       this.activeFilters = activated;
       this.currentlySelected = count;
-      this.getActiveFilters();
+      this.emitActiveFilters();
     },
-    getActiveFilters(){
+    emitActiveFilters(){
       this.$emit('activeFilters',this.activeFilters);
     },
-    removeFilter(fil){
-      this.$emit('removeFilters', fil);
+    emitFilterToRemove(){
+      this.$emit('removeFilters', this.removeFilter);
     },
   },
   created(){
@@ -65,8 +70,8 @@ export default {
     this.selectionEntries = this.filterData.content.length;
   },
   mounted(){
-  this.getActiveFilters();
-  this.removeFilter();
+  this.emitActiveFilters();
+  this.emitFilterToRemove();
   }
 }
 </script>

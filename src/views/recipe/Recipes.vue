@@ -10,7 +10,7 @@
   </div >
   <div class="content">
     <div class="filter-column">
-      <filter-box-component @activeFilters="getCurrentFilters" @removeFilter="removeFilter" v-for="filter in filterCategories" :key="filter.id" :filterData="filter"></filter-box-component>
+      <filter-box-component @activeFilters="getCurrentFilters" @removeFilters="getFilterToRemove" v-for="filter in filterCategories" :key="filter.id" :filterData="filter"></filter-box-component>
     </div>
     <div class="recipes--grid">
       <RecipeComponent v-for="recipe in recipes" :key="recipe.id" :recipeData="recipe" />
@@ -38,17 +38,18 @@ export default {
   data() {
     return {
       recipes: [],
+      currentFilters: [],
       filterCategories:[
         {
           title: "categorieën",
           content: [
-            { label: "Braziliaans", checked: false },
-            { label: "Italiaans", checked: false },
-            { label: "Koreaans", checked: false },
-            { label: "Mexicaans", checked: false },
-            { label: "Nederlands", checked: false },
-            { label: "Spaans", checked: false },
-            { label: "Vietnamees", checked: false },
+            { label: "braziliaans", checked: false },
+            { label: "italiaans", checked: false },
+            { label: "koreaans", checked: false },
+            { label: "mexicaans", checked: false },
+            { label: "nederlands", checked: false },
+            { label: "spaans", checked: false },
+            { label: "vietnamees", checked: false },
           ]
         },
         {
@@ -108,7 +109,6 @@ export default {
           ]
         }
       ],
-      currentFilters: [],
       }
     },
   methods: {
@@ -117,16 +117,22 @@ export default {
     },
 
     getCurrentFilters(mess) {
+      if(mess === undefined || mess.length === 0) return;
+
+      console.log("Filters to Add: " + mess.toString())
       for (let i = 0; i < mess.length; i++){
-        this.currentFilters.push(mess[i]);
+        if(!this.currentFilters.includes(mess[i]))
+          this.currentFilters.push(mess[i]);
       }
-      console.log(this.currentFilters);
+      this.filterIngredients();
     },
 
-    removeFilter(mess){
-      console.log(mess);
-      this.currentFilters.filter((e) => e !== mess);
-      console.log(this.currentFilters);
+    getFilterToRemove(mess){
+      if(mess === undefined || mess === '') return;
+      console.log("Filters To Remove: " + mess.toString())
+      let index = this.currentFilters.indexOf(mess);
+      this.currentFilters.splice(index, 1);
+      this.filterIngredients();
     },
 
     goToRandomRecipe() {
@@ -135,19 +141,18 @@ export default {
       })
     },
 
-    filter() {
+    filterIngredients() {
+      console.log("Current Filters: " + this.currentFilters)
       this.recipes = []
-      fb.filterIngredients(["zout","peper"]).then(data => {
+      fb.filterIngredients(this.currentFilters).then(data => {
         for (let i=0; i<data.length ; i++)
         fb.getRecipeById(data[i]).then((data2) =>
         this.recipes.push({id:data[i],...data2}));
-        console.log(this.recipes);
       });
     },
 
   },
   created() {
-    console.log(this.recipes)
     fb.getAllRecipes()
         .then(data => {
           this.recipes = [...this.recipes, ...data]
