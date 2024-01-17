@@ -1,6 +1,7 @@
 import {initializeApp} from "firebase/app";
 import {collection, doc, getDoc, getDocs, getFirestore, setDoc} from 'firebase/firestore/lite';
 
+
 export default class FirebaseService {
     // Your web app's Firebase configuration
 
@@ -27,12 +28,30 @@ export default class FirebaseService {
             return arr2.every(item => arr1.includes(item));
         } else {
             // Handle the case where one or both arrays are undefined or not arrays
-            console.log("no array");
             return false;
         }
     }
 
+    async filterIngredients(ingredients) {
+        const validRecipes = [];
+       try {
+           const allRecipes = await this.getAllRecipes();
+           allRecipes.forEach((data) => {
+               const ingredientNames = data.ingredientnames.map(ingredient => ingredient.toLowerCase());
+               const inputIngredients = ingredients.map(ingredient => ingredient.toLowerCase());
+
+               if (this.containsEveryIngredient(ingredientNames, inputIngredients)) {
+                   validRecipes.push(data.id);
+               }
+           })
+       } catch (error) {
+           console.log("Error filtering recipes: " , error)
+       }
+        return validRecipes
+    }
+
     async getRecipeById(id) {
+
         const docRef = doc(this.db, "recipes", id);
         const docSnap = await getDoc(docRef);
 
@@ -53,22 +72,6 @@ export default class FirebaseService {
             })
         })
         return recipes;
-    }
-
-    async filterIngredients(ingredients) {
-        const validRecipes = [];
-        await this.getAllRecipes().then(recipe => {
-            recipe.forEach((data) => {
-                const ingredientNames = [];
-                data.ingredientnames.forEach((ingredient => {
-                    ingredientNames.push(ingredient);
-                }));
-                if (this.containsEveryIngredient(ingredientNames, ingredients)) {
-                    validRecipes.push(data.id);
-                }
-            });
-        });
-        return validRecipes
     }
 
     async getRandomRecipe() {
