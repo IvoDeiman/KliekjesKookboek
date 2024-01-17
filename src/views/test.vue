@@ -4,7 +4,7 @@
   <br>
   <button @click="printRecipes">print all</button>
   <br>
-  <button @click="filter">print recipes containing ingredient</button>
+  <button @click="insertRecipe">print recipes containing ingredient</button>
   <div id="app" style="padding: 100px">
     <RecipeComponent></RecipeComponent>
   </div>
@@ -26,10 +26,12 @@ export default {
         ingredients: [],
         description: String,
         tags: [],
+        comments:[],
         preparation: String,
-        rating: "",
-        owner: "",
-        image: "",
+        rating: Number,
+        owner: String,
+        imageurl: String,
+        ingredientnames:[],
         availableMeasurements:[],
         preparationtime:Number
       }
@@ -43,6 +45,23 @@ export default {
     },
     addTag() {
       this.localRecipe.tags.push('');
+    },
+
+    insertRecipe() {
+      console.log(this.localRecipe)
+      this.localRecipe.title = "fucking lekkere droge rijst";
+      this.localRecipe.ingredients = [{name: "rijst", measurement: "gram", amount: 500}, {name:"water",measurement:"mililiter",amount:500}]
+      this.localRecipe.description = "wollah kook rijst";
+      this.localRecipe.rating = 5;
+      this.localRecipe.owner = "je ma";
+      this.localRecipe.imageurl = "pindakaas";
+      this.localRecipe.ingredientnames = ["rijst", "water"];
+      this.localRecipe.preparationtime = 20;
+      this.localRecipe.preparation = "doe water in pan en daarna rijst in pas, nu koken ofzo idk..";
+      this.localRecipe.comments = ["kanker lekker", "niet zo kanker lekker"]
+
+      console.log(this.localRecipe);
+      fb.addRecipe(this.localRecipe);
     },
 
     getTags() {
@@ -83,18 +102,18 @@ export default {
         }
       })
       },
-    printRecipesContainingIngredient() {
-      let recipes = fb.getRecipes();
-      recipes.then((response) => {
-        for (let i = 0; i<response.length; i++) {
-          for (let j = 0; j<response.length; j++) {
-            if(response[i].ingredients[j].name == "pindakaas") {
-              console.log(response[i].name)
-            }
-          }
-        }
-      })
-    },
+    // printRecipesContainingIngredient() {
+    //   let recipes = fb.getRecipes();
+    //   recipes.then((response) => {
+    //     for (let i = 0; i<response.length; i++) {
+    //       for (let j = 0; j<response.length; j++) {
+    //         if(response[i].ingredients[j].name == "pindakaas") {
+    //           console.log(response[i].name)
+    //         }
+    //       }
+    //     }
+    //   })
+    //},
 
     submitRecipe() {
       console.log(fb.addRecipe(this.localRecipe));

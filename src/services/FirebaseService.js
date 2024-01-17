@@ -106,13 +106,15 @@ export default class FirebaseService {
     async addRecipe(data) {
         await setDoc(doc(this.db, "recipes", data.title), {
             description: data.description,
-            ingredient: data.ingredients,
+            ingredients: data.ingredients,
+            ingredientnames: data.ingredientnames,
             tags: data.tags,
             preparation: data.preparation,
             rating: data.rating,
             owner: data.owner,
-            image: data.image,
-            preparationtime: data.preparationtime
+            imageurl: data.imageurl,
+            preparationtime: data.preparationtime,
+            comments: data.comments
         })
     }
     async getRecipes() {

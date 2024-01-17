@@ -117,10 +117,14 @@ export default {
     filter() {
       this.recipes = []
       fb.filterIngredients(["zout","peper"]).then(data => {
-        for (let i=0; i<data.length ; i++)
-        fb.getRecipeById(data[i]).then((data2) =>
-        this.recipes.push({id:data[i],...data2}));
-        console.log(this.recipes);
+        if (data.length !== 0) {
+          for (let i = 0; i < data.length; i++)
+            fb.getRecipeById(data[i]).then((data2) =>
+                this.recipes.push({id: data[i], ...data2}));
+          console.log(this.recipes);
+        } else {
+          console.log("geen recepten gevonden");
+        }
       });
     },
 
