@@ -18,54 +18,71 @@ export default {
 </script>
 
 <template>
-  <div class="login-container">
-    <section class="login-section">
-      <h1 class="login-title">Klaar om te koken?</h1>
-      <h3 class="login-subtext">Log in om jouw recepten te bekijken</h3>
-      <div class="login-form">
-        <div class="flex items-center mb-[25px]">
-          <div class="login-field-description">
-            E-mailadres
+  <div class="login-content">
+    <img class="login-image" src="../../assets/login-image.png" alt="">
+    <div class="login-container">
+      <section class="login-section">
+        <h1 class="login-title">Klaar om te koken?</h1>
+        <h3 class="login-subtext">Log in om jouw recepten te bekijken</h3>
+        <div class="login-form">
+          <div class="flex items-center mb-[25px]">
+            <div class="login-field-description">
+              E-mailadres
+            </div>
+            <input class="login-input" placeholder="Ralf.v.d.koek@example.com">
           </div>
-          <input class="login-input" placeholder="Ralf.v.d.koek@example.com">
-        </div>
-        <div class="flex items-center mb-[25px]">
-          <div class="login-field-description">
-            Wachtwoord
+          <div class="flex items-center mb-[25px]">
+            <div class="login-field-description">
+              Wachtwoord
+            </div>
+            <div class="input-icons">
+              <font-awesome-icon @click="switchVisibility()" class="visibility-icon clickable"
+                                 :icon="['fas', passwordType === 'password' ? 'eye-slash' : 'eye']" />
+              <input :type="passwordType" placeholder="Wachtwoord" class="login-input">
+            </div>
           </div>
-          <div class="input-icons">
-            <font-awesome-icon @click="switchVisibility()" class="visibility-icon clickable"
-                               :icon="['fas', passwordType === 'password' ? 'eye-slash' : 'eye']" />
-            <input :type="passwordType" placeholder="Wachtwoord" class="login-input">
+          <div class="user-options">
+            <input type="checkbox" class="remember-checkbox"> <span class="info-color">Onthoud mij</span>
+            <button class="btn-forgot-password">Wachtwoord vergeten?</button>
           </div>
         </div>
-        <div class="user-options">
-          <input type="checkbox" class="remember-checkbox"> <span class="info-color">Onthoud mij</span>
-          <button class="btn-forgot-password">Wachtwoord vergeten?</button>
+        <div class="button-wrapper">
+          <button class="login-button">Inloggen</button>
         </div>
-      </div>
-      <div class="button-wrapper">
-        <button class="login-button">Inloggen</button>
-      </div>
-      <div class="options-wrapper mt-[61px]">
-        <div class="spacer"></div>
-        <div class="other-options mx-[58px]">
-          Andere opties
+        <div class="options-wrapper mt-[61px]">
+          <div class="spacer"></div>
+          <div class="other-options mx-[58px]">
+            Andere opties
+          </div>
+          <div class="spacer"></div>
         </div>
-        <div class="spacer"></div>
-      </div>
-      <div class="options-wrapper mt-[20px]">
-        <img class="me-[50px] clickable" src="../../assets/facebook-login-option.png" alt="Facebook Login">
-        <img class="clickable" src="../../assets/google-login-option.png" alt="Google Login">
-      </div>
-      <div class="options-wrapper my-[41px]">
-        <p class="register-text">Nog geen account? Geen probleem, hier kan je je registreren</p>
-      </div>
-    </section>
+        <div class="options-wrapper mt-[20px]">
+          <img class="me-[50px] clickable" src="../../assets/facebook-login-option.png" alt="Facebook Login">
+          <img class="clickable" src="../../assets/google-login-option.png" alt="Google Login">
+        </div>
+        <div class="options-wrapper my-[41px]">
+          <p class="register-text">Nog geen account? Geen probleem, hier kan je je registreren</p>
+        </div>
+      </section>
+    </div>
   </div>
 </template>
 
 <style scoped>
+
+.login-image {
+  width: 560px;
+  height: 100%;
+}
+
+.login-content {
+  padding: 20px 0 0 0 ;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: auto;
+}
+
 .login-section {
   margin-top: 100px;
 }
@@ -85,8 +102,8 @@ export default {
 
 .visibility-icon {
   position: absolute;
-  left: 64%;
-  margin-top: 20px;
+  margin-top: 22px;
+  margin-left: 440px;
   font-size: 18px;
   color: #444444;
 }
@@ -128,10 +145,8 @@ export default {
 }
 
 .login-container {
-  max-width: 800px;
   margin: auto;
-  padding: 20px;
-  font-family: 'Work Sans, sans-serif', sans-serif;
+  font-family: Work Sans, sans-serif;
 }
 
 .login-title {
