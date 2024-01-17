@@ -1,7 +1,7 @@
 <template>
   <div class="recipe-preview--container" @click="goToInfo">
     <div class="image--container">
-      <img src="@/assets/dotw-preview.jpg" alt="">
+      <img :src="image" alt="">
     </div>
     <div class="info--container">
       <div class="recipe-title">{{title}}</div>
@@ -35,7 +35,7 @@ export default {
       tags: [],
       preparationtime:Number,
       rating: Number,
-      image: Blob,
+      image: String,
       unpackedTags:''
     }
   }, methods: {
@@ -45,7 +45,7 @@ export default {
       this.tags = this.recipeData.tags;
       this.preparationtime = this.recipeData.preparationtime;
       this.rating = this.recipeData.rating;
-      this.image = this.recipeData.image;
+      this.image = this.recipeData.imageurl;
     },
     goToInfo() {
       this.$router.push({name:'RecipesDetails', params: {id:this.title}})

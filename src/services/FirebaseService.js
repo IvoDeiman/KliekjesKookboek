@@ -109,7 +109,8 @@ export default class FirebaseService {
             rating: data.rating,
             owner: data.owner,
             image: data.image,
-            preparationtime: data.preparationtime
+            preparationtime: data.preparationtime,
+            imageurl: data.imageurl
         })
     }
     async getRecipes() {
