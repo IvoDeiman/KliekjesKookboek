@@ -3,12 +3,12 @@
   <div class="container-details sm:px-3 xl:px-[144px]">
     <div class="lg:grid lg:grid-cols-3 lg:gap-4">
       <div class="dish-container mb-8 lg:col-span-2 rounded-md box-shadow">
-        <img src="../../assets/oosterse-maaltijd.jpg" alt="maaltijd" class="w-full rounded-t-md h-[304px]" style="object-fit: cover;">
+        <img :src="image" alt="maaltijd" class="w-full rounded-t-md h-[304px]" style="object-fit: cover;">
         <h1 class="title-font recipe-title">{{ title }}</h1>
         <h2 class="quote info-color"><i>"{{ description }}"</i></h2>
         <div class="info grid grid-rows-3 grid-cols-1 md:grid-rows-1 md:grid-cols-3">
           <div class="row">
-            <img src="../../assets/clock-regular.svg" alt="" class="prep-time-icon"> 
+            <img src="../../assets/clock-regular.svg" alt="" class="prep-time-icon">
             <label class="info-color" v-if="preparationtime == 1"> {{ preparationtime }} minuut</label>
             <label class="info-color" v-else> {{ preparationtime }} minuten</label>
           </div>
@@ -76,7 +76,8 @@
         preparationtime: Number,
         rating:Number,
         tags: [],
-        preparation: String
+        preparation: String,
+        image: String
       }
     },
     methods: {
@@ -92,6 +93,7 @@
           this.rating = data.rating;
           this.tags = data.tags;
           this.preparation = data.preparation;
+          this.image = data.imageurl;
         })
       },
       unpackTags() {
