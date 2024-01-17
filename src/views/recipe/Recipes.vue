@@ -10,7 +10,7 @@
   </div >
   <div class="content">
     <div class="filter-column">
-      <filter-box-component v-for="filter in filterCategories" :key="filter.id" :filterData="filter"></filter-box-component>
+      <filter-box-component @activeFilters="getCurrentFilters" @removeFilter="removeFilter" v-for="filter in filterCategories" :key="filter.id" :filterData="filter"></filter-box-component>
     </div>
     <div class="recipes--grid">
       <RecipeComponent v-for="recipe in recipes" :key="recipe.id" :recipeData="recipe" />
@@ -37,7 +37,6 @@ export default {
   },
   data() {
     return {
-
       recipes: [],
       filterCategories:[
         {
@@ -109,11 +108,25 @@ export default {
           ]
         }
       ],
+      currentFilters: [],
       }
     },
   methods: {
     toggleFilterBox(filter) {
       this[`${filter}Expanded`] = !this[`${filter}Expanded`];
+    },
+
+    getCurrentFilters(mess) {
+      for (let i = 0; i < mess.length; i++){
+        this.currentFilters.push(mess[i]);
+      }
+      console.log(this.currentFilters);
+    },
+
+    removeFilter(mess){
+      console.log(mess);
+      this.currentFilters.filter((e) => e !== mess);
+      console.log(this.currentFilters);
     },
 
     goToRandomRecipe() {

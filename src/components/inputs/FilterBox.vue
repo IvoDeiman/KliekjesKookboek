@@ -45,18 +45,28 @@ export default {
           count++;
         } else {
           activated.filter((e) => e !== this.content[i].label);
+          this.removeFilter(this.content[i].label);
         }
       }
       this.activeFilters = activated;
       this.currentlySelected = count;
-
-      //TODO: Add Filter application
+      this.getActiveFilters();
+    },
+    getActiveFilters(){
+      this.$emit('activeFilters',this.activeFilters);
+    },
+    removeFilter(fil){
+      this.$emit('removeFilters', fil);
     },
   },
   created(){
     this.title = this.filterData.title;
     this.content = this.filterData.content;
     this.selectionEntries = this.filterData.content.length;
+  },
+  mounted(){
+  this.getActiveFilters();
+  this.removeFilter();
   }
 }
 </script>
