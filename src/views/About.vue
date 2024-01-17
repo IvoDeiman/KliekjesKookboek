@@ -66,18 +66,23 @@
 </template>
 
 <style scoped>
+
+.section-introduction {
+  margin-top: 100px;
+}
+
 .about-us-container {
   max-width: 800px;
-  margin: 100px auto 20px; 
+  margin: auto;
   padding: 20px;
   font-family: 'Work Sans, sans-serif', sans-serif;
 }
 
 .section-bg {
   /* https://www.trouw.nl/nieuws/niemand-kookt-korter-dan-de-nederlander~bcb3d436/?referrer=https://www.google.com/*/
-  background-color: rgba(228, 164, 40, 0.3); 
-  border-radius: 10px; 
-  padding: 20px; 
+  background-color: rgba(228, 164, 40, 0.3);
+  border-radius: 10px;
+  padding: 20px;
   margin-bottom: 20px;
 }
 
