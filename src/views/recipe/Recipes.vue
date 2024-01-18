@@ -12,8 +12,41 @@
     <div class="filter-column">
       <filter-box-component @activeFilters="getCurrentFilters" @removeFilters="getFilterToRemove" v-for="filter in filterCategories" :key="filter.id" :filterData="filter"></filter-box-component>
     </div>
-    <div class="recipes--grid">
-      <RecipeComponent v-for="recipe in recipes" :key="recipe.id" :recipeData="recipe" />
+    <div>
+      <div class="recipes--grid">
+        <RecipeComponent v-for="recipe in recipes" :key="recipe.id" :recipeData="recipe" />
+      </div>
+      <div id="pagination-control" class="pagination-control-container">
+        <ul class="pagination">
+          <li class="pagination__controls pagination__controls--prev">
+            <a class="pagination-button" href="#">
+              <svg viewBox="0 0 14 14" aria-hidden="true" class="chevron" data-test="icon-chevron-back" focusable="false">
+                <path fill-rule="evenodd" d="M9.306 3.644a.508.508 0 000-.71.497.497 0 00-.7-.006l-4.06 4.084 4.055 4.054c.195.195.517.19.707 0a.501.501 0 00-.002-.71L5.954 7.006l3.352-3.36z"></path>
+              </svg>
+            </a>
+          </li>
+          <li class="pagination__controls">
+            <a class="pagination-button" href="#">1</a>
+          </li>
+          <li class="pagination__controls">
+            <a class="pagination-button" href="#">2</a>
+          </li>
+          <li class="pagination__controls">
+            <a class="pagination-button" href="#">3</a>
+          </li>
+          <li class="pagination__controls indicator-more">
+            ...
+          </li>
+          <li class="pagination__controls">
+            <a class="pagination-button" href="#">{max}</a>
+          </li>
+          <li class="pagination__controls pagination__controls--next">
+            <a class="pagination-button" href="#">
+              <svg version="1.1" viewBox="0 0 14 14" aria-hidden="true" class="svg-inline--bi bi-chevron-next bi-lg" data-test="icon-chevron-next" focusable="false"><path fill-rule="evenodd" d="M4.694 3.644a.508.508 0 010-.71.497.497 0 01.7-.006l4.06 4.084-4.055 4.054a.505.505 0 01-.707 0 .501.501 0 01.002-.71l3.352-3.351-3.352-3.36z"></path></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -165,7 +198,6 @@ export default {
 </script>
 
 <style>
-
 body {
   background: #fafafa;
 }
@@ -241,4 +273,72 @@ body {
   transform: scale(1.0) !important;
 }
 
+.pagination-control-container {
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination > li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: .25rem;
+}
+
+.pagination > li.pagination__controls--next{
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.pagination__controls {
+  font-family: Work Sans, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #E4A428;
+  border-radius: 10px;
+}
+
+.pagination__controls:hover {
+  background-color: #E4A428;
+  color: white;
+  fill: white;
+}
+
+.pagination__controls:hover .pagination-button svg {
+  fill: white;
+}
+
+.indicator-more{
+  color: black;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+}
+
+.pagination__controls--prev {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.pagination-button {
+  display: flex;
+  min-height: 48px;
+  min-width: 48px;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-button svg {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  fill: #E4A428;
+  margin: 0;
+}
 </style>
