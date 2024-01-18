@@ -10,43 +10,13 @@
   </div >
   <div class="content">
     <div class="filter-column">
-      <filter-box-component @activeFilters="getCurrentFilters" @removeFilters="getFilterToRemove" v-for="filter in filterCategories" :key="filter.id" :filterData="filter"></filter-box-component>
+      <filter-box-component @activeFilters="receiveCurrentFilters" @removeFilters="removeFilter" v-for="filter in filterCategories" :key="filter.id" :filterData="filter"></filter-box-component>
     </div>
     <div>
-      <div class="recipes--grid">
-        <RecipeComponent v-for="recipe in recipes" :key="recipe.id" :recipeData="recipe" />
+      <div id="recipes-grid" class="recipes--grid">
+        <RecipeComponent v-for="recipe in recipes.slice((page-1)*recipesPerPage,page*recipesPerPage)" :key="recipe.id" :recipeData="recipe" />
       </div>
-      <div id="pagination-control" class="pagination-control-container">
-        <ul class="pagination">
-          <li class="pagination__controls pagination__controls--prev">
-            <a class="pagination-button" href="#">
-              <svg viewBox="0 0 14 14" aria-hidden="true" class="chevron" data-test="icon-chevron-back" focusable="false">
-                <path fill-rule="evenodd" d="M9.306 3.644a.508.508 0 000-.71.497.497 0 00-.7-.006l-4.06 4.084 4.055 4.054c.195.195.517.19.707 0a.501.501 0 00-.002-.71L5.954 7.006l3.352-3.36z"></path>
-              </svg>
-            </a>
-          </li>
-          <li class="pagination__controls">
-            <a class="pagination-button" href="#">1</a>
-          </li>
-          <li class="pagination__controls">
-            <a class="pagination-button" href="#">2</a>
-          </li>
-          <li class="pagination__controls">
-            <a class="pagination-button" href="#">3</a>
-          </li>
-          <li class="pagination__controls indicator-more">
-            ...
-          </li>
-          <li class="pagination__controls">
-            <a class="pagination-button" href="#">{max}</a>
-          </li>
-          <li class="pagination__controls pagination__controls--next">
-            <a class="pagination-button" href="#">
-              <svg version="1.1" viewBox="0 0 14 14" aria-hidden="true" class="svg-inline--bi bi-chevron-next bi-lg" data-test="icon-chevron-next" focusable="false"><path fill-rule="evenodd" d="M4.694 3.644a.508.508 0 010-.71.497.497 0 01.7-.006l4.06 4.084-4.055 4.054a.505.505 0 01-.707 0 .501.501 0 01.002-.71l3.352-3.351-3.352-3.36z"></path></svg>
-            </a>
-          </li>
-        </ul>
-      </div>
+      <pagination v-model="page" :records="recipes.length" :per-page="recipesPerPage" @paginate="PaginateCallback"/>
     </div>
   </div>
 </template>
@@ -57,6 +27,7 @@ import FilterBoxComponent from "@/components/inputs/FilterBox.vue";
 import RecipeComponent from "@/components/Recipe.vue";
 import SecondaryButton from "@/components/buttons/SecondaryButton.vue";
 import FirebaseService from "@/services/FirebaseService";
+import Pagination from "v-pagination-3";
 
 const fb = new FirebaseService();
 
@@ -66,10 +37,13 @@ export default {
     SearchComponent,
     RecipeComponent,
     SecondaryButton,
-    FilterBoxComponent
+    FilterBoxComponent,
+    Pagination
   },
   data() {
     return {
+      page: 1,
+      recipesPerPage: 10,
       recipes: [],
       currentFilters: [],
       filterCategories:[
@@ -145,44 +119,34 @@ export default {
       }
     },
   methods: {
-    toggleFilterBox(filter) {
-      this[`${filter}Expanded`] = !this[`${filter}Expanded`];
-    },
-
-    getCurrentFilters(mess) {
+    receiveCurrentFilters(mess) {
       if(mess === undefined || mess.length === 0) return;
-
-      console.log("Filters to Add: " + mess.toString())
       for (let i = 0; i < mess.length; i++){
         if(!this.currentFilters.includes(mess[i]))
           this.currentFilters.push(mess[i]);
       }
       this.filterIngredients();
     },
-
-    getFilterToRemove(mess){
+    removeFilter(mess){
       if(mess === undefined || mess === '') return;
-      console.log("Filters To Remove: " + mess.toString())
       let index = this.currentFilters.indexOf(mess);
       this.currentFilters.splice(index, 1);
       this.filterIngredients();
     },
-
+    filterIngredients() {
+      this.recipes = []
+      fb.filterIngredients(this.currentFilters).then(data => {
+        for (let i=0; i<data.length ; i++)
+          fb.getRecipeById(data[i]).then((data2) =>
+              this.recipes.push({id:data[i],...data2}));
+      });
+    },
     goToRandomRecipe() {
       fb.getRandomRecipe().then((id) => {
         this.$router.push({name:'RecipesDetails', params: {id:id}});
       })
     },
 
-    filterIngredients() {
-      console.log("Current Filters: " + this.currentFilters)
-      this.recipes = []
-      fb.filterIngredients(this.currentFilters).then(data => {
-        for (let i=0; i<data.length ; i++)
-          fb.getRecipeById(data[i]).then((data2) =>
-            this.recipes.push({id:data[i],...data2}));
-      });
-    },
 
   },
   created() {
@@ -273,9 +237,30 @@ body {
   transform: scale(1.0) !important;
 }
 
-.pagination-control-container {
+.VuePagination {
   padding-top: 75px;
   padding-bottom: 75px;
+}
+
+.VuePagination__count {
+  font-family: Work Sans, sans-serif;
+}
+
+.page-link {
+  font-family: Work Sans, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #E4A428;
+  border-radius: 10px;
+  min-height: 48px;
+  min-width: 48px;
+  transition: color 0.1s, background-color 0.1s, transform 0.1s;
+}
+
+.page-link:hover, .active {
+  border-radius: 10px;
+  background-color: #E4A428;
+  color: white;
 }
 
 .pagination{
@@ -291,54 +276,13 @@ body {
   margin-left: .25rem;
 }
 
-.pagination > li.pagination__controls--next{
-  margin-right: 0;
-  margin-left: auto;
-}
-
-.pagination__controls {
-  font-family: Work Sans, sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  color: #E4A428;
-  border-radius: 10px;
-}
-
-.pagination__controls:hover {
-  background-color: #E4A428;
-  color: white;
-  fill: white;
-}
-
-.pagination__controls:hover .pagination-button svg {
-  fill: white;
-}
-
-.indicator-more{
-  color: black;
-  width: 48px;
-  height: 48px;
-  pointer-events: none;
-}
-
-.pagination__controls--prev {
+.pagination__controls--prev, .VuePagination__pagination-item-prev-chunk {
   margin-right: auto;
   margin-left: 0;
 }
 
-.pagination-button {
-  display: flex;
-  min-height: 48px;
-  min-width: 48px;
-  justify-content: center;
-  align-items: center;
-}
-
-.pagination-button svg {
-  display: inline-block;
-  height: 25px;
-  width: 25px;
-  fill: #E4A428;
-  margin: 0;
+.pagination > li.pagination__controls--next, .pagination > li.VuePagination__pagination-item-next-chunk{
+  margin-right: 0;
+  margin-left: auto;
 }
 </style>
