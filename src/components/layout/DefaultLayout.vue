@@ -5,8 +5,8 @@
 </template>
 
 <script setup>
-import Navbar from "../components/Navbar.vue";
-import FooterGeneral from "@/components/Footer.vue";
+import Navbar from "./Navbar.vue";
+import FooterGeneral from "@/components/layout/Footer.vue";
 </script>
 
 <style>

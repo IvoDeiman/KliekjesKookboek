@@ -4,37 +4,55 @@
         <form>
             <div class="">
                 <span class="">Recept naam: </span>
-                <input class="" type="text">
+                <input class="" type="text" v-model="recipeName">
             </div>
 
             <div class="">
                 <span>Recept quote: </span>
-                <input type="text">
+                <input type="text" v-model="recipeQuote">
             </div>
 
             <div class="">
                 <span>Chef naam: </span>
-                <input type="text">
+                <input type="text" v-model="chefName">
             </div>
 
 
             <div class="">
                 <span>Bereidings tijd: </span>
-                <input type="text"> 
+                <input type="text" v-model="prepTime">
+            </div>
+
+            <div class="">
+                <span>Ingrediënten: </span>
+                <div>
+                    <input type="text" id="amount" name="amount" placeholder="Hoeveelheid" v-model="amount"> 
+                    <select name="measurements" v-model="selectedMeasurement">
+                        <option :value='measurements.measurement' v-for="(measurements, k) in measurements" :key="k">
+                            {{ measurements.measurement }}
+                        </option>
+                    </select>
+                    <input type="text" id="ingredient" name="ingredient" placeholder="Ingrediënt" v-model="ingredient">
+                    <button type="button" class="add-tag-button"  @click="addSelectedIngredient(amount, selectedMeasurement, ingredient)">Voeg ingredient toe</button>
+                </div>
+                <div v-for="(selectedIngredients, k) in selectedIngredients" :key="k">
+                    {{ selectedIngredients.amount }} {{ selectedIngredients.measurement }} {{ selectedIngredients.name }}
+                    <span @click="removeIngredient(k)">x</span>
+                </div>
             </div>
 
 
             <div class="">
-                <span>Ingrediënten: </span>
-                <div v-for="(selectedTag, k) in selectedTags" :key="k">
-                    {{ selectedTag.tag }}
-                    <span @click="removeSelectedTag(k)">x</span>
-                </div>
+                <span>Tags: </span>
                 <div>
                     <select name="ingredienten" v-model="selectedTag">
                         <option :value='tags.tag' v-for="(tags, k) in tags" :key="k">{{ tags.tag }}</option>
                     </select>
                     <button type="button" class="add-tag-button" @click="addSelectedTag(selectedTag)">Voeg tag toe</button>
+                </div>
+                <div v-for="(selectedTag, k) in selectedTags" :key="k">
+                    {{ selectedTag.tag }}
+                    <span @click="removeSelectedTag(k)">x</span>
                 </div>
             </div>
 
@@ -42,13 +60,13 @@
             <div class="instructions-container" >
                 <div v-for="(instruction, k) in instructions" :key="k">
                     {{ k+1 }}
-                    <textarea rows="5" cols="33" class="instruction-step"></textarea>
+                    <textarea rows="5" cols="33" class="instruction-step" v-model="instructions[k]"></textarea>
                 </div>
             </div>
 
             <button type="button" class="add-instruction-button" @click="addInstruction(k)">Voeg instructie toe</button><br>
             <button type="button" class="add-instruction-button" @click="removeLatestInstruction(k)">Haal instructie weg</button><br>
-            <button type="submit">Submit</button>
+            <button type="button" @click="insertRecipe()">Submit</button>
         </form>
     </div>
 </template>
@@ -62,6 +80,29 @@ export default {
     name: "AddRecipe",
     data() {
         return {
+            localRecipe: {
+                title: String,
+                ingredients: [],
+                description: String,
+                tags: [],
+                comments:[],
+                preparation: String,
+                rating: Number,
+                owner: String,
+                imageurl: String,
+                ingredientnames:[],
+                availableMeasurements:[],
+                preparationtime:Number
+            },
+            ingredients: [
+
+            ],
+            selectedIngredients: [
+
+            ],
+            measurements: [
+
+            ],
             selectedTags: [
 
             ],
@@ -69,15 +110,7 @@ export default {
 
             ],
             instructions: [
-                {
-                    instruction: ''
-                },
-                {
-                    instruction: ''
-                },
-                {
-                    instruction: ''
-                }
+                "",
             ]
         }
     },
@@ -92,16 +125,35 @@ export default {
             if (exists) return false;
             this.selectedTags.push({tag: newTag});
         },
+        addSelectedIngredient(amount, measurement, ingredient) {
+            this.ingredients.push(ingredient);
+            this.selectedIngredients.push({
+                amount: parseInt(amount),
+                measurement: measurement,
+                name: ingredient
+            });
+        },
         removeSelectedTag(tagToRemove) {
             this.selectedTags.splice(tagToRemove, 1);
         },
+        removeIngredient(ingredientToRemove) {
+            this.ingredients.splice(ingredientToRemove, 1);
+            this.selectedIngredients.splice(ingredientToRemove, 1);
+        },
         addInstruction() {
             if (this.instructions.length >= 20 ) return false; 
-            this.instructions.push({instruction: ''});
+            this.instructions.push('');
         },
         removeLatestInstruction() {
             if (this.instructions.length <= 1 ) return false; 
             this.instructions.splice(-1, 1);
+        },
+        getMeasurementsFromFirestore() {
+            fb.getMeasurements().then((data) => {
+                for (var i = 0; i < data.length; i++) {
+                    this.measurements.push({measurement: data.at(i)});
+                }
+            })
         },
         getTagsFromFirestore() {
             fb.getTags().then((data) => {
@@ -110,9 +162,31 @@ export default {
                 }
             })
         },
+        insertRecipe() {
+            var tags = [];
+            for (var i = 0; i < this.selectedTags.length; i++) {
+                tags.push(this.selectedTags.at(i).tag);
+            }
+
+            this.localRecipe.title = this.recipeName;
+            this.localRecipe.ingredients = this.selectedIngredients;
+            this.localRecipe.description = this.recipeQuote
+            this.localRecipe.rating = 0;
+            this.localRecipe.owner = this.chefName
+            this.localRecipe.imageurl = "";
+            this.localRecipe.tags = tags;
+            this.localRecipe.ingredientnames = this.ingredients;
+            this.localRecipe.preparationtime = parseInt(this.prepTime);
+            this.localRecipe.preparation = this.instructions.at(0);
+            this.localRecipe.comments = [];
+
+            console.log(this.localRecipe);
+            fb.addRecipe(this.localRecipe);
+        },
     },
     created() {
-      this.getTagsFromFirestore();
+        this.getMeasurementsFromFirestore()
+        this.getTagsFromFirestore();
     }
 };
 </script>

@@ -131,6 +131,7 @@ export default class FirebaseService {
             rating: data.rating,
             owner: data.owner,
             imageurl: data.imageurl,
+            image: data.image,
             preparationtime: data.preparationtime,
             comments: data.comments
         })
