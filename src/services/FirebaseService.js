@@ -2,6 +2,8 @@ import {initializeApp} from "firebase/app";
 import {collection, doc, getDoc, getDocs, getFirestore, setDoc} from 'firebase/firestore/lite';
 
 
+
+
 export default class FirebaseService {
     // Your web app's Firebase configuration
 
@@ -48,6 +50,22 @@ export default class FirebaseService {
            console.log("Error filtering recipes: " , error)
        }
         return validRecipes
+    }
+
+    
+
+    async storeUserData(data){
+        console.log(data)
+        try {
+            await setDoc(doc(this.db, "users", "customname"), {
+                email: data.mail,
+                firstname: data.fname,
+                surname: data.lname,
+                phone: data.tell
+            })
+        } catch (error) {
+            console.error("fuck:", error);
+        }
     }
 
     async getRecipeById(id) {

@@ -8,6 +8,7 @@ import About from "@/views/About.vue";
 import MyAccount from "@/views/MyAccount.vue";
 import Test from "@/views/test.vue";
 import PageNotFound from "@/views/PageNotFound.vue";
+import Register from "@/views/Register.vue";
 
 const routes = [
     {
@@ -53,7 +54,12 @@ const routes = [
                 path: ":notFound",
                 name: "Page not found",
                 component: PageNotFound
-            }
+            },
+            {
+                name: "Register",
+                component: Register,
+                path: "/register",
+            },
         ]
     },
     // {
