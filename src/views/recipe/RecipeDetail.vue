@@ -63,15 +63,15 @@
         <div class="instruction-cta">
           Deel dit recept via:
           <ol>
-            <li><img src="@/assets/twitter-logo.svg" alt="">Twitter</li>
-            <li><img src="@/assets/pinterest-logo.svg" alt="">Pinterest</li>
-            <li><img src="@/assets/facebook-logo.svg" alt="">Facebook</li>
-            <li><img src="@/assets/instagram-logo.svg" alt="">Instagram</li>
+            <li><a href="https://www.twitter.com/"><img src="@/assets/twitter-logo.svg" alt="">Twitter</a></li>
+            <li><a href="https://www.pinterest.com/"><img src="@/assets/pinterest-logo.svg" alt="">Pinterest</a></li>
+            <li><a href="https://www.facebook.com/"><img src="@/assets/facebook-logo.svg" alt="">Facebook</a></li>
+            <li><a href="https://www.instagram.com/"><img src="@/assets/instagram-logo.svg" alt="">Instagram</a></li>
           </ol>
           <hr class="instruction-cta-separator">
           <ol>
-            <li><img src="@/assets/star-solid.svg" alt="">Geef een review</li>
-            <li><img src="@/assets/exclaimation.svg" alt="">Rapporteren</li>
+            <li><a><img src="@/assets/star-solid.svg" alt="">Geef een review</a></li>
+            <li><a><img src="@/assets/exclaimation.svg" alt="">Rapporteren</a></li>
           </ol>
         </div>
       </div>
@@ -349,6 +349,14 @@
     display: flex;
     margin: 10px;
     font-weight: 400;
+  }
+
+  .instruction-cta ol li a {
+    display: flex;
+  }
+
+  .instruction-cta ol li a:hover, .instruction-cta ol li a:hover img{
+    color: #E4A428;
   }
 
   .instruction-cta ol li img {
