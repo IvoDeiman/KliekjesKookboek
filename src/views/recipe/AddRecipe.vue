@@ -1,6 +1,8 @@
 <template>
     <div class="upper-page-background"></div>
     <div class="add-recipe-container box-shadow">
+        <h1 class="title">Voeg eigen recept toe.</h1>
+        <hr style="margin: 10px 0px 20px 0px; opacity: 20%;">
         <form>
             <div class="recipe-info-item-container mb-3 sm:float-left sm:w-full">
                 <div class="">Recept naam </div>
@@ -278,8 +280,6 @@ export default {
             this.localRecipe.preparation = instructionSteps;
             this.localRecipe.comments = [];
 
-            console.log(this.localRecipe);
-
             fb.addRecipe(this.localRecipe);
             this.$router.push('/recipes');
         },
@@ -308,6 +308,10 @@ export default {
     margin-top: -184px;
     padding: 25px;
     background-color: white;
+  }
+
+  .title {
+    font-weight: bold;
   }
 
   .input-fields {
