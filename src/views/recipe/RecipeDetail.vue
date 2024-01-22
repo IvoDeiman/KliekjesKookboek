@@ -55,10 +55,10 @@
       </div>
       <div class="instruction-grid">
         <ol>
-          <!-- <li v-for="instruction in preparation" :key="instruction" class="instruction-step" style="">
+          <li v-for="instruction in preparation" :key="instruction" class="instruction-step" style="">
             {{ instruction }}
-          </li> -->
-          <li class="instruction-step">{{ preparation }}</li>
+          </li>
+          <!-- <li class="instruction-step">{{ preparation }}</li> -->
         </ol>
         <div class="instruction-cta">
           Deel dit recept via:
@@ -105,7 +105,7 @@
         preparationtime: Number,
         rating:Number,
         tags: [],
-        preparation: String,
+        preparation: [],
         image: String
       }
     },
@@ -121,13 +121,19 @@
           this.preparationtime = data.preparationtime;
           this.rating = data.rating;
           this.tags = data.tags;
-          this.preparation = data.preparation;
+
+          var allInstructionSteps = data.preparation.split("!@#$%");
+          allInstructionSteps = allInstructionSteps.slice(0, -1);
+
+          this.preparation = allInstructionSteps;
           this.image = data.imageurl;
         })
       },
+
       unpackTags() {
         return this.tags.toString().replace(/,/g, ', ');
       },
+      
       setImage(){
         //Blame danny voor de pindakaas clause
         if(this.image == null || this.image === '' || this.image === 'pindakaas'){

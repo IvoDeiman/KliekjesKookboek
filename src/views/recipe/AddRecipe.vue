@@ -1,6 +1,8 @@
 <template>
     <div class="upper-page-background"></div>
     <div class="add-recipe-container box-shadow">
+        <h1 class="title">Voeg eigen recept toe.</h1>
+        <hr style="margin: 10px 0px 20px 0px; opacity: 20%;">
         <form>
             <div class="recipe-info-item-container mb-3 sm:float-left sm:w-full">
                 <div class="">Recept naam </div>
@@ -10,6 +12,11 @@
             <div class="recipe-info-item-container mb-3 sm:float-left sm:w-full">
                 <span>Recept quote </span>
                 <input class="input-fields" :class="{ errorInputFields: !this.validReceptQuoteInput}" type="text" v-model="recipeQuote">
+            </div>
+
+            <div class="recipe-info-item-container mb-3 sm:float-left sm:w-full">
+                <span>Recept foto </span>
+                <input class="input-fields" :class="{ errorInputFields: !this.validReceptQuoteInput}" type="text" v-model="recipeImage">
             </div>
 
             <div class="recipe-info-item-container mb-3 sm:float-left sm:w-[48%]">
@@ -118,7 +125,7 @@ export default {
             tags: [
             ],
             instructions: [
-                "Stap 1",
+                "",
             ]
         }
     },
@@ -245,23 +252,39 @@ export default {
                 tags.push(this.selectedTags.at(i).tag);
             }
 
-            if (!this.validateRecipeInput()) return false;
+            var instructionSteps = ""; 
+            this.instructions.forEach((item) => {
+                instructionSteps += item + "!@#$%";
+            })
+
+            if (!this.validateRecipeInput()) {
+                return false;
+            }
 
             this.localRecipe.title = this.recipeName;
             this.localRecipe.ingredients = this.selectedIngredients;
             this.localRecipe.description = this.recipeQuote
             this.localRecipe.rating = 0;
             this.localRecipe.owner = this.chefName
-            this.localRecipe.imageurl = "";
+
+            if (this.recipeImage == undefined) {
+                this.localRecipe.imageurl = "";
+            } else {
+                this.localRecipe.imageurl = this.recipeImage;
+            }
+            
             this.localRecipe.tags = tags;
             this.localRecipe.ingredientnames = this.ingredients;
+            this.localRecipe.availableMeasurements = [];
             this.localRecipe.preparationtime = parseInt(this.prepTime);
-            this.localRecipe.preparation = this.instructions.at(0);
+            this.localRecipe.preparation = instructionSteps;
             this.localRecipe.comments = [];
 
             fb.addRecipe(this.localRecipe);
+            this.$router.push('/recipes');
         },
     },
+
     created() {
         this.getMeasurementsFromFirestore()
         this.getTagsFromFirestore();
@@ -285,6 +308,10 @@ export default {
     margin-top: -184px;
     padding: 25px;
     background-color: white;
+  }
+
+  .title {
+    font-weight: bold;
   }
 
   .input-fields {
