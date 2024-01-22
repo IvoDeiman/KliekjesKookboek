@@ -9,13 +9,13 @@
         </div>
         <div class="form-fields">
             <label for="fname">Voornaam:</label>
-            <input type="text" v-model="fname" id="fname" name="fname">
+            <input type="text" v-model="fname" @input="updateFname">
             <label for="lname">Achternaam:</label>
-            <input type="text" v-model="lname" id="lname" name="lname">
+            <input type="text" v-model="lname" @input="updateLname">
             <label for="mail">E-mailadress:</label>
             <input type="text" v-model="mail" @input="updateMail">
             <label for="tell">Telefoonnummer:</label>
-            <input type="text" v-model="tell" id="tell" name="tell">
+            <input type="text" v-model="tell" @input="updateTell">
             <label for="password">Wachtwoord:</label>
             <input type="password" v-model="password" @input="updatePassword">
             <label for="ww2">Herhaal Wachtwoord:</label>
@@ -41,6 +41,18 @@ const updateMail = (event) => {
     mail.value = event.target.value;
 };
 
+const updateFname = (event) => {
+    fname.value = event.target.value;
+};
+
+const updateLname = (event) => {
+    lname.value = event.target.value;
+};
+
+const updateTell = (event) => {
+    tell.value = event.target.value;
+};
+
 const updatePassword = (event) => {
     password.value = event.target.value;
 };
@@ -50,6 +62,11 @@ const updateWw2 = (event) => {
 };
 
 const register = () => {
+    if (!fname.value || !lname.value || !mail.value || !tell.value || !password.value || !ww2.value) {
+        alert("Vul alle velden in voordat je het formulier indient.");
+        return;
+    }
+    
     if (password.value !== ww2.value) {
         alert("Wachtwoord en herhaalde wachtwoord moeten hetzelfde zijn.");
         return;
@@ -73,6 +90,9 @@ export default {
         updateMail,
         updatePassword,
         updateWw2,
+        updateFname,
+        updateLname,
+        updateTell
     },
     data() {
         return {
