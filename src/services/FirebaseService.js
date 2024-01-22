@@ -119,8 +119,6 @@ export default class FirebaseService {
         }
     }
 
-
-
     async addRecipe(data) {
         await setDoc(doc(this.db, "recipes", data.title), {
             description: data.description,
@@ -131,11 +129,12 @@ export default class FirebaseService {
             rating: data.rating,
             owner: data.owner,
             imageurl: data.imageurl,
-            image: data.image,
+            // image: data.image,
             preparationtime: data.preparationtime,
             comments: data.comments
         })
     }
+    
     async getRecipes() {
         try {
             const recipesCol = collection(this.db, 'recipes');
