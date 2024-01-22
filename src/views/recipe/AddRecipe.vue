@@ -264,7 +264,13 @@ export default {
             this.localRecipe.description = this.recipeQuote
             this.localRecipe.rating = 0;
             this.localRecipe.owner = this.chefName
-            this.localRecipe.imageurl = this.recipeImage;
+
+            if (this.recipeImage == undefined) {
+                this.localRecipe.imageurl = "";
+            } else {
+                this.localRecipe.imageurl = this.recipeImage;
+            }
+            
             this.localRecipe.tags = tags;
             this.localRecipe.ingredientnames = this.ingredients;
             this.localRecipe.availableMeasurements = [];
@@ -275,7 +281,7 @@ export default {
             console.log(this.localRecipe);
 
             fb.addRecipe(this.localRecipe);
-            this.$router.push('/recipes')
+            this.$router.push('/recipes');
         },
     },
 
