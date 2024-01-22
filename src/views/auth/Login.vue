@@ -1,4 +1,18 @@
 <script>
+import { ref } from "vue";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+const mail = ref("");
+const password = ref("");
+
+const updateMail = (event) => {
+    mail.value = event.target.value;
+};
+
+const updatePassword = (event) => {
+    password.value = event.target.value;
+};
+
 export default {
   name: "LoginPage",
   props: {
@@ -6,13 +20,31 @@ export default {
   },
   data() {
     return {
-      passwordType: 'password'
+      passwordType: 'password',
+      mail: "",    
+      password: "",
     };
   },
   methods: {
+    updateMail,
+    updatePassword,
     switchVisibility() {
       this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
-    }
+    },
+    async login() {
+      try {
+        console.log(this.email, this.password)
+        const auth = getAuth();
+        const userCredential = await signInWithEmailAndPassword(auth, mail.value, password.value);
+        const user = userCredential.user;
+        
+        // You can handle successful login here, e.g., redirect to another page
+        console.log("Successfully logged in:", user);
+      } catch (error) {
+        console.error("Login error:", error);
+        alert("Login failed. Please check your email and password.");
+      }
+    },
   },
 }
 </script>
@@ -29,7 +61,7 @@ export default {
             <div class="login-field-description">
               E-mailadres
             </div>
-            <input class="login-input" placeholder="Ralf.v.d.koek@example.com">
+            <input class="login-input" placeholder="Ralf.v.d.koek@example.com" @input="updateMail">
           </div>
           <div class="flex items-center mb-[25px]">
             <div class="login-field-description">
@@ -38,7 +70,7 @@ export default {
             <div class="input-icons">
               <font-awesome-icon @click="switchVisibility()" class="visibility-icon clickable"
                                  :icon="['fas', passwordType === 'password' ? 'eye-slash' : 'eye']" />
-              <input :type="passwordType" placeholder="Wachtwoord" class="login-input">
+              <input :type="passwordType" placeholder="Wachtwoord" class="login-input" @input="updatePassword">
             </div>
           </div>
           <div class="user-options">
@@ -47,7 +79,7 @@ export default {
           </div>
         </div>
         <div class="button-wrapper">
-          <button class="login-button">Inloggen</button>
+          <button class="login-button" @click="login">Inloggen</button>
         </div>
         <div class="options-wrapper mt-[61px]">
           <div class="spacer"></div>
@@ -67,6 +99,7 @@ export default {
     </div>
   </div>
 </template>
+
 
 <style scoped>
 
