@@ -1,10 +1,13 @@
 <template>
   <div class="searchbar--background">
     <div class="searchbar--holder">
-      <search-component id="search-bar" placeholder="Vul hier je kliekjes in!" value="" label=""></search-component>
-      <secondary-button class="button--squared" @click="goToRandomRecipe" id="surprise-button" value="Verras me"/>
+      <div class="input-icons">
+        <font-awesome-icon @click="removeSearchFilter" class="visibility-icon" :icon="['fas', 'xmark']" />
+        <input id="search-bar" v-model="ingredients" placeholder="Vul hier je kliekjes in!" class="login-input">
+      </div>
+      <secondary-button class="button--squared" @click="getRecipe" id="surprise-button" :value="this.ingredients.length > 0 ? 'Zoeken' : 'Verras me'"/>
     </div>
-  </div >
+  </div>
   <div class="content">
     <div class="filter-column">
       <filter-box-component @activeFilters="receiveCurrentFilters" @removeFilters="removeFilter" v-for="filter in filterCategories" :key="filter.id" :filterData="filter"></filter-box-component>
@@ -20,7 +23,6 @@
 </template>
 
 <script>
-import SearchComponent from "@/components/inputs/Search.vue";
 import FilterBoxComponent from "@/components/inputs/FilterBox.vue";
 import RecipeComponent from "@/components/Recipe.vue";
 import SecondaryButton from "@/components/buttons/SecondaryButton.vue";
@@ -32,7 +34,6 @@ const fb = new FirebaseService();
 export default {
   name: "RecipePage",
   components: {
-    SearchComponent,
     RecipeComponent,
     SecondaryButton,
     FilterBoxComponent,
@@ -43,6 +44,7 @@ export default {
       page: 1,
       recipesPerPage: 10,
       recipes: [],
+      ingredients: "",
       currentFilters: [],
       filterCategories:[
         {
@@ -120,17 +122,33 @@ export default {
     receiveCurrentFilters(mess) {
       if(mess === undefined || mess.length === 0) return;
       for (let i = 0; i < mess.length; i++){
-        if(!this.currentFilters.includes(mess[i]))
+        if(!this.currentFilters.includes(mess[i])) {
           this.currentFilters.push(mess[i]);
+        }
       }
       this.filterIngredients();
     },
+
+    updateFilter(mess) {
+      this.ingredients = mess
+    },
+
     removeFilter(mess){
       if(mess === undefined || mess === '') return;
       let index = this.currentFilters.indexOf(mess);
       this.currentFilters.splice(index, 1);
       this.filterIngredients();
     },
+
+    removeSearchFilter() {
+      for (let i = 0; i < this.ingredients.length; i++) {
+        let index = this.currentFilters.indexOf(this.ingredients[i]);
+        this.currentFilters.splice(index, 1);
+      }
+      this.ingredients = ""
+      this.filterIngredients();
+    },
+
     filterIngredients() {
       this.recipes = []
       fb.filterIngredients(this.currentFilters).then(data => {
@@ -139,10 +157,16 @@ export default {
               this.recipes.push({id:data[i],...data2}));
       });
     },
-    goToRandomRecipe() {
-      fb.getRandomRecipe().then((id) => {
-        this.$router.push({name:'RecipesDetails', params: {id:id}});
-      })
+
+    getRecipe() {
+      if (this.ingredients.length > 0) {
+        this.currentFilters = this.ingredients.split(", ")
+        this.receiveCurrentFilters(this.currentFilters)
+      } else {
+        fb.getRandomRecipe().then((id) => {
+          this.$router.push({name:'RecipesDetails', params: {id:id}});
+        })
+      }
     },
 
   },
@@ -161,6 +185,15 @@ export default {
 <style>
 body {
   background: #fafafa;
+}
+
+.visibility-icon {
+  position: absolute;
+  margin-top: 22px;
+  margin-left: 500px;
+  font-size: 18px;
+  color: #444444;
+  cursor: pointer;
 }
 
 .add-recipe-button {

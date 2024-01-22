@@ -24,22 +24,22 @@ export default {
           <label for="checkbox_toggle" class="hamburger">&#9776;</label>
           <div class="menu">
             <li>
-              <router-link to="/">
+              <router-link class="font-semibold" to="/">
                 Home
               </router-link>
             </li>
             <li>
-              <router-link to="/recipes">
+              <router-link class="font-semibold" to="/recipes">
                 Recepten
               </router-link>
             </li>
             <li>
-              <router-link to="/about">
+              <router-link class="font-semibold" to="/about">
                 Over ons
               </router-link>
             </li>
             <li>
-              <router-link to="/login">
+              <router-link class="font-semibold" to="/login">
                 <font-awesome-icon :icon="['far', 'user']" />
               </router-link>
             </li>
@@ -58,6 +58,10 @@ export default {
 
 li {
   list-style: none;
+}
+
+.navbar .exact-active {
+  color: black;
 }
 
 .nav-container {

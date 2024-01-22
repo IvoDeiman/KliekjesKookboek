@@ -167,6 +167,7 @@ export default {
   margin-left: 440px;
   font-size: 18px;
   color: #444444;
+  cursor: pointer;
 }
 
 .spacer {
@@ -178,7 +179,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 42px 0 0 28px;
+  margin: 42px 0 0 155px;
 }
 
 .options-wrapper {
