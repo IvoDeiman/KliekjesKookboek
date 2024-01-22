@@ -8,7 +8,7 @@
     <div v-show="expanded" class="checkbox-section">
       <div class="checkbox-item" v-for="(checkbox, index) in content" :key="index">
         <label class="checkbox-container">
-          <input type="checkbox" v-model="checkbox.checkbox" @change="handleCheckboxChange" class="checkbox-input" @click.stop />
+          <input type="checkbox" :checked="activeFilters.includes(checkbox.label)" v-model="checkbox.checkbox" @change="handleCheckboxChange" class="checkbox-input" @click.stop />
           {{ checkbox.label }}
         </label>
 

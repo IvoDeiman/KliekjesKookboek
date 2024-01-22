@@ -13,6 +13,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
+import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 
 /* add icons to the library */
 library.add(faUser)
@@ -20,6 +21,7 @@ library.add(faChevronDown)
 library.add(faChevronUp)
 library.add(faEyeSlash)
 library.add(faEye)
+library.add(faXmark)
 
 const app = createApp(App);
 app.component('font-awesome-icon', FontAwesomeIcon).use(router).mount("#app");
