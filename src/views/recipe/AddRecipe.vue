@@ -2,71 +2,76 @@
     <div class="upper-page-background"></div>
     <div class="add-recipe-container box-shadow">
         <form>
-            <div class="">
-                <span class="">Recept naam: </span>
-                <input class="" type="text" v-model="recipeName">
+            <div class="recipe-info-item-container mb-3 sm:float-left sm:w-full">
+                <div class="">Recept naam </div>
+                <input class="input-fields" :class="{ errorInputFields: !this.validReceptNameInput}" type="text" v-model="recipeName">
             </div>
 
-            <div class="">
-                <span>Recept quote: </span>
-                <input type="text" v-model="recipeQuote">
+            <div class="recipe-info-item-container mb-3 sm:float-left sm:w-full">
+                <span>Recept quote </span>
+                <input class="input-fields" :class="{ errorInputFields: !this.validReceptQuoteInput}" type="text" v-model="recipeQuote">
             </div>
 
-            <div class="">
-                <span>Chef naam: </span>
-                <input type="text" v-model="chefName">
+            <div class="recipe-info-item-container mb-3 sm:float-left sm:w-[48%]">
+                <span>Chef naam </span>
+                <input class="input-fields" :class="{ errorInputFields: !this.validChefNameInput}" type="text" v-model="chefName">
             </div>
 
 
-            <div class="">
-                <span>Bereidings tijd: </span>
-                <input type="text" v-model="prepTime">
+            <div class="recipe-info-item-container mb-3 sm:float-right sm:w-[48%]">
+                <span>Bereidings tijd </span>
+                <input class="input-fields" :class="{ errorInputFields: !this.validPrepTimeInput}" type="text"  v-model.number="prepTime" placeholder="Tijd in minuten">
             </div>
 
-            <div class="">
-                <span>Ingrediënten: </span>
-                <div>
-                    <input type="text" id="amount" name="amount" placeholder="Hoeveelheid" v-model="amount"> 
-                    <select name="measurements" v-model="selectedMeasurement">
-                        <option :value='measurements.measurement' v-for="(measurements, k) in measurements" :key="k">
-                            {{ measurements.measurement }}
-                        </option>
-                    </select>
-                    <input type="text" id="ingredient" name="ingredient" placeholder="Ingrediënt" v-model="ingredient">
-                    <button type="button" class="add-tag-button"  @click="addSelectedIngredient(amount, selectedMeasurement, ingredient)">Voeg ingredient toe</button>
+            <div class="recipe-info-item-container mb-3 sm:float-left sm:w-full">
+                <span>Ingrediënten</span>
+                <div class="mb-2">
+                    <div class="ingredient-input-container">
+                        <input type="text" id="amount" name="amount" placeholder="Hoeveelheid" class="input-fields w-full mb-1 md:me-1" :class="{ errorInputFields: !this.validAmountInput}" v-model="amount"> 
+                        <select name="measurements" class="input-fields w-full mb-1 md:me-1" :class="{ errorInputFields: !this.validMeasurementInput}" v-model="selectedMeasurement">
+                            <option :value='measurements.measurement' v-for="(measurements, k) in measurements" :key="k">
+                                {{ measurements.measurement }}
+                            </option>
+                        </select>
+                        <input type="text" id="ingredient" name="ingredient" placeholder="Ingrediënt" class="input-fields w-full mb-1" :class="{ errorInputFields: !this.validIngredientInput}" v-model="ingredient">
+                    </div>
+                    <button type="button" class="dynamic-add-remove-button box-shadow"  @click="addSelectedIngredient(amount, selectedMeasurement, ingredient)">Voeg ingredient toe</button>
                 </div>
-                <div v-for="(selectedIngredients, k) in selectedIngredients" :key="k">
-                    {{ selectedIngredients.amount }} {{ selectedIngredients.measurement }} {{ selectedIngredients.name }}
-                    <span @click="removeIngredient(k)">x</span>
+                <div class="tag-container">
+                    <div class="tag-item me-1 mb-1" v-for="(selectedIngredients, k) in selectedIngredients" :key="k"  @click="removeIngredient(k)">
+                        {{ selectedIngredients.amount }} {{ selectedIngredients.measurement }} {{ selectedIngredients.name }}
+                    </div>
                 </div>
             </div>
 
-
-            <div class="">
-                <span>Tags: </span>
-                <div>
-                    <select name="ingredienten" v-model="selectedTag">
+            <div class="recipe-info-item-container mb-3 sm:float-left sm:w-full">
+                <span>Tags</span>
+                <div class="mb-3">
+                    <select name="ingredienten" class="input-fields w-full mb-1" v-model="selectedTag">
                         <option :value='tags.tag' v-for="(tags, k) in tags" :key="k">{{ tags.tag }}</option>
                     </select>
-                    <button type="button" class="add-tag-button" @click="addSelectedTag(selectedTag)">Voeg tag toe</button>
+                    <button type="button" class="dynamic-add-remove-button box-shadow" @click="addSelectedTag(selectedTag)">Voeg tag toe</button>
                 </div>
-                <div v-for="(selectedTag, k) in selectedTags" :key="k">
-                    {{ selectedTag.tag }}
-                    <span @click="removeSelectedTag(k)">x</span>
-                </div>
-            </div>
-
-            <span>Instructies: </span>
-            <div class="instructions-container" >
-                <div v-for="(instruction, k) in instructions" :key="k">
-                    {{ k+1 }}
-                    <textarea rows="5" cols="33" class="instruction-step" v-model="instructions[k]"></textarea>
+                <div class="tag-container">
+                    <div class="tag-item me-1 mb-1" v-for="(selectedTag, k) in selectedTags" :key="k" @click="removeSelectedTag(k)">
+                        {{ selectedTag.tag }}
+                    </div>
                 </div>
             </div>
 
-            <button type="button" class="add-instruction-button" @click="addInstruction(k)">Voeg instructie toe</button><br>
-            <button type="button" class="add-instruction-button" @click="removeLatestInstruction(k)">Haal instructie weg</button><br>
-            <button type="button" @click="insertRecipe()">Submit</button>
+            <div class="sm:float-left sm:w-full">
+                <span>Instructies</span>
+                <div class="instructions-container">
+                    <div v-for="(instruction, k) in instructions" :key="k" class="mb-2">
+                        Stap {{ k+1 }}
+                        <textarea rows="5" cols="33" class="input-fields w-full min-h-28 max-h-64" v-model="instructions[k]"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="dynamic-add-remove-button box-shadow mb-2" @click="addInstruction(k)">Voeg instructie toe</button><br>
+            <button type="button" class="dynamic-add-remove-button box-shadow mb-5" @click="removeLatestInstruction(k)">Haal instructie weg</button><br>
+            <button type="button" class="submit-button box-shadow w-full h-[45px] " @click="insertRecipe()">Submit</button>
         </form>
     </div>
 </template>
@@ -80,6 +85,14 @@ export default {
     name: "AddRecipe",
     data() {
         return {
+            validReceptNameInput: true,
+            validReceptQuoteInput: true,
+            validChefNameInput: true,
+            validPrepTimeInput: true,
+            validAmountInput: true,
+            validMeasurementInput: true,
+            validIngredientInput: true,
+            validInstructionInput: true,
             localRecipe: {
                 title: String,
                 ingredients: [],
@@ -95,26 +108,87 @@ export default {
                 preparationtime:Number
             },
             ingredients: [
-
             ],
             selectedIngredients: [
-
             ],
             measurements: [
-
             ],
             selectedTags: [
-
             ],
             tags: [
-
             ],
             instructions: [
-                "",
+                "Stap 1",
             ]
         }
     },
     methods: {
+        getMeasurementsFromFirestore() {
+            fb.getMeasurements().then((data) => {
+                for (var i = 0; i < data.length; i++) {
+                    this.measurements.push({measurement: data.at(i)});
+                }
+            })
+        },
+
+        getTagsFromFirestore() {
+            fb.getTags().then((data) => {
+                for (var i = 0; i < data.length; i++) {
+                    this.tags.push({tag: data.at(i)});
+                }
+            })
+        },
+
+        resetValidationVars() {
+            this.validReceptNameInput = true;
+            this.validReceptQuoteInput = true;
+
+            this.validChefNameInput = true;
+            this.validPrepTimeInput = true;
+
+            this.validAmountInput = true;
+            this.validMeasurementInput = true;
+            this.validIngredientInput = true;
+
+            this.validInstructionInput = true;
+        },
+
+        addSelectedIngredient(amount, measurement, ingredient) {
+            this.resetValidationVars();
+            if (!this.checkValidIngredientInput(amount, measurement, ingredient)) {
+                return false;
+            }
+
+            this.ingredients.push(ingredient);
+            this.selectedIngredients.push({
+                amount: parseInt(amount),
+                measurement: measurement,
+                name: ingredient
+            });
+        },
+
+        checkValidIngredientInput(amount, measurement, ingredient) {
+            if (measurement == undefined || this.selectedIngredients.length >= 25) {
+                this.validMeasurementInput = false;
+            }
+
+            if (amount == undefined || amount.match(/^[0-9]{1,6}([,.][0-9]{1,2})?$/) == null) {
+                this.validAmountInput = false;
+            }
+
+            if (ingredient == undefined || ingredient.match(/^[A-Za-z]*$/) == null) {
+                this.validIngredientInput = false;
+            }
+
+            if (!this.validAmountInput || !this.validMeasurementInput || !this.validIngredientInput) return false;
+            return true;
+        },
+
+        removeIngredient(ingredientToRemove) {
+            this.ingredients.splice(ingredientToRemove, 1);
+            this.selectedIngredients.splice(ingredientToRemove, 1);
+        },
+
         addSelectedTag(newTag) {
             if (newTag == undefined || this.selectedTags.length >= 5) return false;
             var exists = false;
@@ -125,48 +199,53 @@ export default {
             if (exists) return false;
             this.selectedTags.push({tag: newTag});
         },
-        addSelectedIngredient(amount, measurement, ingredient) {
-            this.ingredients.push(ingredient);
-            this.selectedIngredients.push({
-                amount: parseInt(amount),
-                measurement: measurement,
-                name: ingredient
-            });
-        },
+
         removeSelectedTag(tagToRemove) {
             this.selectedTags.splice(tagToRemove, 1);
         },
-        removeIngredient(ingredientToRemove) {
-            this.ingredients.splice(ingredientToRemove, 1);
-            this.selectedIngredients.splice(ingredientToRemove, 1);
-        },
+
         addInstruction() {
             if (this.instructions.length >= 20 ) return false; 
             this.instructions.push('');
         },
+
         removeLatestInstruction() {
             if (this.instructions.length <= 1 ) return false; 
             this.instructions.splice(-1, 1);
         },
-        getMeasurementsFromFirestore() {
-            fb.getMeasurements().then((data) => {
-                for (var i = 0; i < data.length; i++) {
-                    this.measurements.push({measurement: data.at(i)});
-                }
-            })
-        },
-        getTagsFromFirestore() {
-            fb.getTags().then((data) => {
-                for (var i = 0; i < data.length; i++) {
-                    this.tags.push({tag: data.at(i)});
-                }
-            })
-        },
+
+        validateRecipeInput() {
+            this.resetValidationVars();
+            if (this.recipeName == undefined || this.recipeName == "") {
+                this.validReceptNameInput = false;
+            }
+
+            if (this.chefName == undefined || this.chefName == "") {
+                this.validChefNameInput = false;
+            }
+
+            if (this.recipeQuote == undefined || this.recipeQuote == "") {
+                this.validReceptQuoteInput = false;
+            }
+
+            if (this.prepTime == undefined || this.prepTime == "" || typeof this.prepTime == "string") {
+                this.validPrepTimeInput = false;
+            }
+
+            if (!this.validReceptNameInput || !this.validChefNameInput || !this.validReceptQuoteInput || !this.validPrepTimeInput) {
+                return false;
+            }
+
+            return true;
+        }, 
+
         insertRecipe() {
             var tags = [];
             for (var i = 0; i < this.selectedTags.length; i++) {
                 tags.push(this.selectedTags.at(i).tag);
             }
+
+            if (!this.validateRecipeInput()) return false;
 
             this.localRecipe.title = this.recipeName;
             this.localRecipe.ingredients = this.selectedIngredients;
@@ -180,7 +259,6 @@ export default {
             this.localRecipe.preparation = this.instructions.at(0);
             this.localRecipe.comments = [];
 
-            console.log(this.localRecipe);
             fb.addRecipe(this.localRecipe);
         },
     },
@@ -192,13 +270,13 @@ export default {
 </script>
   
 <style>
+    body {
+        font-family: Work Sans, sans-serif;
+    }
+
   .upper-page-background {
     background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
     height: 368px;
-  }
-
-  .add-tag-button {
-    background: #E4A428 !important;
   }
 
   .add-recipe-container {
@@ -209,20 +287,69 @@ export default {
     background-color: white;
   }
 
-  .instructions-container {
-
+  .input-fields {
+    border-radius: 10px !important;
   }
 
-  .instruction-step {
+  .errorInputFields {
+    border: 1px red solid !important;
+  }
+
+  .recipe-info-item-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tag-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag-item {
+    color: black;
+    background: #f0f0f0;
+    border-radius: 6px;
+    font-family: Work Sans, sans-serif;
+    padding: 10px;
+    text-transform: capitalize;
+    width: max-content;
+    cursor: pointer;
+  }
+
+  .tag-item:hover {
+    transform: scale(1.01);
+    border: 1px red solid;
+  }
+
+  .dynamic-add-remove-button {
+    background: linear-gradient(240deg, rgba(255, 206, 112, 0.70), rgba(0, 0, 0, 0.00)), #E4A428 !important;
     width: 100%;
+    height: 45px;
+    border-radius: 45px;
+    color: #FFF;
   }
 
-  .add-instruction-button {
-    background: #E4A428 !important;
+  .submit-button {
+    background: #FFF !important;
+    width: 100%;
+    height: 45px;
+    border-radius: 45px;
+    border: solid 2px #E4A428;
+  }
+
+  .dynamic-add-remove-button:hover, .submit-button:hover {
+    transform: scale(1.01);
   }
 
   .box-shadow {
     border-radius: 10px;
     box-shadow: 0 4px 7px 0 rgba(0,0,0,20%);
+  }
+
+  
+  @media (min-width: 768px) { 
+    .ingredient-input-container {
+        display: flex;
+    }
   }
 </style>
