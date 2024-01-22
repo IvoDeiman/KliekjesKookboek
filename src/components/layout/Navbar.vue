@@ -39,7 +39,7 @@ export default {
               </router-link>
             </li>
             <li>
-              <router-link to="/my_account">
+              <router-link to="/login">
                 <font-awesome-icon :icon="['far', 'user']" />
               </router-link>
             </li>

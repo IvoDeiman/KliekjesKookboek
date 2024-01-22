@@ -51,7 +51,9 @@ export default {
 
 <template>
   <div class="login-content">
-    <img class="login-image" src="../../assets/login-image.png" alt="">
+    <div class="login-image-holder">
+      <img class="login-image" src="../../assets/img/login-side-img.jpg" alt="">
+    </div>
     <div class="login-container">
       <section class="login-section">
         <h1 class="login-title">Klaar om te koken?</h1>
@@ -93,7 +95,7 @@ export default {
           <img class="clickable" src="../../assets/google-login-option.png" alt="Google Login">
         </div>
         <div class="options-wrapper my-[41px]">
-          <p class="register-text">Nog geen account? Geen probleem, hier kan je je registreren</p>
+          <p class="register-text">Nog geen account? Geen probleem, <a href="/register">hier kan je je registreren</a></p>
         </div>
       </section>
     </div>
@@ -104,20 +106,41 @@ export default {
 <style scoped>
 
 .login-image {
-  width: 560px;
+  width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
+  mix-blend-mode: luminosity;
 }
 
 .login-content {
-  padding: 20px 0 0 0 ;
+  padding: 75px 0 0 0 ;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 1.5fr 0.5fr;
   margin: auto;
 }
 
+@media only screen and (min-width: 1750px){
+  .login-image {
+    width: 50vw;
+    height: 90vh;
+  }
+}
+
+@media only screen and (max-width: 1500px){
+  .login-content {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.login-image-holder{
+  background-color: #E4A428;
+}
+
 .login-section {
-  margin-top: 100px;
+  margin-top: 75px;
+  margin-bottom: 75px;
 }
 
 .register-text {
@@ -127,6 +150,11 @@ export default {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+
+.register-text a:hover{
+  color: #E4A428;
+  text-decoration: underline;
 }
 
 .clickable {

@@ -1,16 +1,14 @@
 <template>
-  <router-link to="/add-recipes" class="add-recipe-button rounded-full">
-    Voeg recept toe
-  </router-link>
   <div class="searchbar--background">
     <div class="searchbar--holder">
       <search-component id="search-bar" placeholder="Vul hier je kliekjes in!" value="" label=""></search-component>
-      <secondary-button class="button--squared" @click="filter" id="surprise-button" value="Verras me"/>
+      <secondary-button class="button--squared" @click="goToRandomRecipe" id="surprise-button" value="Verras me"/>
     </div>
   </div >
   <div class="content">
     <div class="filter-column">
       <filter-box-component @activeFilters="receiveCurrentFilters" @removeFilters="removeFilter" v-for="filter in filterCategories" :key="filter.id" :filterData="filter"></filter-box-component>
+      <router-link to="/add-recipes" class="add-recipe-button">Voeg Recept Toe</router-link>
     </div>
     <div>
       <div id="recipes-grid" class="recipes--grid">
@@ -147,7 +145,6 @@ export default {
       })
     },
 
-
   },
   created() {
     fb.getAllRecipes()
@@ -167,15 +164,28 @@ body {
 }
 
 .add-recipe-button {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  background-color: #fff;
-  z-index: 5;
-  margin: 0px 100px 50px 0px;
-  padding: 40px 10px 40px 10px;
-  border: 5px #E4A428 solid;
-  font-size: 12px;
+  display: flex;
+  background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
+  width: 225px;
+  height: 75px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 7px 0 rgba(0,0,0,20%);
+  color: white;
+  padding: 20px;
+  font-family: Work Sans, sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-align: center;
+  transform: scale(1.0);
+  transition: transform 0.1s;
+}
+
+.add-recipe-button:hover {
+  transform: scale(1.05);
 }
 
 .filter-column {
