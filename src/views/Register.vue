@@ -19,7 +19,7 @@
             <label for="password">Wachtwoord:</label>
             <input type="password" v-model="password" @input="updatePassword">
             <label for="ww2">Herhaal Wachtwoord:</label>
-            <input type="text" id="ww2" name="ww2">
+            <input type="password" v-model="ww2"  @input="updateWw2">
         </div>
 
         <button @click="register">Submit</button>
@@ -35,6 +35,7 @@ const password = ref("");
 const fname = ref("");
 const lname = ref("");
 const tell = ref("");
+const ww2 = ref(""); 
 
 const updateMail = (event) => {
     mail.value = event.target.value;
@@ -44,7 +45,16 @@ const updatePassword = (event) => {
     password.value = event.target.value;
 };
 
+const updateWw2 = (event) => {
+    ww2.value = event.target.value;
+};
+
 const register = () => {
+    if (password.value !== ww2.value) {
+        alert("Wachtwoord en herhaalde wachtwoord moeten hetzelfde zijn.");
+        return;
+    }
+
     console.log(mail.value, password.value);
     createUserWithEmailAndPassword(getAuth(), mail.value, password.value)
         .then(() => {
@@ -62,6 +72,7 @@ export default {
         register,
         updateMail,
         updatePassword,
+        updateWw2,
     },
     data() {
         return {
