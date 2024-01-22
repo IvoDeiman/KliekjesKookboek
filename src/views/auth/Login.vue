@@ -95,7 +95,7 @@ export default {
           <img class="clickable" src="../../assets/google-login-option.png" alt="Google Login">
         </div>
         <div class="options-wrapper my-[41px]">
-          <p class="register-text">Nog geen account? Geen probleem, <a href="/register">hier kan je je registreren</a></p>
+          <p class="register-text">Nog geen account? Geen probleem, <router-link to="/register">hier kan je je registreren</router-link></p>
         </div>
       </section>
     </div>
@@ -197,12 +197,17 @@ export default {
 }
 
 .login-button {
+  font-family: Work Sans, sans-serif;
+  font-weight: 500;
+  background-color: #E4A428;
+  color: #FFFFFF;
+  font-size: 20px;
   width: 483px;
   height: 60px;
-  color: white;
   border-radius: 8px;
-  background: #E4A428;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
 }
 
 .login-container {
