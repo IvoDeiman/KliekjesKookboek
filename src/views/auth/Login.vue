@@ -1,6 +1,7 @@
 <script>
 import { ref } from "vue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import router from "@/routers";
 
 const mail = ref("");
 const password = ref("");
@@ -40,6 +41,7 @@ export default {
         
         // You can handle successful login here, e.g., redirect to another page
         console.log("Successfully logged in:", user);
+        await router.push('/recipes');
       } catch (error) {
         console.error("Login error:", error);
         alert("Login failed. Please check your email and password.");

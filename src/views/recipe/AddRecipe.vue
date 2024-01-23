@@ -17,6 +17,17 @@
             <div class="recipe-info-item-container mb-3 sm:float-left sm:w-full">
                 <span>Recept foto </span>
                 <input class="input-fields" :class="{ errorInputFields: !this.validReceptQuoteInput}" type="text" v-model="recipeImage">
+
+              <div class="image-upload">
+                <label for="input-file" id="drop-area" @dragover="dragoverEvent" @drop="dropEvent">
+                  <input @change="uploadImage" type="file" accept="image/*" id="input-file" hidden>
+                  <div id="img-view">
+                    <img class="image-upload-icon" src="@/assets/svg/cloud-arrow-up-solid.svg">
+                    <p>Drag and drop or click here to upload image</p>
+                    <span>Upload any images from desktop</span>
+                  </div>
+                </label>
+              </div>
             </div>
 
             <div class="recipe-info-item-container mb-3 sm:float-left sm:w-[48%]">
@@ -126,10 +137,34 @@ export default {
             ],
             instructions: [
                 "",
-            ]
+            ],
+          imageView: HTMLElement,
+          inputFile: HTMLElement,
+          dropArea: HTMLElement,
         }
     },
     methods: {
+        uploadImage() {
+          this.dropArea = document.getElementById("drop-area");
+          this.imageView = document.getElementById("img-view");
+          this.inputFile = document.getElementById("input-file");
+          let imgLink = URL.createObjectURL(this.inputFile.files[0]);
+          this.imageView.style.backgroundImage = `url(${imgLink})`;
+          this.imageView.textContent = "";
+          this.imageView.style.border = 0;
+        },
+
+        dragoverEvent(e){
+          e.preventDefault();
+        },
+
+        dropEvent(e){
+          e.preventDefault();
+          this.inputFile = document.getElementById("input-file");
+          this.inputFile.files = e.dataTransfer.files;
+          this.uploadImage()
+        },
+
         getMeasurementsFromFirestore() {
             fb.getMeasurements().then((data) => {
                 for (var i = 0; i < data.length; i++) {
@@ -286,16 +321,66 @@ export default {
     },
 
     created() {
-        this.getMeasurementsFromFirestore()
+        this.getMeasurementsFromFirestore();
         this.getTagsFromFirestore();
     }
 };
 </script>
   
 <style>
+
     body {
         font-family: Work Sans, sans-serif;
     }
+
+    .image-upload {
+      width: 100%;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+    }
+
+    .image-upload-icon {
+      width: 100px;
+      margin: auto;
+      padding-bottom: 20px;
+    }
+
+    #drop-area{
+      width: 500px;
+      height: 300px;
+      padding: 30px;
+      text-align: center;
+      border-radius: 20px;
+    }
+
+    #img-view {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      border: 2px dashed #E4A428;
+      background: rgba(255, 206, 112, 0.1);
+      background-position: center;
+      background-size: cover;
+    }
+
+    #img-view p {
+      width: 220px;
+      margin: auto;
+    }
+
+    #img-view img{
+      margin-top: 25px;
+    }
+
+    #img-view span {
+      display: block;
+      font-size: 12px;
+      color: #777;
+      margin-top: 15px;
+    }
+
+
 
   .upper-page-background {
     background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
@@ -373,7 +458,6 @@ export default {
     box-shadow: 0 4px 7px 0 rgba(0,0,0,20%);
   }
 
-  
   @media (min-width: 768px) { 
     .ingredient-input-container {
         display: flex;

@@ -53,6 +53,7 @@
 <script>
 import { ref } from "vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import router from "@/routers";
 
 const mail = ref("");
 const password = ref("");
@@ -100,6 +101,7 @@ const register = () => {
     createUserWithEmailAndPassword(getAuth(), mail.value, password.value)
         .then(() => {
             console.log("Account geregistreerd");
+            router.push('/recipes')
         })
         .catch((error) => {
             console.error(error);
