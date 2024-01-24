@@ -123,8 +123,9 @@
           this.tags = data.tags;
 
           var allInstructionSteps = data.preparation.split("!@#$%");
-          allInstructionSteps = allInstructionSteps.slice(0, -1);
-
+          if (allInstructionSteps.length > 1) {
+            allInstructionSteps = allInstructionSteps.slice(0, -1);
+          }          
           this.preparation = allInstructionSteps;
           this.image = data.imageurl;
         })

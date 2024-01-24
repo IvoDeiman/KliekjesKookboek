@@ -16,7 +16,7 @@
 
             <div class="recipe-info-item-container mb-3 sm:float-left sm:w-full">
                 <span>Recept foto </span>
-                <input class="input-fields" :class="{ errorInputFields: !this.validReceptQuoteInput}" type="text" v-model="recipeImage">
+                <input class="input-fields" :class="{ errorInputFields: !this.validReceptQuoteInput}" type="text" v-model="recipeImage" placeholder="Foto link / url">
 
               <div class="image-upload">
                 <label for="input-file" id="drop-area" @dragover="dragoverEvent" @drop="dropEvent">
@@ -218,7 +218,7 @@ export default {
                 this.validAmountInput = false;
             }
 
-            if (ingredient == undefined || ingredient.match(/^[A-Za-z]*$/) == null) {
+            if (ingredient == undefined || ingredient.match(/^[a-zA-Z ]*$/) == null) {
                 this.validIngredientInput = false;
             }
 
@@ -287,6 +287,7 @@ export default {
                 tags.push(this.selectedTags.at(i).tag);
             }
 
+            // Ugly and dirty workaround. Do better in the future.
             var instructionSteps = ""; 
             this.instructions.forEach((item) => {
                 instructionSteps += item + "!@#$%";
