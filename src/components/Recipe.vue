@@ -56,11 +56,15 @@ export default {
     },
     setImage(){
       //Blame danny voor de pindakaas clause
-      if(this.image == null || this.image === '' || this.image === 'pindakaas'){
+      if(!this.isImgUrl(this.image)){
         return imgPlaceholder;
       }
       return this.image;
-    }
+    },
+
+    isImgUrl(url){
+      return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
+    },
   },
   created() {
     this.setData();

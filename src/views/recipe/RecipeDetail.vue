@@ -4,7 +4,7 @@
     <div class="container-centering">
     <div class="lg:grid lg:grid-cols-3 lg:gap-4">
       <div class="dish-container mb-8 lg:col-span-2 rounded-md box-shadow">
-        <img :src="setImage()" alt="maaltijd" class="w-full rounded-t-md h-[304px]" style="object-fit: cover;">
+        <img :src="setImage()" class="w-full rounded-t-md h-[304px]" style="object-fit: cover;" alt="">
         <h1 class="title-font recipe-title">{{ title }}</h1>
         <h2 class="title-font quote info-color"><i>"{{ description }}"</i></h2>
         <div class="info grid grid-rows-3 grid-cols-1 md:grid-rows-1 md:grid-cols-3">
@@ -106,7 +106,7 @@
         rating:Number,
         tags: [],
         preparation: [],
-        image: String
+        image: String,
       }
     },
     methods: {
@@ -134,10 +134,14 @@
       unpackTags() {
         return this.tags.toString().replace(/,/g, ', ');
       },
+
+      isImgUrl(url){
+        return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
+      },
       
       setImage(){
         //Blame danny voor de pindakaas clause
-        if(this.image == null || this.image === '' || this.image === 'pindakaas'){
+        if(!this.isImgUrl(this.image)){
           return imgPlaceholder;
         }
         return this.image;
