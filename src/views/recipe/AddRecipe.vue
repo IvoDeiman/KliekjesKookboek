@@ -20,8 +20,8 @@
 
               <div class="image-upload">
                 <label for="input-file" id="drop-area" @dragover="dragoverEvent" @drop="dropEvent">
-                  <input @change="uploadImage" type="file" accept="image/*" id="input-file" hidden>
-                  <div id="img-view">
+                  <input type="file" id="input-file" @change="uploadImage" accept="image/*"  hidden>
+                  <div id="img-view" data-img="">
                     <img class="image-upload-icon" src="@/assets/svg/cloud-arrow-up-solid.svg">
                     <p>Drag and drop or click here to upload image</p>
                     <span>Upload any images from desktop</span>
@@ -144,13 +144,15 @@ export default {
         }
     },
     methods: {
+
         uploadImage() {
           this.dropArea = document.getElementById("drop-area");
           this.imageView = document.getElementById("img-view");
           this.inputFile = document.getElementById("input-file");
           let imgLink = URL.createObjectURL(this.inputFile.files[0]);
+          console.log(imgLink);
           this.imageView.style.backgroundImage = `url(${imgLink})`;
-          this.imageView.textContent = "";
+          this.imageView.textContent = '';
           this.imageView.style.border = 0;
         },
 
@@ -360,12 +362,28 @@ export default {
       height: 100%;
       border-radius: 20px;
       border: 2px dashed #E4A428;
-      background: rgba(255, 206, 112, 0.1);
-      background-position: center;
+      background: rgba(255, 206, 112, 0.1) center;
       background-size: cover;
+      overflow: clip;
+      position: relative;
     }
 
-    #img-view p {
+    .img-view__filled {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 440px;
+      height: 240px;
+      border-radius: 20px;
+      transition: background-color 0.1s;
+    }
+
+    .img-view__filled:hover {
+      background-color: rgba(50,50,50,0.4);
+    }
+
+    #img-view p, .img-area p {
       width: 220px;
       margin: auto;
     }
@@ -374,14 +392,12 @@ export default {
       margin-top: 25px;
     }
 
-    #img-view span {
+    #img-view span, .img-area span {
       display: block;
       font-size: 12px;
       color: #777;
       margin-top: 15px;
     }
-
-
 
   .upper-page-background {
     background: linear-gradient(240deg, rgba(255, 206, 112, 0.30) 30.28%, rgba(0, 0, 0, 0.00) 88.36%), #E4A428;
@@ -390,8 +406,7 @@ export default {
 
   .add-recipe-container {
     max-width: 1084px;
-    margin: auto;
-    margin-top: -184px;
+    margin: -184px auto auto;
     padding: 25px;
     background-color: white;
   }

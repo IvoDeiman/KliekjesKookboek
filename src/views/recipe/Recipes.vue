@@ -46,6 +46,7 @@ export default {
       recipes: [],
       ingredients: "",
       currentFilters: [],
+      currentTags: [],
       filterCategories:[
         {
           title: "categorieën",
@@ -127,10 +128,6 @@ export default {
         }
       }
       this.filterIngredients();
-    },
-
-    updateFilter(mess) {
-      this.ingredients = mess
     },
 
     removeFilter(mess){

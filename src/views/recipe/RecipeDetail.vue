@@ -136,11 +136,13 @@
       },
 
       isImgUrl(url){
-        return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
+        if(url === null || url === '') return false;
+        const img = new Image();
+        img.src = url;
+        return img.width !== 0;
       },
       
       setImage(){
-        //Blame danny voor de pindakaas clause
         if(!this.isImgUrl(this.image)){
           return imgPlaceholder;
         }
