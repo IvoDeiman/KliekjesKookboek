@@ -38,17 +38,23 @@ export default class FirebaseService {
         const validRecipes = [];
        try {
            const allRecipes = await this.getAllRecipes();
-           allRecipes.forEach((data) => {
-               const ingredientNames = data.ingredientnames.map(ingredient => ingredient.toLowerCase());
-               const inputIngredients = ingredients.map(ingredient => ingredient.toLowerCase());
+           const inputIngredients = ingredients.map(ingredient => ingredient.toLowerCase());
 
-               if (this.containsEveryIngredient(ingredientNames, inputIngredients)) {
-                   validRecipes.push(data.id);
+           allRecipes.forEach((recipe) => {
+
+               const ingredientNames = recipe.ingredientnames.map(ingredient => ingredient.toLowerCase());
+               const recipeTags = recipe.tags.map(tag => tag.toLowerCase());
+
+               let filterItems = ingredientNames.concat(recipeTags)
+
+               if (this.containsEveryIngredient(filterItems, inputIngredients) || ingredients.length === 0) {
+                   validRecipes.push(recipe.id);
                }
            })
        } catch (error) {
            console.log("Error filtering recipes: " , error)
        }
+        console.log(validRecipes)
         return validRecipes
     }
 

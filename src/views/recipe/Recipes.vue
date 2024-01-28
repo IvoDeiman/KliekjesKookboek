@@ -100,6 +100,7 @@ export default {
             { label: "zout", checked: false },
             { label: "peper", checked: false },
             { label: "knoflook saus", checked: false },
+            { label: "mayonaise", checked: false },
           ]
         },
         {
@@ -134,6 +135,7 @@ export default {
       if(mess === undefined || mess === '') return;
       let index = this.currentFilters.indexOf(mess);
       this.currentFilters.splice(index, 1);
+      console.log(this.currentFilters)
       this.filterIngredients();
     },
 
@@ -149,9 +151,10 @@ export default {
     filterIngredients() {
       this.recipes = []
       fb.filterIngredients(this.currentFilters).then(data => {
-        for (let i=0; i<data.length ; i++)
+        for (let i=0; i<data.length ; i++) {
           fb.getRecipeById(data[i]).then((data2) =>
               this.recipes.push({id:data[i],...data2}));
+        }
       });
     },
 
