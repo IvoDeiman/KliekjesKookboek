@@ -18,7 +18,7 @@
                 <span>Recept foto </span>
                 <input class="input-fields" :class="{ errorInputFields: !this.validReceptQuoteInput}" type="text" v-model="recipeImage" placeholder="Foto link / url">
 
-              <div class="image-upload">
+              <!--<div class="image-upload">
                 <label for="input-file" id="drop-area" @dragover="dragoverEvent" @drop="dropEvent">
                   <input type="file" id="input-file" @change="uploadImage" accept="image/*"  hidden>
                   <div id="img-view" data-img="">
@@ -27,7 +27,7 @@
                     <span>Upload any images from desktop</span>
                   </div>
                 </label>
-              </div>
+              </div>-->
             </div>
 
             <div class="recipe-info-item-container mb-3 sm:float-left sm:w-[48%]">

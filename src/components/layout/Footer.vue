@@ -18,8 +18,9 @@ export default {
 </script>
 <template>
  <footer id="footer" class="flex justify-between">
-   <div class="inline-flex items-center ms-36">
-     <div class="flex">
+   <div class="footer-container">
+   <div class="inline-flex items-center">
+     <div class="flex item-pillars">
        <div class="socials">
          <div class="company-name-footer">
            Het <br> Kliekjes Kookboek
@@ -79,6 +80,7 @@ export default {
        </a>
      </div>
    </div>
+   </div>
  </footer>
 </template>
 
@@ -86,10 +88,21 @@ export default {
 #footer {
   width: 100%;
   position: relative;
-  height: auto;
+  //top: -45px;
+  height: 100%;
   bottom: 0;
   background-color: #1E1E1E;
   clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0% 100%);
+  min-height: 430px;
+}
+
+.footer-container{
+  max-width: 1084px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  justify-content: center;
+  align-items: center;
 }
 
 .submit-btn{
@@ -103,6 +116,10 @@ export default {
   font-size: 18px;
 }
 
+.item-pillars {
+  margin-right: 50px;
+}
+
 .socials {
   color: #B4B4B4;
   font-family: Work Sans, sans-serif;
@@ -114,10 +131,10 @@ export default {
 }
 
 .company-rights {
-  margin-top: 100px;
   color: #646464;
   display: inline-flex;
   position: absolute;
+  bottom: 10px;
   font-family: Work Sans, sans-serif;
   font-size: 12px;
   font-style: normal;
@@ -127,15 +144,19 @@ export default {
 
 .privacy-and-tos {
   margin-left: 80px;
-  margin-top: 420px;
   color: #646464;
   display: inline-flex;
+  bottom: 10px;
   position: absolute;
   font-family: Work Sans, sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+
+.company-rights, .privacy-and-tos{
+  margin-bottom: 4rem;
 }
 
 .company-info {
@@ -145,7 +166,6 @@ export default {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin-right: 122px;
   margin-top: 20px;
 }
 

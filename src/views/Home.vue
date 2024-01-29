@@ -489,6 +489,7 @@ html, body {
   width: 1084px;
   display: inline-grid;
   grid-template-columns: 3fr 3fr;
+  padding: 50px;
 }
 
 .buyBook__title {
@@ -514,7 +515,6 @@ html, body {
   height: 100%;
   max-height: 500px;
   width: 100%;
-  max-width: 30vw;
   align-self: center;
 }
 </style>
