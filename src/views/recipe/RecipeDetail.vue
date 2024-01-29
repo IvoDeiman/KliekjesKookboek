@@ -320,13 +320,14 @@
   .instruction-grid {
     display: grid;
     grid-template-columns: 2.5fr 1fr;
+    position: relative;
+    min-height: 300px;
   }
-
 
 
   .instruction-step {
     margin-left: 35px;
-    padding-bottom: 10px;
+    padding-bottom: 25px;
     list-style: o;
     max-width: 680px;
     font-family: Work Sans, sans-serif;
@@ -336,10 +337,15 @@
   }
 
   .instruction-cta{
+    position: absolute;
+    bottom: 0;
+    top: auto;
+    right: 0;
     background: #F0F0F0;
     border-radius: 15px;
     height: 275px;
     width: 270px;
+    min-width: 270px;
     padding: 15px 30px 15px 30px;
     margin-left: 50px;
     font-family: Work Sans,sans-serif;
@@ -347,6 +353,19 @@
     font-size: 14px;
     color: #444444;
   }
+
+  @media only screen and (max-width: 1000px){
+    .instruction-grid {
+      grid-template-columns: 2.5fr;
+    }
+
+    .instruction-cta {
+      display: inline-block;
+      position: relative;
+      margin:auto;
+    }
+  }
+
 
   .instruction-cta-separator {
     opacity: 20%;

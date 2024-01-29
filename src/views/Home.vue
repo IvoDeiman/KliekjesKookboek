@@ -9,7 +9,7 @@
           Heb je kliekjes over van voorgaande dagen? Of wil je graag een nieuw recept leren? Klik op de knop en ontdek wat de mogelijkheden zijn!
         </div>
         <router-link to="/recipes">
-          <tertiary-button class="button--squared" value="Ontdek het nu!" />
+          <tertiary-button class="button--square" value="Ontdek het nu!" />
         </router-link>
       </div>
       <img class="hero--ralf non-interactable sizing--auto" src="../assets/big-mascotte.png" alt="">
@@ -38,7 +38,7 @@
               </div>
               <div class="dotw-label uploader"><img src="../assets/circle-user-regular.svg" alt="">Chef Wim</div>
             </div>
-            <button class="button-primary">zie recept</button>
+            <router-link to="/recipes-details/Gekruide%20kikkererwten%20en%20gegrilde%20courgette-taco's" class="button-primary">Zie Recept</router-link>
           </div>
         </div>
       </div>
@@ -295,6 +295,7 @@ html, body {
 }
 
 .button-primary{
+  display: flex;
   background: linear-gradient(240deg, rgba(255, 206, 112, 0.70), rgba(0, 0, 0, 0.00)), #E4A428;
   color: #ffffff;
   font-family: Work Sans, sans-serif;
@@ -335,6 +336,18 @@ html, body {
   color: #E4A428;
   border: solid 2px #E4A428;
   transform: scale(1.05);
+}
+
+.button--square {
+  min-height: 65px;
+  border-radius: 10px !important;
+  width: 100%;
+}
+
+.button--square:hover {
+  background: #ffffff;
+  border: solid 2px #ffffff !important;
+  transform: scale(1.0) !important;
 }
 
 /* Categories Section*/

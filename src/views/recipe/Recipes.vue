@@ -2,7 +2,7 @@
   <div class="searchbar--background">
     <div class="searchbar--holder">
       <div class="input-icons">
-        <font-awesome-icon @click="removeSearchFilter" class="visibility-icon" :icon="['fas', 'xmark']" />
+        <font-awesome-icon @click="removeSearchFilter" class="visibility-icon-rec" :icon="['fas', 'xmark']" />
         <input id="search-bar" v-model="ingredients" placeholder="Vul hier je kliekjes in!" class="login-input">
       </div>
       <secondary-button class="button--squared" @click="getRecipe" id="surprise-button" :value="this.ingredients.length > 0 ? 'Zoeken' : 'Verras me'"/>
@@ -187,7 +187,7 @@ body {
   background: #fafafa;
 }
 
-.visibility-icon {
+.visibility-icon-rec {
   position: absolute;
   margin-top: 22px;
   margin-left: 500px;
@@ -266,6 +266,10 @@ body {
 
 #search-bar{
   width: 540px;
+  height: 65px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px 7px 0 rgba(0,0,0,20%);
 }
 
 .button--squared {

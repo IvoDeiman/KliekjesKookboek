@@ -64,7 +64,7 @@ export default {
        </div>
        <div class="button-frame">
          <input placeholder="E-mailadres" type="email" />
-         <primary-button value="Submit"></primary-button>
+         <primary-button class="submit-btn" value="Submit"></primary-button>
        </div>
      </div>
    </div>
@@ -90,6 +90,17 @@ export default {
   bottom: 0;
   background-color: #1E1E1E;
   clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.submit-btn{
+  display: inline-flex;
+  height: 85%;
+  top:3px;
+  right: 3px !important;
+  width: 150px;
+  justify-content: center;
+  align-content: center;
+  font-size: 18px;
 }
 
 .socials {

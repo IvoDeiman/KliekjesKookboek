@@ -25,7 +25,6 @@ export default {
   align-items: center;
   text-transform: uppercase;
   color: #ffffff;
-  width: 85%;
   height: 45px;
   border: solid 2px white;
   border-radius: 45px;
