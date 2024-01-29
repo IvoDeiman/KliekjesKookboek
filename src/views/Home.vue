@@ -6,9 +6,11 @@
           Het Kliekjes Kookboek
         </div>
         <div class="company-slogan my-[24px]">
-          Heb je kliekjes en weet je niet wat je ermee moet? Zoek nu een lekker recept op gebaseerd op je restanten en maak iets nieuws van iets ouds!
+          Heb je kliekjes over van voorgaande dagen? Of wil je graag een nieuw recept leren? Klik op de knop en ontdek wat de mogelijkheden zijn!
         </div>
-        <search-component id="search-bar" placeholder="Vul hier je kliekjes in!" value="" label=""></search-component>
+        <router-link to="/recipes">
+          <tertiary-button class="button--squared" value="Ontdek het nu!" />
+        </router-link>
       </div>
       <img class="hero--ralf non-interactable sizing--auto" src="../assets/big-mascotte.png" alt="">
     </div>
@@ -76,7 +78,6 @@
 </template>
 
 <script>
-import SearchComponent from "@/components/inputs/Search.vue";
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css';
 import categoryBrazilImage from "@/assets/category-braziliaans.jpg";
@@ -85,11 +86,12 @@ import categoryKoreaImage from "@/assets/category-koreaans.jpg";
 import categoryDutchImage from "@/assets/category-nederlands.png";
 import categorySpainImage from "@/assets/category-spaans.jpg";
 import categoryVietnamImage from "@/assets/category-vietnamees.jpg";
+import TertiaryButton from "@/components/buttons/ThirdButton.vue";
 
 export default {
   name: "HomePage",
   components: {
-    SearchComponent,
+    TertiaryButton,
     Carousel,
     Slide,
     Pagination,
