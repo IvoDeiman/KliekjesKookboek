@@ -52,7 +52,13 @@ export default {
           title: "categorieën",
           content: [
             { label: "braziliaans", checked: false },
+            { label: "duits", checked: false},
+            { label: "frans", checked: false},
+            { label: "grieks", checked: false},
+            { label: "ijslands", checked: false},
+            { label: "indonesisch", checked: false},
             { label: "italiaans", checked: false },
+            { label: "japans", checked: false},
             { label: "koreaans", checked: false },
             { label: "mexicaans", checked: false },
             { label: "nederlands", checked: false },
@@ -63,8 +69,17 @@ export default {
         {
           title: "Groenten",
           content: [
+            { label: "bloemkool", checked: false},
+            { label: "broccoli", checked: false},
+            { label: "doperwten", checked: false},
+            { label: "kikkererwten", checked: false},
+            { label: "knoflook", checked: false},
             { label: "paprika", checked: false },
+            { label: "prei", checked: false},
+            { label: "sla", checked: false},
+            { label: "tomaat", checked: false},
             { label: "ui", checked: false },
+            { label: "wortel", checked: false}
           ]
         },
         {
@@ -72,13 +87,31 @@ export default {
           content: [
             { label: "kip", checked: false },
             { label: "rund", checked: false },
+            { label: "varken", checked: false},
+            { label: "paard", checked: false},
+            { label: "kalf", checked: false},
+            { label: "lam", checked: false},
+            { label: "schaap", checked: false},
           ]
         },
         {
           title: "Zuivel",
           content: [
             { label: "melk", checked: false },
-            { label: "kaas", checked: false },
+            { label: "appenzeller", checked: false },
+            { label: "brie", checked: false },
+            { label: "camembert", checked: false },
+            { label: "cheddar", checked: false },
+            { label: "feta", checked: false },
+            { label: "gorgonzola", checked: false },
+            { label: "gruyere", checked: false },
+            { label: "manchego", checked: false },
+            { label: "mascarpone", checked: false },
+            { label: "mozzarella", checked: false },
+            { label: "parmigiano reggiano", checked: false },
+            { label: "raclette", checked: false},
+            { label: "roquefort", checked: false},
+            { label: "stilton", checked: false}
           ]
         },
         {
@@ -106,8 +139,10 @@ export default {
         {
           title: "Suiker en zoetmakers",
           content: [
-            { label: "wit kristalsuiker", checked: false },
+            { label: "kristalsuiker", checked: false },
+            { label: "rietsuiker", checked: false},
             { label: "bastardsuiker", checked: false },
+            { label: "donkere bastardsuiker", checked: false},
           ]
         },
         {
@@ -135,7 +170,6 @@ export default {
       if(mess === undefined || mess === '') return;
       let index = this.currentFilters.indexOf(mess);
       this.currentFilters.splice(index, 1);
-      console.log(this.currentFilters)
       this.filterIngredients();
     },
 
@@ -150,6 +184,7 @@ export default {
 
     filterIngredients() {
       this.recipes = []
+      this.page = 1;
       fb.filterIngredients(this.currentFilters).then(data => {
         for (let i=0; i<data.length ; i++) {
           fb.getRecipeById(data[i]).then((data2) =>
