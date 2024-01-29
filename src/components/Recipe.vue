@@ -5,17 +5,19 @@
     </div>
     <div class="info--container">
       <div class="recipe-title">{{title}}</div>
-      <div class="work-sans has-svg recipe-preptime">
-        <img src="../assets/clock-regular.svg" alt="">
-        {{preparationtime}} minuten
-      </div>
-      <div class="work-sans has-svg recipe-tags">
-        <img src="../assets/tag-solid.svg" alt="">
-        {{unpackTags()}}
-      </div>
-      <div class="work-sans has-svg recipe-rating">
-        <star-rating :ratingVal="rating"/>
-        <!-- <div class="work-sans recipe-rating-count">{{ratingCount}}</div> -->
+      <div class="recipe--info">
+        <div class="work-sans has-svg recipe-preptime">
+          <img src="../assets/clock-regular.svg" alt="">
+          {{preparationtime}} minuten
+        </div>
+        <div class="work-sans has-svg recipe-tags">
+          <img src="../assets/tag-solid.svg" alt="">
+          {{unpackTags()}}
+        </div>
+        <div class="work-sans has-svg recipe-rating">
+          <star-rating :ratingVal="rating"/>
+          <!-- <div class="work-sans recipe-rating-count">{{ratingCount}}</div> -->
+        </div>
       </div>
     </div>
   </div>
@@ -110,6 +112,12 @@ export default {
 .info--container {
   display: grid;
   padding: 15px 0;
+}
+
+.recipe--info {
+  display: grid;
+  position: absolute;
+  bottom: 5px;
 }
 
 .recipe-title {
